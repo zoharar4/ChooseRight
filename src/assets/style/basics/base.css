@@ -1,0 +1,56 @@
+*,
+*::after,
+*::before {
+    box-sizing: border-box;
+}
+
+body{
+    padding: 0;
+    margin: 0;
+    font-family: 'Edu VIC WA NT Beginner', cursive;
+}
+
+button, input, select, textarea {
+    font-family: inherit;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: .5em 0;
+}
+
+a {
+  text-decoration: none;
+  color: unset;
+}
+
+img,
+embed,
+video,
+object {
+  max-width: 100%
+}
+
+ul{
+    margin: 0;
+    padding: 0;
+}
+
+li{
+    list-style:none;
+}
+
+button{
+    background-color: rgb(241, 241, 241);
+    &:hover{
+        filter: brightness(0.90);
+        cursor: pointer;
+    }
+    &:active{
+        filter: brightness(0.80);
+    }
+}
