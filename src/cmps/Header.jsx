@@ -1,23 +1,41 @@
-import { useNavigate } from "react-router"
+import { NavLink } from "react-router"
 import logo from "../assets/images/logo_no_bg.png"
 
 export function Header() {
-
-    const navigate = useNavigate()
-    // const
-
-
+    
     return (
         <div className="header">
+            <img src={logo} alt="logo" />
             <nav>
-                <button onClick={() => navigate('/יצירת_קשר')}>יצירת קשר</button>
-                <button onClick={() => navigate('/אודותי')}>אודותי</button>
-                <button onClick={() => navigate('/מתכונים')}>מתכונים</button>
-                <button onClick={() => navigate('/בלוג')}>בלוג</button>
-                <button onClick={() => navigate('/תכניות_ליווי')}>תכניות ליווי</button>
-                <button onClick={() => navigate('/')}>בית</button>
+                <div>
+                    <NavLink to="/" className={({ isActive }) => isActive ? "nav-link active" : "nav-link"}>
+                        בית
+                    </NavLink>
+
+                    <NavLink to="/תכניות_ליווי" className={({ isActive }) => isActive ? "nav-link active" : "nav-link"}>
+                        תכניות ליווי
+                    </NavLink>
+
+                    <NavLink to="/בלוג" className={({ isActive }) => isActive ? "nav-link active" : "nav-link"}>
+                        בלוג
+                    </NavLink>
+
+                    <NavLink to="/מתכונים" className={({ isActive }) => isActive ? "nav-link active" : "nav-link"}>
+                        מתכונים
+                    </NavLink>
+                </div>
+
+                <div>
+                    <NavLink to="/אודותי" className={({ isActive }) => isActive ? "nav-link active" : "nav-link"}>
+                        אודותי
+                    </NavLink>
+                    <NavLink to="/יצירת_קשר" className={({ isActive }) => isActive ? "nav-link active" : "nav-link"}>
+                        יצירת קשר
+                    </NavLink>
+
+                </div>
             </nav>
-            <img src={logo} alt="" />
+
         </div>
     )
 }
