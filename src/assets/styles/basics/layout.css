@@ -1,12 +1,17 @@
 .main-layout {
   display: grid;
-  grid-template-columns: minmax(88px, 1fr) minmax(auto, 1100px) minmax(72px, 1fr);
-
+  grid-template-columns: var(--layout);
+  
+  
   .header {
     grid-column: 1 / 4;
   }
-
+  
   .main-content {
     grid-column: 2;
+    margin-top: 12px;
+    /* >*{
+      min-height: 100%;
+    } */
   }
 }

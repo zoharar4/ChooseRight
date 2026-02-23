@@ -24,8 +24,8 @@ export function ContactForm() {
 
     return (
         <div className="contact-form">
-            <h2>יצירת קשר</h2>
             <form action="" onSubmit={ev => onSubmit(ev)}>
+                <h2>יצירת קשר</h2>
                 <div className="form1">
                     <div>
                         <label htmlFor="fullname">שם מלא *</label>
@@ -43,7 +43,7 @@ export function ContactForm() {
                     <input onChange={(ev) => handleChange(ev, "email")} value={formData.email} type="email" id="email" />
                 </div>
 
-                <div>
+                <div className="form3">
                     <label htmlFor="contant">שליחת הודעה</label>
                     <textarea onChange={(ev) => handleChange(ev, 'contant')} value={formData.contant} name="contant" id="contant"></textarea>
                 </div>

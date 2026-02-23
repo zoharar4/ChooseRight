@@ -5,6 +5,7 @@ import { AboutPage } from "./pages/AboutPage";
 import { PlansPage } from "./pages/PlansPage";
 import { BlogPage } from "./pages/BlogPage";
 import { RecipesPage } from "./pages/RecipesPage";
+import { ContactPage } from "./pages/ContactPage";
 
 export function RootCmp() {
 
@@ -18,7 +19,7 @@ export function RootCmp() {
                     <Route path="/בלוג" element={<BlogPage />} />
                     <Route path="/מתכונים" element={<RecipesPage />} />
                     <Route path="/אודותי" element={<AboutPage />} />
-                    <Route path="/יצירת_קשר" element={<HomePage />} />
+                    <Route path="/יצירת_קשר" element={<ContactPage />} />
                 </Routes>
             </div>
         </div>

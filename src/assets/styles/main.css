@@ -1,7 +1,13 @@
+/* BASICS */
 @import "./basics/base.css";
 @import "./basics/layout.css";
 
+/* SETUP */
+@import "./setup/var.css";
+@import "./setup/typography.css";
 
+
+/* CMPS */
 @import "./cmps/Header.css";
 @import "./cmps/HomePage.css";
-@import "./setup/var.css";
+@import "./cmps/ContactForm.css";

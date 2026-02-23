@@ -1,0 +1,17 @@
+@font-face {
+  font-family: Rubik;
+  src: url(../../fonts/Rubik-Regular.ttf);
+  font-weight: normal;
+}
+
+@font-face {
+  font-family: Rubik;
+  src: url(../../fonts/Rubik-bold.ttf);
+  font-weight: bold;
+}
+
+@font-face {
+  font-family: SuezOne;
+  src: url(../../fonts/SuezOne-Regular.ttf);
+  font-weight: normal;
+}
