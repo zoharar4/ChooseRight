@@ -10,6 +10,11 @@
 
 /* CMPS */
 @import "./cmps/Header.css";
-@import "./cmps/HomePage.css";
-@import "./cmps/ContactForm.css";
 @import "./cmps/Footer.css";
+
+@import "./cmps/ContactForm.css";
+@import "./cmps/PlanPreview.css";
+
+
+@import "./cmps/HomePage.css";
+@import "./cmps/PlansPage.css";

@@ -1,0 +1,26 @@
+.plans-page{
+  text-align: center;
+
+  >h1{
+    padding-top: 24px;
+    font-size: 46px;
+  }
+
+  p{
+    margin-bottom: 0;
+  }
+  
+  .sec1{
+    justify-self: center;
+    max-width: 800px;
+  }
+}
+
+.plans-container{
+  margin: 24px 0;
+  justify-self: center;
+  display: grid;
+  grid-template-columns: repeat(3, max-content);
+  grid-auto-rows: 1fr;
+  gap: 12px;
+}

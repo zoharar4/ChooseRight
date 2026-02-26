@@ -1,9 +1,10 @@
-
+import logo from "../assets/images/logo.png"
 export function PlanPreview({ plan }) {
     return (
-        <div style={{ backgroundColor: 'red' }} className="plan-preview" >
+        <div className="plan-preview" >
             <div className="image-container">
-                <img src={plan.image} alt="" />
+                <img src={logo} alt="" />
+                {/* <img src={plan.image} alt="" /> */}
             </div>
             <h1 className="underline">{plan.title}</h1>
             <p className="bold">{plan.subtitle}</p>
