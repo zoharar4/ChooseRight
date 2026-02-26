@@ -5,9 +5,11 @@
 /* SETUP */
 @import "./setup/var.css";
 @import "./setup/typography.css";
+@import "./setup/helpers.css";
 
 
 /* CMPS */
 @import "./cmps/Header.css";
 @import "./cmps/HomePage.css";
 @import "./cmps/ContactForm.css";
+@import "./cmps/Footer.css";

@@ -1,0 +1,12 @@
+footer {
+  display: grid;
+  grid-template-columns: var(--layout);
+  background-color: var(--footerClr);
+  border-top: 2px solid rgb(190, 190, 190);
+  height: 185px;
+
+  >div{
+    grid-column: 2;
+  }
+
+}

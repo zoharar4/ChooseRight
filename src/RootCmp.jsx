@@ -6,6 +6,7 @@ import { PlansPage } from "./pages/PlansPage";
 import { BlogPage } from "./pages/BlogPage";
 import { RecipesPage } from "./pages/RecipesPage";
 import { ContactPage } from "./pages/ContactPage";
+import { Footer } from "./cmps/footer";
 
 export function RootCmp() {
 
@@ -22,6 +23,7 @@ export function RootCmp() {
                     <Route path="/יצירת_קשר" element={<ContactPage />} />
                 </Routes>
             </div>
+            <Footer/>
         </div>
     )
 }

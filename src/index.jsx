@@ -6,7 +6,7 @@ import "./assets/styles/main.css"
 import { RootCmp } from './RootCmp'
 
 createRoot(document.getElementById('root')).render(
-    <Router basename='/ChooseRight'>
+    <Router basename='/ChooseRight/'>
         <RootCmp />
     </Router>
 )

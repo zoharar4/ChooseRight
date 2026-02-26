@@ -1,17 +1,31 @@
+
+
 .main-layout {
   display: grid;
   grid-template-columns: var(--layout);
-  
-  
+  grid-template-rows: max-content auto max-content;
+  min-height: 100vh;
+  gap: 10px 0;
+
   .header {
     grid-column: 1 / 4;
   }
-  
+
+  footer{
+    grid-column: 1 / 4;
+
+  }
+
   .main-content {
     grid-column: 2;
-    margin-top: 12px;
-    /* >*{
-      min-height: 100%;
-    } */
+
+
+  }
+
+  .plans-page, .blog-page, .recipes-page, .about-page, .contact-page{
+    min-height: 100%;
+    border-radius: 6px;
+    background-color: var(--pageClr);
   }
 }
+
