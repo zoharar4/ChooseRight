@@ -2,7 +2,7 @@ import { useRef, useState } from "react"
 
 
 export function ContactForm() {
-    const formDefault = { fullname: '', phoneNum: '', email: '', content: '' }
+    const formDefault = { fullname: '', phoneNum: '', email: '', message: '' }
 
     const [formData, setFormData] = useState(formDefault)
     const [isFormSent, setIsFormSent] = useState(false)
@@ -10,7 +10,15 @@ export function ContactForm() {
     const timeOutRef = useRef(null)
 
     function sendForm() {
-
+        emailjs.send(import.meta.env.VITE_EMAIL_SERVICE_ID,
+            import.meta.env.VITE_EMAIL_TEMPLATE_ID, formData).then(
+                (response) => {
+                    console.log('SUCCESS!', response.status, response.text);
+                },
+                (error) => {
+                    console.log('FAILED...', error);
+                },
+            );
     }
 
     function handleChange(ev, type) {
@@ -27,7 +35,7 @@ export function ContactForm() {
         const isValid = validateForm()
         if (!isValid || isFormSent) return
 
-        sendForm(formData)
+        sendForm({ ...formData })
 
         setFormData(formDefault)
         setIsFormSent(true)
@@ -64,10 +72,10 @@ export function ContactForm() {
             newErrors.email = "פורמט האימייל אינו תקין"
         }
 
-        if (!formData.content.trim()) {
-            newErrors.content = "יש להזין תוכן הודעה"
-        } else if (formData.content.length < 5) {
-            newErrors.content = "ההודעה חייבת להכיל לפחות 5 תווים"
+        if (!formData.message.trim()) {
+            newErrors.message = "יש להזין תוכן הודעה"
+        } else if (formData.message.length < 5) {
+            newErrors.message = "ההודעה חייבת להכיל לפחות 5 תווים"
         }
 
         setErrors(newErrors)
@@ -100,9 +108,9 @@ export function ContactForm() {
                 </div>
 
                 <div className="form3">
-                    <label htmlFor="content">שליחת הודעה</label>
-                    <textarea onChange={(ev) => handleChange(ev, 'content')} value={formData.content} name="content" id="content"></textarea>
-                    {errors.content && <span className="error">{errors.content}</span>}
+                    <label htmlFor="message">שליחת הודעה</label>
+                    <textarea onChange={(ev) => handleChange(ev, 'message')} value={formData.message} name="message" id="message"></textarea>
+                    {errors.message && <span className="error">{errors.message}</span>}
                 </div>
 
                 <button className="sent-btn">שליחה</button>
