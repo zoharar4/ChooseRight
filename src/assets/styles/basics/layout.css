@@ -4,6 +4,8 @@
   display: grid;
   grid-template-columns: var(--layout);
   grid-template-rows: max-content auto max-content;
+  position: relative;
+
   min-height: 100vh;
   gap: 10px 0;
 
