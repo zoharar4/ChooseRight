@@ -66,7 +66,7 @@ export function Header() {
                     </div>
                 </nav>
 
-                <button onClick={onMenu} className="burger-menu"><img src={isMenuOpen ? closeSvg : menuSvg} alt="" /></button>
+                <button onClick={onMenu} className="burger-menu"><img draggable="false" src={isMenuOpen ? closeSvg : menuSvg} alt="" /></button>
                 <nav className={`mobile-nav ${isMenuOpen ? "active" : ''}`}>
                     <NavLink to="/" className={({ isActive }) => isActive ? "nav-link active" : "nav-link"}>
                         בית

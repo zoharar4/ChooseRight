@@ -3,11 +3,11 @@
   --clr1: rgb(153, 226, 101);
   --clr2: rgb(30, 150, 148);
   --green1: rgb(70, 203, 79);
-  --layout: minmax(72px, 1fr) minmax(auto, 1200px) minmax(72px, 1fr);
+  --layout: minmax(52px, 1fr) minmax(auto, 1200px) minmax(52px, 1fr);
   --footerClr: rgb(233, 233, 233);
 }
 
-@media (max-width: 1000px) {
+@media (max-width: 1024px) {
   :root {
     --layout: 6px 1fr 6px
   }
