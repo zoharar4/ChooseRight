@@ -1,6 +1,9 @@
 .header {
   height: 82px;
   border-bottom: 2px solid rgb(190, 190, 190);
+  background-color: var(--pageClr);
+  font-family: var(--headerF);
+  font-weight: var(--headerFW);
 
   display: grid;
   grid-template-columns: minmax(72px, 1fr) minmax(auto, 1200px) minmax(72px, 1fr);

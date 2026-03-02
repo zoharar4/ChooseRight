@@ -4,13 +4,17 @@
     box-sizing: border-box;
 }
 
-body{
+body {
     padding: 0;
     margin: 0;
-    font-family:Rubik;
+    font-family: var( --bodyF);
+    font-weight: var( --bodyFW);
 }
 
-button, input, select, textarea {
+button,
+input,
+select,
+textarea {
     font-family: inherit;
 }
 
@@ -20,13 +24,13 @@ h3,
 h4,
 h5,
 h6 {
-  margin: .5em 0;
-  margin-top: 0;
+    margin: .5em 0;
+    margin-top: 0;
 }
 
 a {
-  text-decoration: none;
-  color: unset;
+    text-decoration: none;
+    color: unset;
 }
 
 img,
@@ -34,29 +38,32 @@ embed,
 video,
 object {
     user-select: none;
-   /* max-width: 100%  */
+    /* max-width: 100%  */
 }
 
-ul{
+ul {
     margin: 0;
     padding: 0;
 }
 
-li{
-    list-style:none;
+li {
+    list-style: none;
 }
 
-button, .nav-link{
+button,
+.nav-link {
+
     /* background-color: rgb(241, 241, 241); */
-    &:hover{
+    &:hover {
         filter: brightness(0.95);
         cursor: pointer;
     }
-    &:active{
+
+    &:active {
         filter: brightness(0.90);
     }
 }
 
 .no-select {
-  user-select: none;
+    user-select: none;
 }

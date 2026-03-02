@@ -1,4 +1,4 @@
-import { Edit } from "../cmps/Edit";
+import { Edit } from "../cmps/Edit.jsx";
 
 export function AdminPage() {
     return (

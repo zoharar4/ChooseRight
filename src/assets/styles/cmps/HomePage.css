@@ -13,6 +13,7 @@
   overflow: hidden;
 
 
+
   >img {
     height: 100%;
     width: 100%;
@@ -60,16 +61,22 @@
 
   text-align: center;
   font-size: 19px;
-  line-height: 30px;
+  line-height: 35px;
 
   h1 {
-    font-size: 30px;
+    font-size: 36px;
+    font-weight: normal;
     margin-top: 25px;
     margin-bottom: 40px;
   }
 
   .txt-container {
     align-self: self-end;
+    margin: 0 36px;
+
+    p {
+      margin: 8px 0;
+    }
   }
 
   .img-container {
@@ -95,10 +102,9 @@
     height: 60px;
     border-radius: 6px;
     border: 0;
-    margin: 22px 10px;
+    margin: 22px auto;
 
     font-size: 20px;
-    justify-self: center;
   }
 
   .more-btn {
@@ -171,6 +177,10 @@
 
   .home-page {
     margin-top: 290px;
+
+    .owner-sec-home .txt-container {
+      margin: 0;
+    }
   }
 }
 

@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react"
 import { Editor } from '@tinymce/tinymce-react';
 
-export function Edit({ existingContent }) {
+export function Edit({ existingContent = "בית תכניות ליווי" }) {
     const [content, setContent] = useState("");
 
     useEffect(() => {
@@ -39,7 +39,22 @@ export function Edit({ existingContent }) {
                         link image media table | 
                         forecolor backcolor | removeformat | code | fullscreen | ltr rtl
                     `,
-                    content_style: "body { font-family: Arial, sans-serif; font-size: 14pt; }"
+                    content_style: `
+                        @font-face {
+                            font-family: 'Rubik';
+                            src: url('src/assets/fonts/Rubik-Regular.ttf') format('truetype');
+                            font-weight: normal;
+                        }
+                        @font-face {
+                            font-family: 'Rubik';
+                            src: url('src/assets/fonts/Rubik-Bold.ttf') format('truetype');
+                            font-weight: bold;
+                        }
+                        body {
+                            font-family: Rubik, Arial, sans-serif;
+                            font-size: 14pt;
+                        }
+                    `
                 }}
             />
             <button onClick={handleSave} style={{ marginTop: "20px" }}>
