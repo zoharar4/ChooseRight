@@ -28,12 +28,16 @@
 
 .plans-container {
   margin: 24px 10px;
-  justify-self: center;
+  /* justify-self: center; */
 
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   grid-auto-rows: 1fr;
   gap: 28px;
+
+  .plan-preview{
+    justify-self: center;
+  }
 }
 
 @media (max-width: 1024px) {

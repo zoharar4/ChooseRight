@@ -1,6 +1,7 @@
 
 .plan-preview{
-  width: 270px;
+  width: 100%;
+  max-width: 310px;
   text-align: center;
   padding: 6px 0;
 
