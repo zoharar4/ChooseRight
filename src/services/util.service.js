@@ -1,5 +1,5 @@
 
-export const myUtilService = {
+export const utilService = {
     makeId,
     makeLorem,
     getTimeStamp,
@@ -47,23 +47,32 @@ function makeLorem(size = 100) {
     return txt
 }
 
-function getTimeStamp(time) {
+
+
+function getTimeStamp(time, noTxt) {
     const sentAt = new Date(time)
-    const timeDiff = new Date() - sentAt
-    const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+    const monthsArray = ['ינואר', 'פברואר', 'מרץ', 'אפריל', 'מאי', 'יוני', 'יולי', 'אוגוסט', 'ספטמבר', 'אוקטובר', 'נובמבר', 'דצמבר']
 
-    if (timeDiff < 86400000) {
-        const hour = sentAt.getHours()
-        const AMPM = hour >= 12 ? 'PM' : 'AM'
+    const monthsPad = sentAt.getMonth().toString().padStart(2, 0)
+    const dayPad = sentAt.getDate().toString().padStart(2, 0)
 
-        return `${hour}:${sentAt.getMinutes().toString().padStart(2, 0)} ${AMPM}`
-    } else if (timeDiff < 31622400000) {
-
-        return `${months[sentAt.getMonth()]} ${sentAt.getDate() + 1}`
+    if (noTxt) {
+        return `${monthsPad}/${dayPad}/${sentAt.getFullYear().toString().slice(2, 4)}`
     } else {
-        return `${sentAt.getMonth()}/${sentAt.getDate()}/${sentAt.getFullYear().toString().slice(2, 4)}`
+        return `${sentAt.getDate()} ${monthsArray[sentAt.getMonth()]}, ${sentAt.getFullYear()}`
     }
 
+    // const timeDiff = new Date() - sentAt
+    // if (timeDiff < 86400000) {
+    //     const hour = sentAt.getHours()
+    //     const AMPM = hour >= 12 ? 'PM' : 'AM'
+
+    //     return `${hour}:${sentAt.getMinutes().toString().padStart(2, 0)} ${AMPM}`
+    // } else if (timeDiff < 31622400000) {
+
+    //     return `${months[sentAt.getMonth()]} ${sentAt.getDate() + 1}`
+    // } else {
+    // }
 }
 
 

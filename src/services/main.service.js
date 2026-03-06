@@ -1,4 +1,51 @@
+import { httpService } from "./http.service"
 
+export const mainService = {
+    query,
+    getById,
+    remove,
+    save,
+    getEmptyObj,
+}
+
+async function query(type) {
+    return httpService.get(type)
+}
+
+async function getById(type, id) {
+    return httpService.get(`${type}/${id}`)
+}
+
+async function remove(type, id) {
+    return httpService.delete(`${type}/${id}`)
+}
+
+async function save(type, obj) {
+    var savedObj
+    if (obj._id) {
+        savedObj = await httpService.put(`${type}/${obj._id}`, obj)
+    } else {
+        savedObj = await httpService.post(type, obj)
+    }
+    return savedObj
+}
+
+
+function getEmptyObj(type) {
+    if (type === 'blog') {
+        return {
+            title: '',
+            previewContent: '',
+            content: '',
+        }
+    } else if (type === 'recipes') {
+        return {
+            title: '',
+            previewContent: '',
+            content: '',
+        }
+    }
+}
 
 
 

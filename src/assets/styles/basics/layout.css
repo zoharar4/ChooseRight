@@ -24,7 +24,7 @@
 
   }
 
-  .plans-page, .blog-page, .recipes-page, .about-page, .contact-page{
+  .plans-page, .blog-page, .recipes-page, .about-page, .contact-page,.admin-page{
     min-height: 100%;
     border-radius: 6px;
     background-color: var(--pageClr);

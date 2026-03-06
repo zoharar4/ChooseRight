@@ -1,6 +1,6 @@
 import Axios from 'axios'
 
-console.log('process.env.NODE_ENV:', process.env.NODE_ENV)
+// console.log('process.env.NODE_ENV:', process.env.NODE_ENV)
 const BASE_URL = process.env.NODE_ENV === 'production'
     ? '/api/'
     : '//localhost:3030/api/'
@@ -12,7 +12,7 @@ var axios = Axios.create({
 
 export const httpService = {
     get(endpoint, data) {
-        return ajax(endpoint, 'GET', data) // car/
+        return ajax(endpoint, 'GET', data) 
     },
     post(endpoint, data) {
         return ajax(endpoint, 'POST', data)
