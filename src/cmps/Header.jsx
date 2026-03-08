@@ -35,7 +35,7 @@ export function Header() {
     return (
         <>
             <div className="header">
-                <img className="logo" onClick={() => navigate('/')} src={logo} alt="logo" />
+                <img className="logo" onClick={() => navigate('/admin')} src={logo} alt="logo" />
                 <nav className="nav-bar">
                     <div>
                         <NavLink to="/" className={({ isActive }) => isActive ? "nav-link active" : "nav-link"}>

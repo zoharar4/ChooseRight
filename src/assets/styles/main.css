@@ -12,10 +12,16 @@
 @import "./cmps/Header.css";
 @import "./cmps/Footer.css";
 
+@import "./cmps/PostPreview.css";
+
 @import "./cmps/ContactForm.css";
 @import "./cmps/PlanPreview.css";
 @import "./cmps/EditList.css";
 
+
 @import "./cmps/HomePage.css";
 @import "./cmps/PlansPage.css";
 @import "./cmps/BlogPage.css";
+@import "./cmps/RecipesPage.css";
+
+@import "./cmps/PostPage.css";

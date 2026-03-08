@@ -1,5 +1,3 @@
-
-
 .main-layout {
   display: grid;
   grid-template-columns: var(--layout);
@@ -13,7 +11,7 @@
     grid-column: 1 / 4;
   }
 
-  footer{
+  footer {
     grid-column: 1 / 4;
 
   }
@@ -24,10 +22,16 @@
 
   }
 
-  .plans-page, .blog-page, .recipes-page, .about-page, .contact-page,.admin-page{
+  .plans-page,
+  .blog-page,
+  .recipes-page,
+  .about-page,
+  .contact-page,
+  .admin-page,
+  .post-page {
     min-height: 100%;
     border-radius: 6px;
     background-color: var(--pageClr);
   }
-}
 
+}

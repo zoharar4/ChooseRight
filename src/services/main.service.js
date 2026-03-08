@@ -6,6 +6,7 @@ export const mainService = {
     remove,
     save,
     getEmptyObj,
+    incrementViews,
 }
 
 async function query(type) {
@@ -30,17 +31,22 @@ async function save(type, obj) {
     return savedObj
 }
 
+async function incrementViews(type, id) {
+    return httpService.post(`${type}/${id}/views`)
+}
 
 function getEmptyObj(type) {
     if (type === 'blog') {
         return {
             title: '',
+            imageUrl: '',
             previewContent: '',
             content: '',
         }
     } else if (type === 'recipes') {
         return {
             title: '',
+            imageUrl: '',
             previewContent: '',
             content: '',
         }

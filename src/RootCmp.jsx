@@ -1,12 +1,18 @@
 import { Route, Routes } from "react-router";
+
 import { Header } from "./cmps/Header";
+import { Footer } from "./cmps/footer";
+
+
 import { HomePage } from "./pages/HomePage";
-import { AboutPage } from "./pages/AboutPage";
 import { PlansPage } from "./pages/PlansPage";
 import { BlogPage } from "./pages/BlogPage";
 import { RecipesPage } from "./pages/RecipesPage";
+
+import { PostPage } from "./pages/PostPage";
+
+import { AboutPage } from "./pages/AboutPage";
 import { ContactPage } from "./pages/ContactPage";
-import { Footer } from "./cmps/footer";
 import { AdminPage } from "./pages/AdminPage";
 
 export function RootCmp() {
@@ -17,6 +23,9 @@ export function RootCmp() {
             <div className="main-content">
                 <Routes>
                     <Route path="/" element={<HomePage />} />
+                    <Route path="/בלוג/:id" element={<PostPage />} />
+                    <Route path="/מתכונים/:id" element={<PostPage />} />
+
                     <Route path="/תכניות_ליווי" element={<PlansPage />} />
                     <Route path="/בלוג" element={<BlogPage />} />
                     <Route path="/מתכונים" element={<RecipesPage />} />
@@ -25,7 +34,7 @@ export function RootCmp() {
                     <Route path="/admin" element={<AdminPage />} />
                 </Routes>
             </div>
-            <Footer/>
+            <Footer />
         </div>
     )
 }

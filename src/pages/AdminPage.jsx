@@ -16,6 +16,9 @@ export function AdminPage() {
         if (!type) return
         loadData()
     }, [type])
+    useEffect(() => {
+       console.log('objToEdit:',objToEdit)
+    }, [objToEdit])
 
     async function loadData() {
         try {
@@ -64,7 +67,7 @@ export function AdminPage() {
 
     function onAdd() {
         // const emptyObj = getEmptyObj(type)
-        setObjToEdit({})
+        setObjToEdit({imageUrl:''})
     }
 
     function handleChange({ target }) {
