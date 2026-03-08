@@ -44,7 +44,7 @@
 .post-share {
   border: none;
   background: #1481e1;
-  padding: 6px 12px;
+  padding: 4px 12px;
   border-radius: 6px;
   cursor: pointer;
   font-size: 13px;
@@ -54,7 +54,7 @@
 .post-views {
   background: #a0a0a0;
   color: white;
-  padding: 6px 8px;
+  padding: 4px 8px;
   border-radius: 6px;
   font-size: 16px;
   cursor: default;

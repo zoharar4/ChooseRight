@@ -1,17 +1,23 @@
+.plan-preview {
+  padding: 20px;
+  border-radius: 18px;
 
-.plan-preview{
-  width: 100%;
-  max-width: 310px;
+  background-color: white;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   text-align: center;
-  padding: 6px 0;
+  cursor: pointer;
 
-  .image-container{
-    background-color: rgb(239, 239, 239);
+
+  .image-container {
+    margin: 6px;
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.5);
+
     border-radius: 50%;
-    margin: 18px;
-    img{
+    aspect-ratio: 1;
+    overflow: hidden;
+
+    img {
       width: 100%;
-      cursor: pointer;
     }
   }
 }

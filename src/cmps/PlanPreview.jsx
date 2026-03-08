@@ -1,9 +1,9 @@
-import logo from "../assets/images/logo.png"
+import imageExaple from "../assets/images/healty meal for weight lost.jpg"
 export function PlanPreview({ plan }) {
     return (
         <div className="plan-preview" >
             <div className="image-container">
-                <img src={logo} alt="" />
+                <img src={imageExaple} alt="" />
                 {/* <img src={plan.image} alt="" /> */}
             </div>
             <h1 className="underline">{plan.title}</h1>

@@ -29,8 +29,9 @@
   .contact-page,
   .admin-page,
   .post-page {
+    box-shadow: var(--box-shadow-page);
     min-height: 100%;
-    border-radius: 6px;
+    border-radius: 4px;
     background-color: var(--pageClr);
   }
 

@@ -5,13 +5,14 @@
   --green1: rgb(70, 203, 79);
   --layout: minmax(52px, 1fr) minmax(auto, 1200px) minmax(52px, 1fr);
   --footerClr: rgb(233, 233, 233);
+  --box-shadow-page: 0 0 5px rgba(0, 0, 0, 0.15);
 
   /* fonts */
-  --bodyF:Rubik;
-  --bodyFW:normal;
+  --bodyF: Rubik;
+  --bodyFW: normal;
 
-  --headerF:Rubik;
-  --headerFW:normal;
+  --headerF: Rubik;
+  --headerFW: normal;
 
 
 
