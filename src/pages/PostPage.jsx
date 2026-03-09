@@ -27,7 +27,7 @@ export function PostPage() {
             try {
                const trew = await mainService.incrementViews("blog", id)
                 console.log('trew:',trew)
-            } catch (error) {
+            } catch (err) {
                 console.log('err:',err)
             }
 

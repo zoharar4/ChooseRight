@@ -9,13 +9,13 @@
     cursor: pointer;
   }
 
-  .image-container {
+  .image-container:has(img) {
     border-radius: 16px;
     overflow: hidden;
 
     img {
       /* width: 100%; */
-      aspect-ratio: 1 / 0.6;
+      aspect-ratio: 1 / 0.5;
       object-fit: cover;
 
     }
