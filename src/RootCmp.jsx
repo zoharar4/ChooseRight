@@ -9,7 +9,7 @@ import { PlansPage } from "./pages/PlansPage";
 import { BlogPage } from "./pages/BlogPage";
 import { RecipesPage } from "./pages/RecipesPage";
 
-import { PostPage } from "./pages/PostPage";
+import { PostDetails } from "./pages/PostDetails";
 
 import { AboutPage } from "./pages/AboutPage";
 import { ContactPage } from "./pages/ContactPage";
@@ -23,14 +23,14 @@ export function RootCmp() {
             <div className="main-content">
                 <Routes>
                     <Route path="/" element={<HomePage />} />
-                    <Route path="/בלוג/:id" element={<PostPage />} />
-                    <Route path="/מתכונים/:id" element={<PostPage />} />
+                    <Route path="/blog/:id" element={<PostDetails type={'blog'} />} />
+                    <Route path="/recipes/:id" element={<PostDetails type={'recipes'} />} />
 
-                    <Route path="/תכניות_ליווי" element={<PlansPage />} />
-                    <Route path="/בלוג" element={<BlogPage />} />
-                    <Route path="/מתכונים" element={<RecipesPage />} />
-                    <Route path="/אודותי" element={<AboutPage />} />
-                    <Route path="/יצירת_קשר" element={<ContactPage />} />
+                    <Route path="/plans" element={<PlansPage />} />
+                    <Route path="/blog" element={<BlogPage type={'blog'} />} />
+                    <Route path="/recipes" element={<RecipesPage type={'recipes'} />} />
+                    <Route path="/about" element={<AboutPage />} />
+                    <Route path="/contact" element={<ContactPage />} />
                     <Route path="/admin" element={<AdminPage />} />
                 </Routes>
             </div>

@@ -9,7 +9,7 @@ export function HomePage() {
 
     return (
         <>
-            <div className="home_image_2_container">
+            <div className="home-top-image">
                 <img  className="home_image_2" src={image2} alt="" />
                 <div>
                     <div>

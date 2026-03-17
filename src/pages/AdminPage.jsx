@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { EditContent } from "../cmps/EditContent.jsx";
 import { actions } from "../../store/actions.js";
 import { mainService } from "../services/main.service.js";
@@ -9,15 +9,18 @@ export function AdminPage() {
     const [objToEdit, setObjToEdit] = useState(null)
     const [itemList, setitemList] = useState([])
     const [timeFormat, setTimeFormat] = useState("txt")
-    const formatOpt = ["nums", "txt", "hour"]
     const [type, setType] = useState('blog')
+    const editorRef = useRef()
+
+    const formatOpt = ["nums", "txt", "hour"]
 
     useEffect(() => {
         if (!type) return
         loadData()
     }, [type])
+
     useEffect(() => {
-       console.log('objToEdit:',objToEdit)
+        console.log('objToEdit:', objToEdit)
     }, [objToEdit])
 
     async function loadData() {
@@ -32,13 +35,19 @@ export function AdminPage() {
 
     async function onSave() {
         try {
-            await actions.save(type, objToEdit)
+            // מחכים שכל התמונות בעורך הועלו לשרת
+            if (editorRef.current) {
+                await editorRef.current.uploadImages()
+            }
+            const content = editorRef.current ? editorRef.current.getContent() : objToEdit.content
+            const objToSave = { ...objToEdit, content }
+            await actions.save(type, objToSave)
             alert("Saved")
             loadData()
             setObjToEdit(mainService.getEmptyObj(type))
         } catch (err) {
             alert("ERROR:  cannot save data")
-            console.log('err:', err)
+            console.error('err:', err)
         }
     }
 
@@ -56,7 +65,6 @@ export function AdminPage() {
     async function onEdit(id) {
         try {
             const item = await mainService.getById(type, id)
-            console.log(item)
             setObjToEdit(item)
         } catch (err) {
             alert("ERROR:  cannot get item by id", id)
@@ -66,8 +74,8 @@ export function AdminPage() {
 
 
     function onAdd() {
-        // const emptyObj = getEmptyObj(type)
-        setObjToEdit({imageUrl:''})
+        const emptyObj = mainService.getEmptyObj(type)
+        setObjToEdit(emptyObj || {})
     }
 
     function handleChange({ target }) {
@@ -93,25 +101,23 @@ export function AdminPage() {
             {!objToEdit
                 ?
                 <>
-                    <div style={{ display: 'flex' }}>
-                        <select value={type} onChange={handleChange} name="edit-type" id="edit-type">
-                            <option value="blog">בלוג</option>
-                            <option value="recipes">מתכונים</option>
-                            <option value="plans">תכניות</option>
-                        </select>
-                        <button onClick={onAdd}>הוספה</button>
-                        <button onClick={handleChangeFormat}>פורמט זמן</button>
+                    <div className="list-options">
+                        <div className="right-options">
+                            <select value={type} onChange={handleChange} name="edit-type" id="edit-type">
+                                <option value="blog">בלוג</option>
+                                <option value="recipes">מתכונים</option>
+                                <option value="plans">תכניות</option>
+                            </select>
+                            <button onClick={handleChangeFormat}>פורמט זמן</button>
+                        </div>
+
+                        <div className="left-options">
+                            <button className="add-btn" onClick={onAdd}><i className="fa-solid fa-plus fa-2xl" style={{ color: "rgb(255, 255, 255)" }}></i></button>
+                        </div>
+
                     </div>
 
                     <EditList array={itemList} onRemove={onRemove} onEdit={onEdit} timeFormat={timeFormat} type={type} />
-                    {/* {itemList &&
-                        <div className="list">
-                            {itemList.map((item, idx) => {
-                                return (
-                                )
-                            })}
-                        </div>
-                    } */}
                 </>
                 :
                 <>
@@ -121,7 +127,10 @@ export function AdminPage() {
                     </div>
 
                     <EditForm type={type} objToEdit={objToEdit} setObjToEdit={setObjToEdit} />
-                    <EditContent existingContent={objToEdit?.content} setObjToEdit={setObjToEdit} onSave={onSave} />
+                    <EditContent existingContent={objToEdit?.content} setObjToEdit={setObjToEdit} onSave={onSave} editorRef={editorRef} />
+                    <button onClick={onSave} style={{ marginTop: "20px", padding: '4px 6px' }}>
+                        Save
+                    </button>
                 </>
             }
         </div>

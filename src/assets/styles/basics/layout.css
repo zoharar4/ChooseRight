@@ -5,7 +5,7 @@
   position: relative;
 
   min-height: 100vh;
-  gap: 10px 0;
+  gap: 6px 0;
 
   .header {
     grid-column: 1 / 4;
@@ -13,13 +13,10 @@
 
   footer {
     grid-column: 1 / 4;
-
   }
 
   .main-content {
     grid-column: 2;
-
-
   }
 
   .plans-page,
@@ -28,9 +25,9 @@
   .about-page,
   .contact-page,
   .admin-page,
-  .post-page {
+  .post-details {
     box-shadow: var(--box-shadow-page);
-    min-height: 100%;
+    min-height: 100vh;
     border-radius: 4px;
     background-color: var(--pageClr);
   }

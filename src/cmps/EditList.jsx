@@ -13,7 +13,7 @@ export function EditList({ array, type, onRemove, onEdit, timeFormat }) {
         const time = new Date(item.createdAtTimestamp)
 
         if (timeFormat === "hour") {
-            let str = `${time.getHours()}:${time.getMinutes().toString().padStart(2, 0)} , `
+            let str = `${time.getHours()}:${time.getMinutes().toString().padStart(2, 0)} | `
             str += utilService.getTimeStamp(time, true)
             return str
         } else {
@@ -23,13 +23,14 @@ export function EditList({ array, type, onRemove, onEdit, timeFormat }) {
 
     return (
         <table className="admin-table">
-            {type === "blog" && (
+            {(type === "blog" || type === "recipes") && (
                 <>
                     <thead>
                         <tr>
                             <th>כותרת</th>
-                            <th>צפיות</th>
-                            <th>תגובות</th>
+                            <th><i className="fa-solid fa-eye fa-lg" style={{ color: "rgb(46, 129, 192)" }}></i></th>
+                            <th><i className="fa-solid fa-comment fa-lg" style={{ color: "rgb(85, 85, 85)" }}></i></th>
+                            <th><i className="fa-solid fa-heart fa-lg" style={{ color: "rgb(154, 33, 33)" }}></i></th>
                             <th>תאריך הוספה</th>
                             <th>פעולות</th>
                             <th>ID</th>
@@ -42,6 +43,7 @@ export function EditList({ array, type, onRemove, onEdit, timeFormat }) {
                                 <td>{item.title}</td>
                                 <td>{item.views}</td>
                                 <td>{item.comments.length}</td>
+                                <td>{item.likes}</td>
                                 <td>{getTimeStr(item)}</td>
 
                                 <td>
@@ -52,42 +54,8 @@ export function EditList({ array, type, onRemove, onEdit, timeFormat }) {
                                     <button className="delete-btn" onClick={() => confirmRemove(item._id)}>
                                         מחיקה
                                     </button>
-                                </td>
-                                <td>{item._id.slice(-6)}</td>
-                            </tr>
-                        ))}
-                    </tbody>
-                </>
-            )}
-
-            {type === "recipes" && (
-                <>
-                    <thead>
-                        <tr>
-                            <th>כותרת</th>
-                            <th>צפיות</th>
-                            <th>תגובות</th>
-                            <th>תאריך הוספה</th>
-                            <th>פעולות</th>
-                            <th>ID</th>
-                        </tr>
-                    </thead>
-
-                    <tbody>
-                        {array.map(item => (
-                            <tr key={item._id}>
-                                <td>{item.title}</td>
-                                <td>{item.views}</td>
-                                <td>{item.comments.length}</td>
-                                <td>{getTimeStr(item)}</td>
-
-                                <td>
-                                    <button onClick={() => onEdit(item._id)}>
-                                        עריכה
-                                    </button>
-
-                                    <button onClick={() => confirmRemove(item._id)}>
-                                        מחיקה
+                                    <button className="comments-btn" onClick={() => {}}>
+                                        תגובות
                                     </button>
                                 </td>
                                 <td>{item._id.slice(-6)}</td>
@@ -103,7 +71,6 @@ export function EditList({ array, type, onRemove, onEdit, timeFormat }) {
                         <tr>
                             <th>כותרת</th>
                             <th>צפיות</th>
-                            <th>תגובות</th>
                             <th>תאריך הוספה</th>
                             <th>פעולות</th>
                             <th>ID</th>
@@ -115,7 +82,6 @@ export function EditList({ array, type, onRemove, onEdit, timeFormat }) {
                             <tr key={item._id}>
                                 <td>{item.title}</td>
                                 <td>{item.views}</td>
-                                <td>{item.comments.length}</td>
                                 <td>{getTimeStr(item)}</td>
 
                                 <td>

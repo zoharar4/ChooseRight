@@ -42,24 +42,24 @@ export function Header() {
                             בית
                         </NavLink>
 
-                        <NavLink to="/תכניות_ליווי" className={({ isActive }) => isActive ? "nav-link active" : "nav-link"}>
+                        <NavLink to="/plans" className={({ isActive }) => isActive ? "nav-link active" : "nav-link"}>
                             תכניות ליווי
                         </NavLink>
 
-                        <NavLink to="/בלוג" className={({ isActive }) => isActive ? "nav-link active" : "nav-link"}>
+                        <NavLink to="/blog" className={({ isActive }) => isActive ? "nav-link active" : "nav-link"}>
                             בלוג
                         </NavLink>
 
-                        <NavLink to="/מתכונים" className={({ isActive }) => isActive ? "nav-link active" : "nav-link"}>
+                        <NavLink to="/recipes" className={({ isActive }) => isActive ? "nav-link active" : "nav-link"}>
                             מתכונים
                         </NavLink>
                     </div>
 
                     <div>
-                        <NavLink to="/אודותי" className={({ isActive }) => isActive ? "nav-link active" : "nav-link"}>
+                        <NavLink to="/about" className={({ isActive }) => isActive ? "nav-link active" : "nav-link"}>
                             אודותי
                         </NavLink>
-                        <NavLink to="/יצירת_קשר" className={({ isActive }) => isActive ? "nav-link active" : "nav-link"}>
+                        <NavLink to="/contact" className={({ isActive }) => isActive ? "nav-link active" : "nav-link"}>
                             יצירת קשר
                         </NavLink>
 
@@ -72,23 +72,23 @@ export function Header() {
                         בית
                     </NavLink>
 
-                    <NavLink to="/תכניות_ליווי" className={({ isActive }) => isActive ? "nav-link active" : "nav-link"}>
+                    <NavLink to="/plans" className={({ isActive }) => isActive ? "nav-link active" : "nav-link"}>
                         תכניות ליווי
                     </NavLink>
 
-                    <NavLink to="/בלוג" className={({ isActive }) => isActive ? "nav-link active" : "nav-link"}>
+                    <NavLink to="/blog" className={({ isActive }) => isActive ? "nav-link active" : "nav-link"}>
                         בלוג
                     </NavLink>
 
-                    <NavLink to="/מתכונים" className={({ isActive }) => isActive ? "nav-link active" : "nav-link"}>
+                    <NavLink to="/recipes" className={({ isActive }) => isActive ? "nav-link active" : "nav-link"}>
                         מתכונים
                     </NavLink>
 
-                    <NavLink to="/אודותי" className={({ isActive }) => isActive ? "nav-link active" : "nav-link"}>
+                    <NavLink to="/about" className={({ isActive }) => isActive ? "nav-link active" : "nav-link"}>
                         אודותי
                     </NavLink>
 
-                    <NavLink to="/יצירת_קשר" className={({ isActive }) => isActive ? "nav-link active" : "nav-link"}>
+                    <NavLink to="/contact" className={({ isActive }) => isActive ? "nav-link active" : "nav-link"}>
                         יצירת קשר
                     </NavLink>
                 </nav>

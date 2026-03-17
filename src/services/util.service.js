@@ -53,11 +53,11 @@ function getTimeStamp(time, noTxt) {
     const sentAt = new Date(time)
     const monthsArray = ['ינואר', 'פברואר', 'מרץ', 'אפריל', 'מאי', 'יוני', 'יולי', 'אוגוסט', 'ספטמבר', 'אוקטובר', 'נובמבר', 'דצמבר']
 
-    const monthsPad = sentAt.getMonth().toString().padStart(2, 0)
+    const monthsPad = (sentAt.getMonth() + 1).toString().padStart(2, 0)
     const dayPad = sentAt.getDate().toString().padStart(2, 0)
 
     if (noTxt) {
-        return `${monthsPad}/${dayPad}/${sentAt.getFullYear().toString().slice(2, 4)}`
+        return `${dayPad}/${monthsPad}/${sentAt.getFullYear().toString().slice(2, 4)}`
     } else {
         return `${sentAt.getDate()} ${monthsArray[sentAt.getMonth()]}, ${sentAt.getFullYear()}`
     }

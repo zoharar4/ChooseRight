@@ -1,0 +1,31 @@
+.admin-page {
+  padding: 12px;
+
+}
+
+.admin-page .list-options {
+  display: flex;
+  margin-bottom: 12px;
+  justify-content: space-between;
+
+  .right-options,
+  .left-options {
+    display: flex;
+    gap: 12px;
+  }
+
+  button,
+  select {
+    background-color: #eaeaea;
+    padding: 10px;
+    border: 0;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+
+  .add-btn {
+    background-color: green;
+    padding: 0 10px;
+  }
+
+}

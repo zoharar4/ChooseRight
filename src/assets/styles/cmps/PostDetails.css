@@ -1,0 +1,42 @@
+.post-details {
+
+  padding: 16px;
+
+
+  img {
+    max-width: 100%;
+    border-radius: 8px;
+    cursor: pointer;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  }
+
+  .image-container:has(img) {
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    aspect-ratio: 1 / 0.5;
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+
+    }
+  }
+
+  .post-actions {
+    display: flex;
+    margin: 16px 0;
+    justify-content: space-between;
+  }
+
+  .right-actions {
+    display: flex;
+
+    .like-btn {
+      padding: 5px;
+      border: 0;
+      background: 0;
+    }
+  }
+}

@@ -1,8 +1,11 @@
+.txt-center {
+  text-align: center;
+}
 
-.underline{
+.underline {
   text-decoration: underline;
 }
 
-.bold{
+.bold {
   font-weight: bold;
 }

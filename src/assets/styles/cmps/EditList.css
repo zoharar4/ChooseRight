@@ -20,8 +20,12 @@
   border-bottom: 1px solid #eaeaea;
 }
 
+.admin-table tr:nth-child(even) {
+  background-color: #f5f5f5;
+}
+
 .admin-table tr:hover {
-  background-color: #fafafa;
+  background-color: #f0f0f0;
 }
 
 .admin-table button {
@@ -41,6 +45,10 @@
 
 .admin-table .delete-btn {
   background-color: #ef4444;
+  color: white;
+}
+.admin-table .comments-btn {
+  background-color: #555555;
   color: white;
 }
 

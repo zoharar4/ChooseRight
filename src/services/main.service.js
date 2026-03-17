@@ -7,6 +7,7 @@ export const mainService = {
     save,
     getEmptyObj,
     incrementViews,
+    incrementLikes,
 }
 
 async function query(type) {

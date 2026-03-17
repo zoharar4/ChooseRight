@@ -12,16 +12,26 @@
 @import "./cmps/Header.css";
 @import "./cmps/Footer.css";
 
-@import "./cmps/PostPreview.css";
-
 @import "./cmps/ContactForm.css";
-@import "./cmps/PlanPreview.css";
+@import "./cmps/Loading.css";
+/* @import "./cmps/AddComment.css"; */
+
+/* list */
 @import "./cmps/EditList.css";
+@import "./cmps/CommentsList.css";
+
+/* preview */
+@import "./cmps/PostPreview.css";
+@import "./cmps/PlanPreview.css";
+
+/* details */
+@import "./cmps/PostDetails.css";
 
 
-@import "./cmps/HomePage.css";
-@import "./cmps/PlansPage.css";
-@import "./cmps/BlogPage.css";
-@import "./cmps/RecipesPage.css";
 
-@import "./cmps/PostPage.css";
+/* PAGES */
+@import "./pages/HomePage.css";
+@import "./pages/PlansPage.css";
+@import "./pages/BlogPage.css";
+@import "./pages/RecipesPage.css";
+@import "./pages/AdminPage.css";
