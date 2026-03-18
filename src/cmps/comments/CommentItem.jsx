@@ -2,10 +2,11 @@ import { useState } from "react";
 import { mainService } from "../../services/main.service";
 import { utilService } from "../../services/util.service";
 import { CommentContent } from "./CommentContent";
+import { AddComment } from "./AddComment";
 
 
 
-export function CommentItem({ comment, post, setPost }) {
+export function CommentItem({ comment, postId, setPost, type }) {
     const [isReplying, setIsReplying] = useState(false)
 
     function toggleReply() {
@@ -14,14 +15,12 @@ export function CommentItem({ comment, post, setPost }) {
 
     async function onReply(replyData) {
         try {
-            const res = await mainService.addReply(post._id, comment._id, replyData)
+            console.log('post,comment,replyData:', postId, comment, replyData)
+            const res = await mainService.addReply(type, postId, comment._id, replyData)
             setPost(prev => {
                 const updatedComments = prev.comments.map(c => {
                     if (c._id === comment._id) {
-                        return {
-                            ...c,
-                            replies: [...c.replies, res]
-                        }
+                        return { ...c, replies: [...c.replies, res] }
                     }
                     return c
                 })
@@ -33,26 +32,27 @@ export function CommentItem({ comment, post, setPost }) {
             console.error(err)
         }
 
-
-        setIsReplying(false)
+        setTimeout(() => {
+            setIsReplying(false)
+        }, 1200)
     }
 
     return (
-        <li key={comment._id} className="comment">
+        <li className="comment">
 
             <div className="comment-header">
                 <span className="comment-name">{comment.name}</span>
+
                 <span className="comment-time">
                     {utilService.getTimeStamp(comment.createdAtTimestamp)}
                 </span>
             </div>
 
-            <CommentContent />
-            {/* <CommentContent content={comment.content} /> */}
+            <CommentContent content={comment.content} />
 
             <div className="comment-actions">
 
-                <button className="comment-reply">
+                <button onClick={toggleReply} className="comment-reply">
                     <i className="fa-solid fa-reply"></i>
                 </button>
 
@@ -63,16 +63,25 @@ export function CommentItem({ comment, post, setPost }) {
 
             </div>
 
+            {isReplying &&
+                <AddComment
+                    isReply
+                    onSubmit={onReply}
+                    onCancel={() => setIsReplying(false)}
+                />
+            }
+
+
             {comment.replies && comment.replies.length > 0 &&
                 <ul className="replies-list">
 
                     {comment.replies.map(reply =>
-                        <li key={reply._id} className="reply">
+                        <li key={reply?._id} className="reply">
 
                             <div className="comment-header">
-                                <span className="comment-name">{reply.name}</span>
+                                <span className="comment-name">{reply?.name || 'asff'}</span>
                                 <span className="comment-time">
-                                    {utilService.getTimeStamp(reply.createdAtTimestamp)}
+                                    {utilService.getTimeStamp(reply?.createdAtTimestamp || 170000000)}
                                 </span>
                             </div>
 

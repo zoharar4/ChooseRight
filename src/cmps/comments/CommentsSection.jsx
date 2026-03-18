@@ -1,9 +1,10 @@
 import { useState } from "react"
 import { CommentsList } from "./CommentList"
 import { AddComment } from "./AddComment"
+import { mainService } from "../../services/main.service"
 
 
-export function CommentsSection({ post, setPost }) {
+export function CommentsSection({ post, setPost, type }) {
 
     const [isAddingComment, setIsAddingComment] = useState(false)
 
@@ -13,42 +14,38 @@ export function CommentsSection({ post, setPost }) {
 
     async function onAddComment(commentToAdd) {
         try {
-            // const res = await mainService.addComment(post._id, commentToAdd)
-            setPost(prev => ({ ...prev, comments: [commentToAdd, ...prev.comments] }))
-            timeoutIsComment()
-            // setPost(prev => ({ ...prev, comments: [res, ...prev.comments] }))
+            const res = await mainService.addComment(type, post._id, commentToAdd)
+            setPost(prev => ({ ...prev, comments: [res, ...prev.comments] }))
+            setTimeout(() => {
+                setIsAddingComment(false)
+            }, 1200)
         } catch (err) {
             console.error('had issue with adding comment. comment:', commentToAdd, "err:", err)
+            throw err
         }
-    }
-
-    function timeoutIsComment() {//טיים אווט בשביל הלייק
-        setTimeout(() => {
-            setIsAddingComment(false)
-        }, 2000)
     }
 
     return (
         <div className="comments-section">
 
-            <button
-                className="toggle-comment-btn"
-                onClick={toggleAddComment}
-            >
-                {isAddingComment ? "סגור" : "כתוב תגובה"}
-            </button>
 
-            {isAddingComment &&
+            {isAddingComment
+                ?
                 <AddComment
-                    onAddComment={onAddComment}
+                    onSubmit={onAddComment}
                     onCancel={() => setIsAddingComment(false)}
                 />
+                :
+                <button className="toggle-comment-btn" onClick={toggleAddComment}>
+                    {isAddingComment ? "סגור" : "כתוב תגובה"}
+                </button>
             }
 
             <CommentsList
                 comments={post.comments}
                 postId={post._id}
                 setPost={setPost}
+                type={type}
             />
 
         </div>

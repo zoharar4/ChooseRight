@@ -8,6 +8,8 @@ export const mainService = {
     getEmptyObj,
     incrementViews,
     incrementLikes,
+    addComment,
+    addReply,
 }
 
 async function query(type) {
@@ -32,6 +34,14 @@ async function save(type, obj) {
     return savedObj
 }
 
+async function addComment(type, id, comment) {
+    return httpService.post(`${type}/${id}/comment`, comment)
+}
+
+async function addReply(type, id, commentId, reply) {
+    return httpService.post(`${type}/${id}/${commentId}/reply`, reply)
+}
+
 async function incrementViews(type, id) {
     return httpService.put(`stats/views/${type}/${id}`)
 }
@@ -41,6 +51,7 @@ async function incrementLikes(type, id) {
 async function incrementShares(type, id) {
     return httpService.put(`stats/shares/${type}/${id}`)
 }
+
 
 function getEmptyObj(type) {
     if (type === 'blog') {

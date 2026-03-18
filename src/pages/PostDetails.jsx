@@ -6,8 +6,6 @@ import { utilService } from "../services/util.service";
 import { ImageBasic } from "../cmps/ImageBasic";
 import { Loading } from "../cmps/Loading"
 
-import { CommentsList } from "../cmps/comments/CommentList";
-import { AddComment } from "../cmps/comments/AddComment";
 import { CommentsSection } from "../cmps/comments/CommentsSection";
 
 
@@ -116,7 +114,7 @@ export function PostDetails({ type }) {
 
             <div className="content" dangerouslySetInnerHTML={{ __html: post.content }}></div>
 
-            <CommentsSection post={post} setPost={setPost} />
+            <CommentsSection type={type} post={post} setPost={setPost} />
 
         </div>
     )

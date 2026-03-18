@@ -3,7 +3,7 @@ import { utilService } from "../../services/util.service.js";
 import { CommentContent } from "./CommentContent.jsx";
 import { CommentItem } from "./CommentItem.jsx";
 
-export function CommentsList({ comments, post, setPost }) {
+export function CommentsList({ comments, postId, setPost, type }) {
     if (!comments || !comments.length) {
         return (
             <div className="comments-section">
@@ -12,7 +12,7 @@ export function CommentsList({ comments, post, setPost }) {
             </div>
         )
     }
-console.log('comments:',comments)
+    console.log('comments:', comments)
 
     return (
         <div className="comments-section">
@@ -20,7 +20,7 @@ console.log('comments:',comments)
 
             <ul className="comments-list">
                 {comments.map(comment =>
-                    <CommentItem key={comment._id} comment={comment} post={post} setPost={setPost} />
+                    <CommentItem key={comment._id} comment={comment} postId={postId} setPost={setPost} type={type} />
                 )}
             </ul>
         </div>

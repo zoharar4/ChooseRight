@@ -1,7 +1,8 @@
 import { useState } from "react"
 import { Loading } from "../Loading"
 
-export function AddComment({ onAddComment }) {
+export function AddComment({ onSubmit, onCancel, isReply }) {
+
     const [isLoading, setIsLoading] = useState(false)
     const [isSent, setIsSent] = useState(false)
 
@@ -12,34 +13,22 @@ export function AddComment({ onAddComment }) {
         setComment(prev => ({ ...prev, [name]: value }))
     }
 
-    async function onSubmit(ev) {
+    async function handleSubmit(ev) {
         ev.preventDefault()
         if (isLoading || isSent) return
         if (!comment.name.trim() || !comment.content.trim()) return
 
         setIsLoading(true)
-        await onAddComment(comment)
+        await onSubmit(comment)
         setIsLoading(false)
         setIsSent(true)
     }
 
     return (
-        <div className="add-comment">
-
-            {(isLoading && !isSent) &&
-                <div className="loading-cover-form">
-                    <Loading isTxt={false} />
-                </div>
-            }
-            {isSent &&
-                <div className="loading-cover-form">
-                    <i className="fa-solid fa-check fa-2xl" style={{ color: "rgb(47, 192, 47)", fontSize: '50px' }}></i>
-                </div>
-            }
-
+        <div className="add-comment slide-open">
             <h3>הוסף תגובה</h3>
 
-            <form onSubmit={onSubmit}>
+            <form onSubmit={handleSubmit}>
 
                 <input
                     type="text"
@@ -56,8 +45,19 @@ export function AddComment({ onAddComment }) {
                     onChange={handleChange}
                 />
 
-                <button>שלח תגובה</button>
+                <button type="submit" className="send-btn" disabled={isLoading || isSent}>שלח תגובה</button>
+                <button type="button" className="cancel-btn" onClick={() => { onCancel() }} >
+                    ביטול
+                </button>
 
+                {(isLoading || isSent) &&
+                    <div className={`overlay-comment-form`} >
+                        {isSent ?
+                            <i className="fa-solid fa-check fa-2xl" style={{ color: "rgb(47, 192, 47)", fontSize: '50px' }}></i> :
+                            <Loading isTxt={false} />
+                        }
+                    </div>
+                }
             </form>
 
         </div>
