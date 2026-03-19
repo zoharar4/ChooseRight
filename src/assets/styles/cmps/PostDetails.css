@@ -34,9 +34,19 @@
     display: flex;
 
     .like-btn {
+      color: #666;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 22px;
       padding: 5px;
       border: 0;
       background: 0;
+      
+    }
+    .like-btn:hover, .active{
+      color: rgb(222, 74, 67);
+      
     }
   }
 }

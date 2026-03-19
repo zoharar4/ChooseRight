@@ -60,10 +60,11 @@ export function PostDetails({ type }) {
         utilService.saveToStorage("likedPosts", likedPosts)
         setIsLiked(true)
         setCurrAnimation('fa-beat')
+        setPost(prev => ({...prev, likes: prev.likes + 1}))
 
         setTimeout(() => {
             setCurrAnimation(null)
-        }, 1800)
+        }, 900)
 
         try {
             await mainService.incrementLikes(type, id)
@@ -95,11 +96,12 @@ export function PostDetails({ type }) {
                         sadgtdj
                     </div>
                     <div className="right-actions">
-                        <button onClick={updateLikes} className="like-btn">
+                        <button onClick={updateLikes} className={`like-btn ${isLiked ? "active" : ""}`}>
+                            <span>{post.likes}</span>
                             {isLiked ?
-                                <i className={`fa-solid fa-heart fa-2xl ${currAnimation || ''}`} style={{ color: "rgb(222, 74, 67)" }}></i>
+                                <i className={`fa-solid fa-heart ${currAnimation || ''}`} ></i>
                                 :
-                                <i className={`fa-regular fa-heart fa-2xl`} style={{ color: "rgb(222, 74, 67)" }}></i>
+                                <i className={`fa-regular fa-heart`}></i>
                             }
                         </button>
                     </div>

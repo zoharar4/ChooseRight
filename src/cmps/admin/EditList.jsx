@@ -1,12 +1,18 @@
-import { utilService } from "../services/util.service";
+import { useNavigate } from "react-router";
+import { utilService } from "../../services/util.service";
 
 
 export function EditList({ array, type, onRemove, onEdit, timeFormat }) {
+    const navigate = useNavigate()
 
     function confirmRemove(id) {
         const ans = confirm("האם את/ה בטוח?")
         if (ans) onRemove(id)
         else alert("הפעולה בוטלה")
+    }
+
+    function onCommentList(id) {
+        navigate(`${type}/${id}`)
     }
 
     function getTimeStr(item) {
@@ -47,6 +53,9 @@ export function EditList({ array, type, onRemove, onEdit, timeFormat }) {
                                 <td>{getTimeStr(item)}</td>
 
                                 <td>
+                                    <button className="view-btn" style={{ backgroundColor: "rgb(210,220,230)" }} onClick={() => navigate(`/${type}/${item._id}`)}>
+                                        <i className="fa-solid fa-arrow-up-right-from-square"></i>
+                                    </button>
                                     <button className="edit-btn" onClick={() => onEdit(item._id)}>
                                         עריכה
                                     </button>
@@ -54,7 +63,7 @@ export function EditList({ array, type, onRemove, onEdit, timeFormat }) {
                                     <button className="delete-btn" onClick={() => confirmRemove(item._id)}>
                                         מחיקה
                                     </button>
-                                    <button className="comments-btn" onClick={() => {}}>
+                                    <button className="comments-btn" onClick={() => { onCommentList(item._id) }}>
                                         תגובות
                                     </button>
                                 </td>

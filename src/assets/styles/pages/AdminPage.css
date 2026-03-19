@@ -1,6 +1,63 @@
 .admin-page {
   padding: 12px;
 
+  form {
+    font-size: medium;
+
+    input#title,
+    input#previewContent {
+      font-size: medium;
+      padding: 4px 6px;
+      border: 2px solid rgb(238, 238, 238);
+      border-radius: 4px;
+    }
+    /* .file-upload {
+      display: inline-flex;
+      align-items: center;
+      border: 2px rgb(234, 234, 234);
+      border-style: dashed;
+      padding: 2px 2px 60px;
+    } */
+
+    /* input#imageUrl {
+      display: none;
+      width: max-content;
+      border: 2px rgb(234, 234, 234);
+      border-style: dashed;
+    } */
+  }
+
+  .upload-box {
+    border: 2px dashed #aaa;
+    border-radius: 12px;
+    padding: 30px;
+    text-align: center;
+    cursor: pointer;
+    transition: 0.2s ease;
+    background-color: #fafafa;
+  }
+
+  .upload-box:hover {
+    border-color: #666;
+    background-color: #f0f0f0;
+  }
+
+  .upload-box.dragging {
+    border-color: #4caf50;
+    background-color: #e8f5e9;
+  }
+
+  .upload-box img {
+    max-width: 200px;
+    border-radius: 10px;
+  }
+
+  button {
+    background-color: rgb(234, 234, 234);
+    padding: 10px;
+    border-radius: 4px;
+    border: 0;
+  }
 }
 
 .admin-page .list-options {
@@ -16,16 +73,19 @@
 
   button,
   select {
-    background-color: #eaeaea;
+    background-color: #dedede;
     padding: 10px;
     border: 0;
     border-radius: 4px;
+    font-size: 15px;
     cursor: pointer;
   }
+
 
   .add-btn {
     background-color: green;
     padding: 0 10px;
   }
+
 
 }

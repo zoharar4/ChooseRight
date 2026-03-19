@@ -18,7 +18,7 @@ export function CommentsSection({ post, setPost, type }) {
             setPost(prev => ({ ...prev, comments: [res, ...prev.comments] }))
             setTimeout(() => {
                 setIsAddingComment(false)
-            }, 1200)
+            }, 500)
         } catch (err) {
             console.error('had issue with adding comment. comment:', commentToAdd, "err:", err)
             throw err

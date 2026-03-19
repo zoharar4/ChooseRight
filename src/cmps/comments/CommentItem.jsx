@@ -6,7 +6,7 @@ import { AddComment } from "./AddComment";
 
 
 
-export function CommentItem({ comment, postId, setPost, type }) {
+export function CommentItem({ comment, postId, setPost, type, setComments, isAdminPage = true, onDelete }) {
     const [isReplying, setIsReplying] = useState(false)
 
     function toggleReply() {
@@ -15,18 +15,32 @@ export function CommentItem({ comment, postId, setPost, type }) {
 
     async function onReply(replyData) {
         try {
-            console.log('post,comment,replyData:', postId, comment, replyData)
             const res = await mainService.addReply(type, postId, comment._id, replyData)
-            setPost(prev => {
-                const updatedComments = prev.comments.map(c => {
-                    if (c._id === comment._id) {
-                        return { ...c, replies: [...c.replies, res] }
-                    }
-                    return c
-                })
+            if (setPost) {
+                setPost(prev => {
+                    const updatedComments = prev.comments.map(c => {
+                        if (c._id === comment._id) {
+                            return {
+                                ...c,
+                                replies: [...(c.replies || []), res]
+                            }
+                        }
+                        return c
+                    })
 
-                return { ...prev, comments: updatedComments }
-            })
+                    return { ...prev, comments: updatedComments }
+                })
+            } else {
+                setComments(prev => {
+                    const updatedComments = prev.map(c => {
+                        if (c._id === comment._id) {
+                            return { ...c, replies: [...(c.replies || []), res] }
+                        }
+                        return c
+                    })
+                    return updatedComments
+                })
+            }
 
         } catch (err) {
             console.error(err)
@@ -34,8 +48,13 @@ export function CommentItem({ comment, postId, setPost, type }) {
 
         setTimeout(() => {
             setIsReplying(false)
-        }, 1200)
+        }, 500)
     }
+
+    async function onLikeComment() {
+
+    }
+
 
     return (
         <li className="comment">
@@ -56,10 +75,15 @@ export function CommentItem({ comment, postId, setPost, type }) {
                     <i className="fa-solid fa-reply"></i>
                 </button>
 
-                <button className="comment-like">
+                <button onClick={onLikeComment} className="comment-like">
                     <i className="fa-regular fa-heart"></i>
                     <span>{comment.likes || 0}</span>
                 </button>
+                {isAdminPage &&
+                    <button onClick={() => onDelete(type, postId, comment._id)} className="delete-btn">
+                        <i className="fa-solid fa-trash-can"></i>
+                    </button>
+                }
 
             </div>
 
@@ -79,14 +103,25 @@ export function CommentItem({ comment, postId, setPost, type }) {
                         <li key={reply?._id} className="reply">
 
                             <div className="comment-header">
-                                <span className="comment-name">{reply?.name || 'asff'}</span>
+                                <span className="comment-name">{reply.name }</span>
                                 <span className="comment-time">
-                                    {utilService.getTimeStamp(reply?.createdAtTimestamp || 170000000)}
+                                    {utilService.getTimeStamp(reply.createdAtTimestamp)}
                                 </span>
                             </div>
 
                             <p className="comment-content">{reply.content}</p>
 
+                            {isAdminPage &&
+                                <div className="reply-actions">
+                                    {/* <button onClick={ } className="delete-btn">
+                                        <i className="fa-solid fa-pen" style={{ color: "rgb(0, 0, 0)" }}></i>
+                                    </button> */}
+
+                                    <button onClick={() => onDelete(type, postId, comment._id, reply._id)} className="delete-btn">
+                                        <i className="fa-solid fa-trash-can"></i>
+                                    </button>
+                                </div>
+                            }
                         </li>
                     )}
 

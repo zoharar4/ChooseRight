@@ -47,9 +47,7 @@ function makeLorem(size = 100) {
     return txt
 }
 
-
-
-function getTimeStamp(time, noTxt) {
+function getTimeStamp(time, noTxt) { //TODO support more stuff
     const sentAt = new Date(time)
     const monthsArray = ['ינואר', 'פברואר', 'מרץ', 'אפריל', 'מאי', 'יוני', 'יולי', 'אוגוסט', 'ספטמבר', 'אוקטובר', 'נובמבר', 'דצמבר']
 
@@ -61,20 +59,7 @@ function getTimeStamp(time, noTxt) {
     } else {
         return `${sentAt.getDate()} ${monthsArray[sentAt.getMonth()]}, ${sentAt.getFullYear()}`
     }
-
-    // const timeDiff = new Date() - sentAt
-    // if (timeDiff < 86400000) {
-    //     const hour = sentAt.getHours()
-    //     const AMPM = hour >= 12 ? 'PM' : 'AM'
-
-    //     return `${hour}:${sentAt.getMinutes().toString().padStart(2, 0)} ${AMPM}`
-    // } else if (timeDiff < 31622400000) {
-
-    //     return `${months[sentAt.getMonth()]} ${sentAt.getDate() + 1}`
-    // } else {
-    // }
 }
-
 
 //LocalStorage
 

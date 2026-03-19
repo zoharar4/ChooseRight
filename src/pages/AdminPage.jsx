@@ -1,15 +1,16 @@
 import { useEffect, useRef, useState } from "react";
-import { EditContent } from "../cmps/EditContent.jsx";
+import { EditContent } from "../cmps/admin/EditContent.jsx"; 
 import { actions } from "../../store/actions.js";
 import { mainService } from "../services/main.service.js";
-import { EditForm } from "../cmps/EditForm.jsx";
-import { EditList } from "../cmps/EditList.jsx";
+import { EditForm } from "../cmps/admin/EditForm.jsx"; 
+import { EditList } from "../cmps/admin/EditList.jsx";
+import { utilService } from "../services/util.service.js";
 
 export function AdminPage() {
     const [objToEdit, setObjToEdit] = useState(null)
     const [itemList, setitemList] = useState([])
-    const [timeFormat, setTimeFormat] = useState("txt")
-    const [type, setType] = useState('blog')
+    const [timeFormat, setTimeFormat] = useState(utilService.loadFromStorage('time-format') || 'txt')
+    const [type, setType] = useState(utilService.loadFromStorage('edit-type') || 'blog')
     const editorRef = useRef()
 
     const formatOpt = ["nums", "txt", "hour"]
@@ -25,10 +26,11 @@ export function AdminPage() {
 
     async function loadData() {
         try {
-            const list = await mainService.query(type)
+            const list = await mainService.queryAdmin(type)
             setitemList(list)
             console.log('list:', list)
         } catch (err) {
+            setitemList([])
             console.log('err:', err)
         }
     }
@@ -80,6 +82,7 @@ export function AdminPage() {
 
     function handleChange({ target }) {
         setType(target.value)
+        utilService.saveToStorage('edit-type', target.value)
     }
 
     function getTypeText() {
@@ -92,6 +95,7 @@ export function AdminPage() {
         setTimeFormat(prev => {
             const currentIndex = formatOpt.indexOf(prev)
             const nextIndex = (currentIndex + 1) % formatOpt.length
+            utilService.saveToStorage('time-format', formatOpt[nextIndex])
             return formatOpt[nextIndex]
         })
     }
@@ -128,7 +132,7 @@ export function AdminPage() {
 
                     <EditForm type={type} objToEdit={objToEdit} setObjToEdit={setObjToEdit} />
                     <EditContent existingContent={objToEdit?.content} setObjToEdit={setObjToEdit} onSave={onSave} editorRef={editorRef} />
-                    <button onClick={onSave} style={{ marginTop: "20px", padding: '4px 6px' }}>
+                    <button onClick={onSave}>
                         Save
                     </button>
                 </>

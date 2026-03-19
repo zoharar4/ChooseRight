@@ -2,7 +2,7 @@ footer {
   display: grid;
   grid-template-columns: var(--layout);
   background-color: var(--footerClr);
-  border-top: 2px solid rgb(190, 190, 190);
+  border-top: 2px solid rgb(221, 221, 221);
   height: 185px;
 
   >div{

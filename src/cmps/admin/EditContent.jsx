@@ -1,6 +1,6 @@
 import { Editor } from '@tinymce/tinymce-react';
-import { httpService } from '../services/http.service';
-import { imageService } from '../services/image.service';
+import { httpService } from '../../services/http.service';
+import { imageService } from '../../services/image.service';
 
 export function EditContent({ existingContent, setObjToEdit, editorRef }) {
 

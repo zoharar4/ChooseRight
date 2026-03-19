@@ -14,6 +14,7 @@ import { PostDetails } from "./pages/PostDetails";
 import { AboutPage } from "./pages/AboutPage";
 import { ContactPage } from "./pages/ContactPage";
 import { AdminPage } from "./pages/AdminPage";
+import { EditCommentList } from "./cmps/admin/EditCommentsList";
 
 export function RootCmp() {
 
@@ -32,6 +33,7 @@ export function RootCmp() {
                     <Route path="/about" element={<AboutPage />} />
                     <Route path="/contact" element={<ContactPage />} />
                     <Route path="/admin" element={<AdminPage />} />
+                    <Route path="/admin/:type/:id" element={<EditCommentList />} />
                 </Routes>
             </div>
             <Footer />

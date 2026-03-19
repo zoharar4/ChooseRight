@@ -5,7 +5,7 @@
   --green1: rgb(70, 203, 79);
   --layout: minmax(52px, 1fr) minmax(auto, 1200px) minmax(52px, 1fr);
   --footerClr: rgb(233, 233, 233);
-  --box-shadow-page: 0 0 5px rgba(0, 0, 0, 0.15);
+  --box-shadow-page: 0 0 5px rgba(0, 0, 0, 0.08);
   --home-top-image-height: 305px;
 
   /* fonts */
@@ -14,9 +14,6 @@
 
   --headerF: Rubik;
   --headerFW: normal;
-
-
-
 }
 
 @media (max-width: 1024px) {

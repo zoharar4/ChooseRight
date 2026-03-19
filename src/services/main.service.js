@@ -2,6 +2,7 @@ import { httpService } from "./http.service"
 
 export const mainService = {
     query,
+    queryAdmin,
     getById,
     remove,
     save,
@@ -9,37 +10,54 @@ export const mainService = {
     incrementViews,
     incrementLikes,
     addComment,
+    removeComment,
     addReply,
+    updateReply,
+    removeReply,
 }
 
 async function query(type) {
-    return httpService.get(type)
+    return httpService.get(`post/${type}`)
+}
+async function queryAdmin(type) {
+    return httpService.get(`post/${type}/admin`)
 }
 
 async function getById(type, id) {
-    return httpService.get(`${type}/${id}`)
+    return httpService.get(`post/${type}/${id}`)
 }
 
 async function remove(type, id) {
-    return httpService.delete(`${type}/${id}`)
+    return httpService.delete(`post/${type}/${id}`)
 }
 
 async function save(type, obj) {
     var savedObj
     if (obj._id) {
-        savedObj = await httpService.put(`${type}/${obj._id}`, obj)
+        savedObj = await httpService.put(`post/${type}/${obj._id}`, obj)
     } else {
-        savedObj = await httpService.post(type, obj)
+        savedObj = await httpService.post(`post/${type}`, obj)
     }
     return savedObj
 }
 
 async function addComment(type, id, comment) {
-    return httpService.post(`${type}/${id}/comment`, comment)
+    return httpService.post(`post/${type}/${id}/comments`, comment)
+}
+
+async function removeComment(type, id, commentId) {
+    return httpService.delete(`post/${type}/${id}/comments/${commentId}`)
 }
 
 async function addReply(type, id, commentId, reply) {
-    return httpService.post(`${type}/${id}/${commentId}/reply`, reply)
+    return httpService.post(`post/${type}/${id}/comments/${commentId}/replies`, reply)
+}
+async function updateReply(type, id, commentId, replyId) {
+    return httpService.put(`post/${type}/${id}/comments/${commentId}/replies/${replyId}`)
+}
+
+async function removeReply(type, id, commentId, replyId) {
+    return httpService.delete(`post/${type}/${id}/comments/${commentId}/replies/${replyId}`)
 }
 
 async function incrementViews(type, id) {

@@ -1,5 +1,5 @@
 .comments-section {
-  margin-top: 50px;
+  margin-top: 30px;
 }
 
 .comments-section h3 {
@@ -104,6 +104,18 @@
   color: #444;
 }
 
+.comment .delete-btn {
+  border: none;
+  background: none;
+  cursor: pointer;
+  font-size: 18px;
+  color: #666;
+}
+
+.comment .delete-btn:hover {
+  color: #444;
+}
+
 
 .replies-list {
   list-style: none;
@@ -121,6 +133,11 @@
   box-shadow: 0 0 8px rgba(0, 0, 0, 0.05);
 }
 
+.reply-actions{
+  display: flex;
+  gap: 16px;
+  margin-top: 12px;
+}
 
 .overlay-comment-form {
   position: absolute;

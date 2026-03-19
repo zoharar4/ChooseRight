@@ -1,6 +1,6 @@
 .header {
   height: 82px;
-  border-bottom: 2px solid rgb(190, 190, 190);
+  border-bottom: 2px solid rgb(224, 224, 224);
   background-color: var(--pageClr);
   font-family: var(--headerF);
   font-weight: var(--headerFW);
