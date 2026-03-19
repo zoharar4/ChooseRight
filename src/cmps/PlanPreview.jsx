@@ -1,10 +1,11 @@
+import postDefault from "../assets/images/post_default.png"
 import imageExaple from "../assets/images/healty meal for weight lost.jpg"
+
 export function PlanPreview({ plan }) {
     return (
         <div className="plan-preview" >
             <div className="image-container">
-                <img src={imageExaple} alt="" />
-                {/* <img src={plan.image} alt="" /> */}
+                <img src={plan.imageUrl || postDefault} onError={(ev) => { ev.target.onerror = null; ev.target.src = postDefault }} />
             </div>
             <h1 className="underline">{plan.title}</h1>
             <p className="bold">{plan.subtitle}</p>
