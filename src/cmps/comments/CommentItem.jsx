@@ -6,7 +6,7 @@ import { AddComment } from "./AddComment";
 
 
 
-export function CommentItem({ comment, postId, setPost, type, setComments, isAdminPage = true, onDelete }) {
+export function CommentItem({ comment, postId, setPost, type, setComments, isAdminPage, onDelete }) {
     const [isReplying, setIsReplying] = useState(false)
 
     function toggleReply() {

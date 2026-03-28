@@ -10,6 +10,7 @@ import { BlogPage } from "./pages/BlogPage";
 import { RecipesPage } from "./pages/RecipesPage";
 
 import { PostDetails } from "./pages/PostDetails";
+import { PlanDetails } from "./pages/PlanDetails.jsx";
 
 import { AboutPage } from "./pages/AboutPage";
 import { ContactPage } from "./pages/ContactPage";
@@ -26,10 +27,11 @@ export function RootCmp() {
                     <Route path="/" element={<HomePage />} />
                     <Route path="/blog/:id" element={<PostDetails type={'blog'} />} />
                     <Route path="/recipes/:id" element={<PostDetails type={'recipes'} />} />
+                    <Route path="/plans/:id" element={<PlanDetails />} />
 
                     <Route path="/plans" element={<PlansPage />} />
-                    <Route path="/blog" element={<BlogPage type={'blog'} />} />
-                    <Route path="/recipes" element={<RecipesPage type={'recipes'} />} />
+                    <Route path="/blog" element={<BlogPage />} />
+                    <Route path="/recipes" element={<RecipesPage />} />
                     <Route path="/about" element={<AboutPage />} />
                     <Route path="/contact" element={<ContactPage />} />
                     <Route path="/admin" element={<AdminPage />} />

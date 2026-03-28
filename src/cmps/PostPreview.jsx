@@ -3,14 +3,14 @@ import { useNavigate } from "react-router"
 
 import { ImageBasic } from "./ImageBasic";
 
-export function PostPreview({ post }) {
+export function PostPreview({ post, isHome, type }) {
     const navigate = useNavigate()
 
     return (
-        <article onClick={() => navigate(post._id)} className="post-card">
+        <article onClick={() => navigate(`/${type}/${post._id}`)} className="post-card">
 
             <div className="post-image">
-                <ImageBasic src={post.imageUrl} alt={post.title} />
+                <ImageBasic src={post.imageUrl?.[0]} alt={post.title} />
             </div>
 
             <div className="post-content">
@@ -19,15 +19,15 @@ export function PostPreview({ post }) {
                     <p className="post-date">
                         {utilService.getTimeStamp(post.createdAtTimestamp, false)}
                     </p>
-
                     <div className="post-views-share">
                         <div className="post-views">
                             <div className="views-num">{post.views}</div>
-                            <i className="fa-regular fa-eye" style={{ color: "rgb(255, 255, 255)" }}></i></div>
+                            <i className="fa-regular fa-eye"></i>
+                        </div>
 
-                        <button className="post-share">
-                            <i className="fa-solid fa-share" style={{ color: "rgb(255, 255, 255)" }}></i>
-                        </button>
+                        {/* {!isHome && <button className="post-share">
+                            <i className="fa-solid fa-share"></i>
+                        </button>} */}
                     </div>
                 </div>
 

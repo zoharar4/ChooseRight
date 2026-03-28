@@ -1,16 +1,42 @@
-import { NavLink, useNavigate } from "react-router"
+import { useNavigate } from "react-router"
+import { useEffect, useState } from "react"
 import image1 from "../assets/images/image1.jpeg"
 import image2 from "../assets/images/1.png"
 import { ContactForm } from "../cmps/ContactForm.jsx"
+import { ImageBasic } from "../cmps/ImageBasic.jsx"
+import { mainService } from "../services/main.service.js"
+import { utilService } from "../services/util.service.js"
+import { PostPreview } from "../cmps/PostPreview.jsx"
 
 export function HomePage() {
 
     const navigate = useNavigate()
+    const [previewBlock, setPreviewBlock] = useState({ blog: [], recipes: [] })
+    const [plansBlock, setPlansBlock] = useState([])
+
+    useEffect(() => {
+        loadPreviews()
+    }, [])
+
+    async function loadPreviews() {
+        try {
+            const [blog, recipes, plans] = await Promise.all([
+                mainService.query("blog", { limit: 3 }),
+                mainService.query("recipes", { limit: 3 }),
+                mainService.query("plans")
+            ])
+
+            setPreviewBlock({ blog: blog.data, recipes: recipes.data })
+            setPlansBlock(plans)
+        } catch (err) {
+            console.error("Failed loading previews", err)
+        }
+    }
 
     return (
         <>
             <div className="home-top-image">
-                <img  className="home_image_2" src={image2} alt="" />
+                <img className="home_image_2" src={image2} alt="" />
                 <div>
                     <div>
                         <h1 className="no-select" >לבחור נכון</h1>
@@ -18,8 +44,9 @@ export function HomePage() {
                     </div>
                 </div>
             </div>
+
             <div className="home-page">
-                <section className="owner-sec-home">
+                <section className="hero-sec-home">
                     <section className="owner-details-home">
                         <div className="txt-container">
                             <h1>החופש לבחור בחיים טובים יותר</h1>
@@ -37,8 +64,8 @@ export function HomePage() {
                         </div>
 
                         <div className="btn-container">
-                            <button className="plans-btn" onClick={() => navigate("/תכניות_ליווי")} >תכניות ליווי</button>
-                            <button className="more-btn" onClick={() => navigate("/אודותי")}>אודותי</button>
+                            <button className="plans-btn" onClick={() => navigate("/plans")} >תכניות ליווי</button>
+                            <button className="more-btn" onClick={() => navigate("/about")}>אודותי</button>
                         </div>
                     </section>
 
@@ -47,8 +74,21 @@ export function HomePage() {
                     </div>
                 </section>
 
-                <div className="contact-sec">
+                {Object.entries(previewBlock).map(([key, items]) => (
+                    <section className="home-post-block" key={key}>
+                        <h2>{key === 'blog' ? 'בלוגים אחרונים' : "מתכונים אחרונים"}</h2>
+                        <div className="post-list-home">
+                            {items.map((item, idx) => (
+                                <PostPreview post={item} key={item._id || idx} isHome type={key}/>
+                            ))}
+                        </div>
+                    </section>
+                ))}
 
+                {/* <section className="home-plans-block">
+                </section> */}
+
+                <div className="contact-sec">
                     <div className="container">
                         <div className="image-container">
                             <img src={image2} alt="" />

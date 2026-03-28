@@ -1,7 +1,23 @@
+import { useEffect, useState } from "react"
 import { PlanPreview } from "../cmps/PlanPreview"
-import { plans } from "../services/main.service"
+import { mainService } from "../services/main.service"
 
 export function PlansPage() {
+
+    const [plans, setPlans] = useState([])
+
+    useEffect(() => {
+        loadPlans()
+    }, [])
+
+    async function loadPlans() {
+        try {
+            const items = await mainService.query("plans")
+            setPlans(items)
+        } catch (err) {
+            console.error('err: cannot load plans:', err)
+        }
+    }
 
     return (
         <div className="plans-page">
@@ -33,7 +49,9 @@ export function PlansPage() {
             </div>
 
             <div className="plans-container">
-                {plans.map((plan, idx) => <PlanPreview plan={plan} key={idx} />)}
+                {plans.map(plan => {
+                    return <PlanPreview plan={plan} key={plan._id} />
+                })}
             </div>
 
         </div>

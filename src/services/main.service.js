@@ -1,12 +1,11 @@
 import { httpService } from "./http.service"
+import { plansService } from "./plans.service"
 
 export const mainService = {
     query,
-    queryAdmin,
     getById,
     remove,
     save,
-    getEmptyObj,
     incrementViews,
     incrementLikes,
     addComment,
@@ -16,23 +15,37 @@ export const mainService = {
     removeReply,
 }
 
-async function query(type) {
-    return httpService.get(`post/${type}`)
-}
-async function queryAdmin(type) {
-    return httpService.get(`post/${type}/admin`)
+async function query(type, options = {}) {
+    console.log('type:',type)
+    if (type === 'plans') return await plansService.query()
+    const { limit, page, full } = options
+
+    const params = new URLSearchParams()
+
+    if (limit) params.append("limit", limit)
+    if (page) params.append("page", page)
+    if (full) params.append("full", true)
+
+    const queryString = params.toString()
+
+    const url = `post/${type}${queryString ? `?${queryString}` : ""}`
+    console.log('1:',1)
+    return httpService.get(url)
 }
 
 async function getById(type, id) {
+    if (type === 'plans') return await plansService.getById(id)
     return httpService.get(`post/${type}/${id}`)
 }
 
 async function remove(type, id) {
+    if (type === 'plans') return await plansService.remove(id)
     return httpService.delete(`post/${type}/${id}`)
 }
 
 async function save(type, obj) {
-    var savedObj
+    if (type === 'plans') return await plansService.save(obj)
+    let savedObj
     if (obj._id) {
         savedObj = await httpService.put(`post/${type}/${obj._id}`, obj)
     } else {
@@ -71,26 +84,6 @@ async function incrementShares(type, id) {
 }
 
 
-function getEmptyObj(type) {
-    if (type === 'blog') {
-        return {
-            title: '',
-            imageUrl: '',
-            previewContent: '',
-            content: '',
-        }
-    } else if (type === 'recipes') {
-        return {
-            title: '',
-            imageUrl: '',
-            previewContent: '',
-            content: '',
-        }
-    }
-}
-
-
-
 export const plans = [
     {
         image: '123',
@@ -101,50 +94,5 @@ export const plans = [
         meetings: `3 מפגשים פרונטליים/בזום, מידע ותוכן, זמינות טלפונית לאורך רוב שעות היום, התאמה אישית לתזונה, פעילות גופנית.`,
         duration: '3 שבועות.',
         cost: 500,
-    }, {
-        image: '123',
-        title: 'ניקוי רעלים',
-        subtitle: 'תכנית ליווי אישית לניקוי רעלים',
-        details: `"סור מרע ועשה טוב" לגוף ולנפש.
-לסלק את הפסולת שמקיפה אותנו מבפנים ומבחוץ ולמלא את הגוף באנרגיה מחודשת.`,
-        meetings: `3 מפגשים פרונטליים/בזום, מידע ותוכן, זמינות טלפונית לאורך רוב שעות היום, התאמה אישית לתזונה, פעילות גופנית.`,
-        duration: '3 שבועות.',
-        cost: 500,
-    }, {
-        image: '123',
-        title: 'ניקוי רעלים',
-        subtitle: 'תכנית ליווי אישית לניקוי רעלים',
-        details: `"סור מרע ועשה טוב" לגוף ולנפש.
-לסלק את הפסולת שמקיפה אותנו מבפנים ומבחוץ ולמלא את הגוף באנרגיה מחודשת.`,
-        meetings: `3 מפגשים פרונטליים/בזום, מידע ותוכן, זמינות טלפונית לאורך רוב שעות היום, התאמה אישית לתזונה, פעילות גופנית.`,
-        duration: '3 שבועות.',
-        cost: 500,
-    }, {
-        image: '123',
-        title: 'ניקוי רעלים',
-        subtitle: 'תכנית ליווי אישית לניקוי רעלים',
-        details: `"סור מרע ועשה טוב" לגוף ולנפש.
-לסלק את הפסולת שמקיפה אותנו מבפנים ומבחוץ ולמלא את הגוף באנרגיה מחודשת.`,
-        meetings: `3 מפגשים פרונטליים/בזום, מידע ותוכן, זמינות טלפונית לאורך רוב שעות היום, התאמה אישית לתזונה, פעילות גופנית.`,
-        duration: '3 שבועות.',
-        cost: 500,
-    }, {
-        image: '123',
-        title: 'ניקוי רעלים',
-        subtitle: 'תכנית ליווי אישית לניקוי רעלים',
-        details: `"סור מרע ועשה טוב" לגוף ולנפש.
-לסלק את הפסולת שמקיפה אותנו מבפנים ומבחוץ ולמלא את הגוף באנרגיה מחודשת.`,
-        meetings: `3 מפגשים פרונטליים/בזום, מידע ותוכן, זמינות טלפונית לאורך רוב שעות היום, התאמה אישית לתזונה, פעילות גופנית.`,
-        duration: '3 שבועות.',
-        cost: 500,
-    }, {
-        image: '123',
-        title: 'ניקוי רעלים',
-        subtitle: 'תכנית ליווי אישית לניקוי רעלים',
-        details: `"סור מרע ועשה טוב" לגוף ולנפש.
-לסלק את הפסולת שמקיפה אותנו מבפנים ומבחוץ ולמלא את הגוף באנרגיה מחודשת.`,
-        meetings: `3 מפגשים פרונטליים/בזום, מידע ותוכן, זמינות טלפונית לאורך רוב שעות היום, התאמה אישית לתזונה, פעילות גופנית.`,
-        duration: '3 שבועות.',
-        cost: 500,
-    },
+    }
 ]

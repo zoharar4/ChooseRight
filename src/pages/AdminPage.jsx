@@ -1,34 +1,39 @@
 import { useEffect, useRef, useState } from "react";
-import { EditContent } from "../cmps/admin/EditContent.jsx"; 
-import { actions } from "../../store/actions.js";
+import { EditContent } from "../cmps/admin/EditContent.jsx";
 import { mainService } from "../services/main.service.js";
-import { EditForm } from "../cmps/admin/EditForm.jsx"; 
+import { EditForm } from "../cmps/admin/EditForm.jsx";
 import { EditList } from "../cmps/admin/EditList.jsx";
 import { utilService } from "../services/util.service.js";
+import { useNavigate } from "react-router";
+import { adminConfig } from "../services/admin.config.js";
+import { Loading } from "../cmps/Loading.jsx";
 
 export function AdminPage() {
     const [objToEdit, setObjToEdit] = useState(null)
-    const [itemList, setitemList] = useState([])
-    const [timeFormat, setTimeFormat] = useState(utilService.loadFromStorage('time-format') || 'txt')
+    const [itemList, setitemList] = useState(null)
     const [type, setType] = useState(utilService.loadFromStorage('edit-type') || 'blog')
-    const editorRef = useRef()
 
-    const formatOpt = ["nums", "txt", "hour"]
+    const [isSaving, setIsSaving] = useState(false)
+    const [timeFormat, setTimeFormat] = useState(utilService.loadFromStorage('time-format') || 'txt')
+    const editorRef = useRef()
+    const editFormRef = useRef()
+    const navigate = useNavigate()
 
     useEffect(() => {
-        if (!type) return
         loadData()
     }, [type])
-
     useEffect(() => {
         console.log('objToEdit:', objToEdit)
     }, [objToEdit])
+    useEffect(() => {
+        console.log('itemList:', itemList)
+    }, [itemList])
+
 
     async function loadData() {
         try {
-            const list = await mainService.queryAdmin(type)
+            const list = await mainService.query(type, { full: true })
             setitemList(list)
-            console.log('list:', list)
         } catch (err) {
             setitemList([])
             console.log('err:', err)
@@ -36,31 +41,43 @@ export function AdminPage() {
     }
 
     async function onSave() {
+        if (isSaving) return
+
         try {
-            // מחכים שכל התמונות בעורך הועלו לשרת
-            if (editorRef.current) {
-                await editorRef.current.uploadImages()
-            }
+            setIsSaving(true)
+
+            if (editFormRef.current) await editFormRef.current.waitForImageUpload()
+            if (editorRef.current) await editorRef.current.uploadImages()
+
             const content = editorRef.current ? editorRef.current.getContent() : objToEdit.content
-            const objToSave = { ...objToEdit, content }
-            await actions.save(type, objToSave)
+            let objToSave = { ...objToEdit, content }
+
+            const latestImage = editFormRef.current?.getLatestImage()
+            if (latestImage) objToSave.imageUrl = latestImage
+
+            await mainService.save(type, objToSave)
             alert("Saved")
             loadData()
-            setObjToEdit(mainService.getEmptyObj(type))
+            setObjToEdit(adminConfig.emptyObj[type])
+
         } catch (err) {
-            alert("ERROR:  cannot save data")
-            console.error('err:', err)
+            alert("ERROR: cannot save")
+            console.error(err)
+        } finally {
+            setIsSaving(false)
         }
     }
 
     async function onRemove(id) {
+        if (!confirm("האם את/ה בטוח?")) return
         try {
-            await actions.remove(type, id)
+            await mainService.remove(type, id)
             alert("Deleted")
-            loadData()
         } catch (err) {
-            alert("ERROR:  cannot delete data")
+            alert("ERROR:  cannot delete data \n", err)
             console.log('err:', err)
+        } finally {
+            loadData()
         }
     }
 
@@ -74,31 +91,33 @@ export function AdminPage() {
         }
     }
 
-
     function onAdd() {
-        const emptyObj = mainService.getEmptyObj(type)
-        setObjToEdit(emptyObj || {})
+        setObjToEdit(adminConfig.emptyObj[type])
     }
 
     function handleChange({ target }) {
+        if (target.value === type) return
+        setitemList(null)
         setType(target.value)
         utilService.saveToStorage('edit-type', target.value)
     }
 
-    function getTypeText() {
-        if (type === 'blog') return "בלוג"
-        else if (type === 'recipes') return "מתכונים"
-        return "תכניות"
-    }
-
     function handleChangeFormat() {
         setTimeFormat(prev => {
-            const currentIndex = formatOpt.indexOf(prev)
-            const nextIndex = (currentIndex + 1) % formatOpt.length
+            const formatOpt = adminConfig.formatOpt
+            const nextIndex = (formatOpt.indexOf(prev) + 1) % formatOpt.length
             utilService.saveToStorage('time-format', formatOpt[nextIndex])
             return formatOpt[nextIndex]
         })
     }
+
+    const config = adminConfig[type]
+    const actions = config.actions({
+        onEdit,
+        onRemove,
+        navigate,
+        type
+    })
 
     return (
         <div className="admin-page">
@@ -121,19 +140,26 @@ export function AdminPage() {
 
                     </div>
 
-                    <EditList array={itemList} onRemove={onRemove} onEdit={onEdit} timeFormat={timeFormat} type={type} />
+                    <EditList data={itemList} columns={config.columns} actions={actions} timeFormat={timeFormat} isId={config.id} />
                 </>
                 :
                 <>
-                    <div>
-                        <h2>{getTypeText()} :</h2>
+                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '20px' }}>
+                        <h2 style={{ margin: 0 }}>{adminConfig.typeText[type]} :</h2>
                         <button onClick={() => setObjToEdit(null)}>חזור</button>
                     </div>
 
-                    <EditForm type={type} objToEdit={objToEdit} setObjToEdit={setObjToEdit} />
-                    <EditContent existingContent={objToEdit?.content} setObjToEdit={setObjToEdit} onSave={onSave} editorRef={editorRef} />
-                    <button onClick={onSave}>
-                        Save
+                    <EditForm type={type} objToEdit={objToEdit} setObjToEdit={setObjToEdit} ref={editFormRef} />
+                    {type === "plans" &&
+                        <EditContent existingContent={objToEdit?.previewContent} setObjToEdit={setObjToEdit} editorRef={editorRef} isPreview />
+                    }
+                    <EditContent existingContent={objToEdit?.content} setObjToEdit={setObjToEdit} editorRef={editorRef} />
+                    <button onClick={onSave} disabled={isSaving}>
+                        {isSaving ?
+                            <Loading isTxt={false} />
+                            :
+                            'Save'
+                        }
                     </button>
                 </>
             }

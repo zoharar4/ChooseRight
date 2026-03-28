@@ -1,7 +1,7 @@
 .admin-page {
   padding: 12px;
 
-  form {
+  .edit-form {
     font-size: medium;
 
     input#title,
@@ -11,20 +11,12 @@
       border: 2px solid rgb(238, 238, 238);
       border-radius: 4px;
     }
-    /* .file-upload {
-      display: inline-flex;
-      align-items: center;
-      border: 2px rgb(234, 234, 234);
-      border-style: dashed;
-      padding: 2px 2px 60px;
-    } */
 
-    /* input#imageUrl {
-      display: none;
-      width: max-content;
-      border: 2px rgb(234, 234, 234);
-      border-style: dashed;
-    } */
+  }
+
+  .loading-wrapper.inline {
+    min-height: 0;
+    /* width: 40px; */
   }
 
   .upload-box {

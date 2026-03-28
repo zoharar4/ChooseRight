@@ -60,7 +60,7 @@ export function PostDetails({ type }) {
         utilService.saveToStorage("likedPosts", likedPosts)
         setIsLiked(true)
         setCurrAnimation('fa-beat')
-        setPost(prev => ({...prev, likes: prev.likes + 1}))
+        setPost(prev => ({ ...prev, likes: prev.likes + 1 }))
 
         setTimeout(() => {
             setCurrAnimation(null)
@@ -75,7 +75,7 @@ export function PostDetails({ type }) {
                 localStorage.setItem("likedPosts", JSON.stringify(likedPosts))
                 setIsLiked(false)
             }
-            console.log('err:', err)
+            console.error('err:', err)
         }
     }
 
@@ -93,7 +93,6 @@ export function PostDetails({ type }) {
 
                 <div className="post-actions">
                     <div className="left-actions">
-                        sadgtdj
                     </div>
                     <div className="right-actions">
                         <button onClick={updateLikes} className={`like-btn ${isLiked ? "active" : ""}`}>
@@ -108,7 +107,7 @@ export function PostDetails({ type }) {
                 </div>
 
                 <div className="image-container">
-                    <ImageBasic src={post.imageUrl} alt={post.title} />
+                    <ImageBasic src={post.imageUrl?.[1]} alt={post.title} />
                 </div>
             </div>
             {/* </Top> */}

@@ -1,19 +1,16 @@
 import { useNavigate } from "react-router";
 import { utilService } from "../../services/util.service";
+import { Loading } from "../Loading";
 
 
-export function EditList({ array, type, onRemove, onEdit, timeFormat }) {
-    const navigate = useNavigate()
+export function EditList({ data, columns, actions, timeFormat, type, isId }) {
 
-    function confirmRemove(id) {
-        const ans = confirm("האם את/ה בטוח?")
-        if (ans) onRemove(id)
-        else alert("הפעולה בוטלה")
-    }
-
-    function onCommentList(id) {
-        navigate(`${type}/${id}`)
-    }
+    // function confirmRemove(id) {
+    //     console.log('id:',id)
+    //     const ans = confirm("האם את/ה בטוח?")
+    //     if (ans) actions.remove?.(id)
+    //     else alert("הפעולה בוטלה")
+    // }
 
     function getTimeStr(item) {
         const time = new Date(item.createdAtTimestamp)
@@ -26,88 +23,76 @@ export function EditList({ array, type, onRemove, onEdit, timeFormat }) {
             return utilService.getTimeStamp(time, timeFormat === "nums")
         }
     }
-
+    if (!data) return (
+        <Loading isForPage />
+    )
     return (
         <table className="admin-table">
-            {(type === "blog" || type === "recipes") && (
-                <>
-                    <thead>
-                        <tr>
-                            <th>כותרת</th>
-                            <th><i className="fa-solid fa-eye fa-lg" style={{ color: "rgb(46, 129, 192)" }}></i></th>
-                            <th><i className="fa-solid fa-comment fa-lg" style={{ color: "rgb(85, 85, 85)" }}></i></th>
-                            <th><i className="fa-solid fa-heart fa-lg" style={{ color: "rgb(154, 33, 33)" }}></i></th>
-                            <th>תאריך הוספה</th>
-                            <th>פעולות</th>
-                            <th>ID</th>
-                        </tr>
-                    </thead>
+            <thead>
+                <tr>
+                    {columns.map(col => <th key={col.key}>{col.label || <i className={col.icon} style={{ color: col.clr }}></i>}</th>)}
+                    {actions && <th>פעולות</th>}
+                    {isId && <th key={'id'}>ID</th>}
+                </tr>
+            </thead>
 
-                    <tbody>
-                        {array.map(item => (
-                            <tr key={item._id}>
-                                <td>{item.title}</td>
-                                <td>{item.views}</td>
-                                <td>{item.comments.length}</td>
-                                <td>{item.likes}</td>
-                                <td>{getTimeStr(item)}</td>
+            <tbody>
+                {data.map(item => (
+                    <tr key={item._id}>
+                        {columns.map(col => (
+                            <td key={col.key}>
+                                {col.render
+                                    ? col.render(item, { getTimeStr })
+                                    : item[col.field]}
+                            </td>
+                        ))}
 
-                                <td>
-                                    <button className="view-btn" style={{ backgroundColor: "rgb(210,220,230)" }} onClick={() => navigate(`/${type}/${item._id}`)}>
+                        {actions && (
+                            <td>
+                                {actions.view && (
+                                    <button
+                                        className="view-btn"
+                                        style={{ backgroundColor: "rgb(210,220,230)" }}
+                                        onClick={() => actions.view(item)}
+                                    >
                                         <i className="fa-solid fa-arrow-up-right-from-square"></i>
                                     </button>
-                                    <button className="edit-btn" onClick={() => onEdit(item._id)}>
+                                )}
+
+                                {actions.edit && (
+                                    <button
+                                        className="edit-btn"
+                                        onClick={() => actions.edit(item)}
+                                    >
                                         עריכה
                                     </button>
+                                )}
 
-                                    <button className="delete-btn" onClick={() => confirmRemove(item._id)}>
+                                {actions.remove && (
+                                    <button
+                                        className="delete-btn"
+                                        onClick={() => actions.remove(item._id)}
+                                    >
                                         מחיקה
                                     </button>
-                                    <button className="comments-btn" onClick={() => { onCommentList(item._id) }}>
+                                )}
+
+                                {actions.comments && (
+                                    <button
+                                        className="comments-btn"
+                                        onClick={() => actions.comments(item)}
+                                    >
                                         תגובות
                                     </button>
-                                </td>
-                                <td>{item._id.slice(-6)}</td>
-                            </tr>
-                        ))}
-                    </tbody>
-                </>
-            )}
-
-            {type === "plans" && (
-                <>
-                    <thead>
-                        <tr>
-                            <th>כותרת</th>
-                            <th>צפיות</th>
-                            <th>תאריך הוספה</th>
-                            <th>פעולות</th>
-                            <th>ID</th>
-                        </tr>
-                    </thead>
-
-                    <tbody>
-                        {array.map(item => (
-                            <tr key={item._id}>
-                                <td>{item.title}</td>
-                                <td>{item.views}</td>
-                                <td>{getTimeStr(item)}</td>
-
-                                <td>
-                                    <button onClick={() => onEdit(item._id)}>
-                                        עריכה
-                                    </button>
-
-                                    <button onClick={() => confirmRemove(item._id)}>
-                                        מחיקה
-                                    </button>
-                                </td>
-                                <td>{item._id.slice(-6)}</td>
-                            </tr>
-                        ))}
-                    </tbody>
-                </>
-            )}
-        </table >
+                                )}
+                            </td>
+                        )}
+                        {isId &&
+                            <td>{item._id.slice(-6)}</td>
+                        }
+                    </tr>
+                ))}
+            </tbody>
+        </table>
     )
 }

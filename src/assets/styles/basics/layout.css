@@ -19,14 +19,16 @@
     grid-column: 2;
   }
 
-  .plans-page,
+  /* .plans-page,
   .blog-page,
   .recipes-page,
   .about-page,
   .contact-page,
   .admin-page,
   .post-details,
-  .edit-comment-list {
+  .edit-comment-list,
+  .plan-details { */
+  .main-content {
     box-shadow: var(--box-shadow-page);
     min-height: 100vh;
     border-radius: 4px;
