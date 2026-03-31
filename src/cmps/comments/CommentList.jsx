@@ -1,26 +1,30 @@
 
+import { useNavigate } from "react-router";
 import { CommentItem } from "./CommentItem.jsx";
 
 export function CommentsList({ comments, postId, setPost, type, setComments, isAdminPage, onDelete }) {
-    if (!comments || !comments.length) {
-        return (
-            <div className="comments-section">
-                <h3>תגובות</h3>
-                <p className="no-comments">אין תגובות עדיין</p>
-            </div>
-        )
-    }
+    const navigate = useNavigate()
     console.log('comments:', comments)
 
     return (
         <div className="comments-section">
-            <h3>תגובות ({comments.length})</h3>
+            <div className="top-container">
+                <h3>תגובות ({comments?.length || 0})</h3>
+                {isAdminPage &&
+                    <button onClick={() => navigate(-1)}>חזור</button>
+                }
+            </div>
 
-            <ul className="comments-list">
-                {comments.map(comment =>
-                    <CommentItem key={comment._id} comment={comment} postId={postId} setPost={setPost} type={type} setComments={setComments} isAdminPage={isAdminPage} onDelete={onDelete} />
-                )}
-            </ul>
+            {!comments || !comments.length
+                ?
+                <p className="no-comments">אין תגובות עדיין</p>
+                :
+                <ul className="comments-list">
+                    {comments.map(comment =>
+                        <CommentItem key={comment._id} comment={comment} postId={postId} setPost={setPost} type={type} setComments={setComments} isAdminPage={isAdminPage} onDelete={onDelete} />
+                    )}
+                </ul>
+            }
         </div>
     )
 }

@@ -19,14 +19,20 @@
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
 }
 
-.post-image img {
+.post-image {
+  overflow: hidden;
+}
+
+.post-card .post-image img {
+  box-shadow: 0 0;
+  border-radius: 0;
   width: 100%;
   height: 200px;
   object-fit: cover;
 }
 
 .post-content {
-  height: 100%;
+  /* height: 100%; */
   overflow: hidden;
   padding: 18px;
   display: flex;
@@ -47,7 +53,7 @@
 
 .post-date {
   font-size: 14px;
-  color: #777;
+  color: var(--date-clr);
 }
 
 .post-share {
@@ -90,8 +96,8 @@
   color: #555;
   line-height: 1.5;
   display: -webkit-box;
-  -webkit-line-clamp: 4;
-  line-clamp: 4;
+  -webkit-line-clamp: 3;
+  line-clamp: 3;
   -webkit-box-orient: vertical;
   overflow: hidden;
 }

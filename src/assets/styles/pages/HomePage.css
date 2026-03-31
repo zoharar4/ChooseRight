@@ -110,7 +110,6 @@
     width: 165px;
     height: 60px;
     border-radius: 6px;
-    border: 0;
     margin: 22px auto;
 
     font-size: 20px;
@@ -167,12 +166,27 @@
 }
 
 .home-post-block {
+  .top-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 12px;
+
+    h2 {
+      margin: 0;
+    }
+
+    span {
+      cursor: pointer;
+    }
+  }
 
   .post-list-home {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
 
     gap: 20px;
+
 
     .post-content {
       padding: 14px 8px;

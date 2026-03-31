@@ -2,7 +2,16 @@
   padding: 12px;
 
   .edit-form {
+    display: flex;
     font-size: medium;
+    flex-direction: column;
+    gap: 20px;
+
+    .input-container {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
 
     input#title,
     input#previewContent {
@@ -43,13 +52,6 @@
     max-width: 200px;
     border-radius: 10px;
   }
-
-  button {
-    background-color: rgb(234, 234, 234);
-    padding: 10px;
-    border-radius: 4px;
-    border: 0;
-  }
 }
 
 .admin-page .list-options {
@@ -62,17 +64,6 @@
     display: flex;
     gap: 12px;
   }
-
-  button,
-  select {
-    background-color: #dedede;
-    padding: 10px;
-    border: 0;
-    border-radius: 4px;
-    font-size: 15px;
-    cursor: pointer;
-  }
-
 
   .add-btn {
     background-color: green;

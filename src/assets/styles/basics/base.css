@@ -17,6 +17,7 @@ select,
 textarea {
     font-family: inherit;
     color: inherit;
+    font-size: 15px;
 }
 
 h1,
@@ -52,16 +53,32 @@ li {
 }
 
 button,
-.nav-link {
+select {
+    background-color: #dedede;
+    padding: 10px;
+    border: 0;
+    border-radius: 4px;
+    cursor: pointer;
 
-    /* background-color: rgb(241, 241, 241); */
     &:hover {
-        filter: brightness(0.95);
-        cursor: pointer;
+        filter: brightness(0.9);
     }
 
     &:active {
-        filter: brightness(0.90);
+        filter: brightness(0.85);
+    }
+}
+
+select:active option {
+    background-color: inherit;
+    &:hover {
+        background-color: inherit;
+        filter: brightness(0.9);
+    }
+    
+    &:active {
+        background-color: inherit;
+        filter: brightness(0.85);
     }
 }
 

@@ -82,7 +82,7 @@ export const EditForm = forwardRef(function EditForm({ type, objToEdit, setObjTo
     }))
 
     return (
-        <div className="edit-form" style={{ display: "flex", flexDirection: 'column', gap: '8px' }}>
+        <div className="edit-form" >
 
             {formConfig[type]?.map(({ field, label, type: inputType, required }) => (
                 <div className="input-container" key={field}>

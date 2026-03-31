@@ -3,10 +3,9 @@ import { useEffect, useState } from "react"
 import image1 from "../assets/images/image1.jpeg"
 import image2 from "../assets/images/1.png"
 import { ContactForm } from "../cmps/ContactForm.jsx"
-import { ImageBasic } from "../cmps/ImageBasic.jsx"
 import { mainService } from "../services/main.service.js"
-import { utilService } from "../services/util.service.js"
 import { PostPreview } from "../cmps/PostPreview.jsx"
+import { BlockPreview } from "../cmps/BlockPreview.jsx"
 
 export function HomePage() {
 
@@ -74,16 +73,8 @@ export function HomePage() {
                     </div>
                 </section>
 
-                {Object.entries(previewBlock).map(([key, items]) => (
-                    <section className="home-post-block" key={key}>
-                        <h2>{key === 'blog' ? 'בלוגים אחרונים' : "מתכונים אחרונים"}</h2>
-                        <div className="post-list-home">
-                            {items.map((item, idx) => (
-                                <PostPreview post={item} key={item._id || idx} isHome type={key}/>
-                            ))}
-                        </div>
-                    </section>
-                ))}
+                <BlockPreview type={'blog'} />
+                <BlockPreview type={'recipes'} />
 
                 {/* <section className="home-plans-block">
                 </section> */}

@@ -40,10 +40,7 @@
   button {
     background-color: rgb(29, 103, 205);
     color: white;
-    border: 0;
-    height: 40px;
     border-radius: 12px;
-    margin-bottom: 6px;
     font-size: 18px;
   }
 

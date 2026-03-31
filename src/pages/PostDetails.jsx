@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { useParams } from "react-router";
+import { useNavigate, useParams } from "react-router";
 
 import { mainService } from "../services/main.service";
 import { utilService } from "../services/util.service";
@@ -7,6 +7,7 @@ import { ImageBasic } from "../cmps/ImageBasic";
 import { Loading } from "../cmps/Loading"
 
 import { CommentsSection } from "../cmps/comments/CommentsSection";
+import { BlockPreview } from "../cmps/BlockPreview";
 
 
 export function PostDetails({ type }) {
@@ -17,9 +18,11 @@ export function PostDetails({ type }) {
     const [currAnimation, setCurrAnimation] = useState('')
 
     const viewTimeoutRef = useRef(null)
+    const navigate = useNavigate()
 
 
     useEffect(() => {
+        setPost(null)
         loadPost()
         const likedPosts = utilService.loadFromStorage('likedPosts') || []
         setIsLiked(likedPosts.includes(id))
@@ -84,15 +87,20 @@ export function PostDetails({ type }) {
     )
     return (
         <div className="post-details" >
-            {/* <Top> */}
-            <div>
-                <div>
+            <div className="top-container">
+                <button onClick={() => navigate(-1)}>חזור</button>
+            </div>
+            <div className="post-section">
+
+                {/* <Top> */}
+
+                <div className="title-container">
                     <h1>{post.title}</h1>
-                    <p>{utilService.getTimeStamp(post.createdAtTimestamp, false)}</p>
                 </div>
 
                 <div className="post-actions">
                     <div className="left-actions">
+                        <div className="post-details-date">{utilService.getTimeStamp(post.createdAtTimestamp, false)}</div>
                     </div>
                     <div className="right-actions">
                         <button onClick={updateLikes} className={`like-btn ${isLiked ? "active" : ""}`}>
@@ -105,15 +113,19 @@ export function PostDetails({ type }) {
                         </button>
                     </div>
                 </div>
-
+                <hr style={{ margin: '0' }} />
+                <br />
                 <div className="image-container">
                     <ImageBasic src={post.imageUrl?.[1]} alt={post.title} />
                 </div>
+                <br />
+                {/* </Top> */}
+
+                <div className="content" dangerouslySetInnerHTML={{ __html: post.content }}></div>
+                <hr />
             </div>
-            {/* </Top> */}
-
-
-            <div className="content" dangerouslySetInnerHTML={{ __html: post.content }}></div>
+            <BlockPreview type={type} />
+            <hr />
 
             <CommentsSection type={type} post={post} setPost={setPost} />
 

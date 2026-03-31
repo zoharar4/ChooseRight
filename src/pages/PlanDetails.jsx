@@ -29,18 +29,23 @@ export function PlanDetails() {
         </div>
     )
     return (
-        <div className="plan-details" style={{ padding: '16px' }}>
-            <div>
-                <h1>{plan.title}</h1>
+        <div className="plan-details">
+            <div className="top-container">
                 <button className="return-btn" onClick={() => navigate('/plans')}>חזור</button>
             </div>
-            <div>
-                <ImageBasic src={plan.imageUrl[1]} alt={plan.title} />
-                <div dangerouslySetInnerHTML={{ __html: plan.previewContent }}></div>
+
+            <div className="image-preview"> {/* גריד עם 2 columns שווים */}
+                <div className="content-container"> 
+                    <h1>{plan.title}</h1>
+                    <div className="preview-content" dangerouslySetInnerHTML={{ __html: plan.previewContent }}></div>
+                </div>
+                <div className="image-container"> 
+                    <ImageBasic src={plan.imageUrl[1]} alt={plan.title} /> {/*  תמונה עם object-fit:cover, width / height: 100%*/}
+                </div>
             </div>
 
             <div>
-                <div dangerouslySetInnerHTML={{ __html: plan.content }}></div>
+                <div className="content" dangerouslySetInnerHTML={{ __html: plan.content }}></div>
             </div>
 
         </div>

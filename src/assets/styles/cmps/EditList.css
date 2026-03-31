@@ -29,18 +29,12 @@
 }
 
 .admin-table button {
-  margin: 0 4px;
-  padding: 6px 10px;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  font-size: 14px;
+  margin-left: 6px;
 }
 
 .admin-table .edit-btn {
   background-color: #3b82f6;
   color: white;
-  margin-left: 6px;
 }
 
 .admin-table .delete-btn {
@@ -51,11 +45,7 @@
   background-color: #555555;
   color: white;
 }
-
-.admin-table .edit-btn:hover {
-  background-color: #2563eb;
-}
-
-.admin-table .delete-btn:hover {
-  background-color: #dc2626;
+.admin-table .view-btn {
+  background-color: #d2dce6;
+  color: black;
 }

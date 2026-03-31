@@ -7,7 +7,6 @@ export function EditCommentList() {
     const { id, type } = useParams()
     const [comments, setComments] = useState(null)
     const [deletingIds, setDeletingIds] = useState(new Set())
-    const navigate = useNavigate()
 
     useEffect(() => {
         loadComments()
@@ -52,8 +51,7 @@ export function EditCommentList() {
 
     return (
         <div className="edit-comment-list" style={{ padding: '12px' }}>
-            <button className="standard-btn" onClick={() => navigate(-1)}>חזור</button>
-            <CommentsList comments={comments} postId={id} type={type} setComments={setComments} onDelete={onDelete} />
+            <CommentsList comments={comments} postId={id} type={type} setComments={setComments} onDelete={onDelete} isAdminPage />
         </div>
     )
 }

@@ -52,7 +52,6 @@ export function EditList({ data, columns, actions, timeFormat, type, isId }) {
                                 {actions.view && (
                                     <button
                                         className="view-btn"
-                                        style={{ backgroundColor: "rgb(210,220,230)" }}
                                         onClick={() => actions.view(item)}
                                     >
                                         <i className="fa-solid fa-arrow-up-right-from-square"></i>

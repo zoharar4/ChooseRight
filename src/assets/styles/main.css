@@ -14,7 +14,6 @@
 
 @import "./cmps/ContactForm.css";
 @import "./cmps/Loading.css";
-/* @import "./cmps/AddComment.css"; */
 
 /* list */
 @import "./cmps/EditList.css";
@@ -26,6 +25,7 @@
 
 /* details */
 @import "./cmps/PostDetails.css";
+@import "./cmps/PlanDetails.css";
 
 
 
