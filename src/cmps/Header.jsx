@@ -1,5 +1,5 @@
 import { NavLink, useLocation, useNavigate } from "react-router"
-import logo from "../assets/images/logo2.png"
+import logo from "../../public/logo.svg"
 import menuSvg from "../assets/images/menu.svg"
 import closeSvg from "../assets/images/close.svg"
 import { useEffect, useState } from "react"
@@ -35,8 +35,8 @@ export function Header() {
     return (
         <>
             <div className="header">
-                <img className="logo" onClick={() => navigate('/admin')} src={logo} alt="logo" />
                 <nav className="nav-bar">
+                    <img className="logo" onClick={() => navigate('/admin')} src={logo} alt="logo" />
                     <div>
                         <NavLink to="/" className={({ isActive }) => isActive ? "nav-link active" : "nav-link"}>
                             בית
@@ -65,8 +65,10 @@ export function Header() {
 
                     </div>
                 </nav>
-
-                <button onClick={onMenu} className="burger-menu"><img draggable="false" src={isMenuOpen ? closeSvg : menuSvg} alt="" /></button>
+                <div className="mobile-container">
+                    <button onClick={onMenu} className="burger-menu"><img draggable="false" src={isMenuOpen ? closeSvg : menuSvg} alt="" /></button>
+                    <img className="logo" onClick={() => navigate('/admin')} src={logo} alt="logo" />
+                </div>
                 <nav className={`mobile-nav ${isMenuOpen ? "active" : ''}`}>
                     <NavLink to="/" className={({ isActive }) => isActive ? "nav-link active" : "nav-link"}>
                         בית

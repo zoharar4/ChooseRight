@@ -9,6 +9,7 @@ export function PlanPreview({ plan }) {
             <div className="image-container">
                 <img src={plan.imageUrl?.[1] || postDefault} onError={(ev) => { ev.target.onerror = null; ev.target.src = postDefault }} />
             </div>
+            <h2 className="plan-title">{plan.title}</h2>
             <div className="preview-content" dangerouslySetInnerHTML={{ __html: plan.previewContent }}></div>
         </div >
     )

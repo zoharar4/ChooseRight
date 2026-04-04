@@ -2,7 +2,7 @@
 
   padding: 16px;
 
-  .top-container {
+  >.top-container {
     display: flex;
     justify-content: left;
   }

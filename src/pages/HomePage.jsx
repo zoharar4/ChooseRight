@@ -6,6 +6,7 @@ import { ContactForm } from "../cmps/ContactForm.jsx"
 import { mainService } from "../services/main.service.js"
 import { PostPreview } from "../cmps/PostPreview.jsx"
 import { BlockPreview } from "../cmps/BlockPreview.jsx"
+import { ImageBasic } from "../cmps/ImageBasic.jsx"
 
 export function HomePage() {
 
@@ -35,7 +36,8 @@ export function HomePage() {
     return (
         <>
             <div className="home-top-image">
-                <img className="home_image_2" src={image2} alt="" />
+                <ImageBasic src={image2} />
+                {/* <img className="" src={image2} alt="" /> */}
                 <div>
                     <div>
                         <h1 className="no-select" >לבחור נכון</h1>
@@ -69,7 +71,8 @@ export function HomePage() {
                     </section>
 
                     <div className="img-container">
-                        <img draggable="false" className="home_image_1" src={image1} alt="" />
+                        <ImageBasic src={image1} className={"home_image_1"}/>
+                        {/* <img draggable="false" className="home_image_1" src={image1} alt="" /> */}
                     </div>
                 </section>
 

@@ -4,7 +4,7 @@
   grid-template-rows: max-content auto max-content;
   position: relative;
 
-  min-height: 100vh;
+  min-height: 101vh;
   gap: 6px 0;
 
   .header {
@@ -30,9 +30,19 @@
   .plan-details { */
   .main-content {
     box-shadow: var(--box-shadow-page);
-    min-height: 100vh;
     border-radius: 4px;
     background-color: var(--pageClr);
+  }
+
+  .blur-load {
+    filter: blur(12px);
+    transform: scale(1.05);
+    transition: filter 0.1s ease, transform 0.1s ease;
+  }
+
+  .blur-load.loaded {
+    filter: blur(0);
+    transform: scale(1);
   }
 
 }

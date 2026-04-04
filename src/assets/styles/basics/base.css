@@ -9,6 +9,7 @@ body {
     margin: 0;
     font-family: var(--bodyF);
     font-weight: var(--bodyFW);
+    background-color: var(--mainBgc);
 }
 
 button,
