@@ -86,7 +86,7 @@ export function PostDetails({ type }) {
         <Loading isForPage={true} />
     )
     return (
-        <div className="post-details" >
+        <div className="post-details page" >
             <div className="top-container">
                 <button onClick={() => navigate(-1)}>חזור</button>
             </div>

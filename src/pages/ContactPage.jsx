@@ -1,6 +1,6 @@
 export function ContactPage() {
     return (
-        <div className="contact-page">
+        <div className="contact-page page">
             ContactPage
         </div>
     )

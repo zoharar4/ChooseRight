@@ -13,7 +13,7 @@ export function RecipesPage() {
         setPosts(items)
     }
     return (
-        <div className="recipes-page">
+        <div className="recipes-page page">
             <div className="post-list">
                 {posts.map(post => {
                     return <PostPreview post={post} key={post._id} type={"recipes"}/>

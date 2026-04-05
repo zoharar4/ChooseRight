@@ -1,22 +1,15 @@
 .home-page {
-  box-shadow: var(--box-shadow-page);
-  border-radius: 4px;
-  margin-top: var(--home-top-image-height);
   padding: 10px;
-
   display: flex;
   flex-direction: column;
   gap: 50px;
 }
 
 .home-top-image {
-  position: absolute;
-  right: 0;
-  left: 0;
-  translate: 0 -6px;
+  position: relative;
+  grid-column: 1/-1;
   height: var(--home-top-image-height);
-  overflow: hidden;
-  box-shadow: 0 3px 4px rgba(0, 0, 0, 0.17);
+  box-shadow: 0 3px 4px rgba(0, 0, 0, 0.1);
 
   &::before {
     position: absolute;
@@ -31,16 +24,12 @@
     width: 100%;
     object-fit: cover;
     object-position: center;
-    opacity: 0.7;
-
+    opacity: 0.65;
   }
 
   >div {
     position: absolute;
-    top: 0;
-    right: 0;
-    width: 100%;
-    height: 100%;
+    inset: 0;
     display: grid;
     grid-template-columns: var(--layout);
     align-items: center;

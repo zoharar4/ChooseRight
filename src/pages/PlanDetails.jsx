@@ -29,7 +29,7 @@ export function PlanDetails() {
         </div>
     )
     return (
-        <div className="plan-details">
+        <div className="plan-details page">
             <div className="top-container">
                 <button className="return-btn" onClick={() => navigate('/plans')}>חזור</button>
             </div>

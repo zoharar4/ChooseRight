@@ -4,10 +4,10 @@
   font-family: var(--headerF);
   font-weight: var(--headerFW);
   font-size: 17px;
-  color: white;
+  /* color: white; */
 
-  display: grid;
-  grid-template-columns: var(--layout);
+  /* display: grid;
+  grid-template-columns: var(--layout); */
 
   .nav-bar {
     grid-column: 2;
@@ -42,7 +42,8 @@
         width: 0;
         height: 2px;
         bottom: 0;
-        background-color: white;
+        background-color: black;
+        /* background-color: white; */
         transition: width 0.3s ease;
       }
 
@@ -55,7 +56,6 @@
   }
 
   .logo {
-    background-color: #fffffff2;
     padding: 0 8px;
     border-radius: 4px;
     height: calc(var(--headerHeight) - 8px);

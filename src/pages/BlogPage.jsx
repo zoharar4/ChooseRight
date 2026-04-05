@@ -16,7 +16,7 @@ export function BlogPage() {
     }
 
     return (
-        <div className="blog-page">
+        <div className="blog-page page">
             <div className="post-list">
                 {posts.map(post => {
                     return <PostPreview post={post} key={post._id} type={'blog'} />

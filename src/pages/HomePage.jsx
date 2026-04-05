@@ -37,7 +37,6 @@ export function HomePage() {
         <>
             <div className="home-top-image">
                 <ImageBasic src={image2} />
-                {/* <img className="" src={image2} alt="" /> */}
                 <div>
                     <div>
                         <h1 className="no-select" >לבחור נכון</h1>
@@ -46,7 +45,7 @@ export function HomePage() {
                 </div>
             </div>
 
-            <div className="home-page">
+            <div className="home-page page">
                 <section className="hero-sec-home">
                     <section className="owner-details-home">
                         <div className="txt-container">
@@ -71,7 +70,7 @@ export function HomePage() {
                     </section>
 
                     <div className="img-container">
-                        <ImageBasic src={image1} className={"home_image_1"}/>
+                        <ImageBasic src={image1} className={"home_image_1"} />
                         {/* <img draggable="false" className="home_image_1" src={image1} alt="" /> */}
                     </div>
                 </section>

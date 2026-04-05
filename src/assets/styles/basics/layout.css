@@ -3,35 +3,34 @@
   grid-template-columns: var(--layout);
   grid-template-rows: max-content auto max-content;
   position: relative;
-
   min-height: 101vh;
-  gap: 6px 0;
 
   .header {
-    grid-column: 1 / 4;
+    grid-column: 1 / -1;
+    display: grid;
+    grid-template-columns: subgrid;
+  }
+
+  .main-content {
+    grid-column: 1 / -1;
+    display: grid;
+    grid-template-columns: subgrid;
   }
 
   footer {
-    grid-column: 1 / 4;
+    grid-column: 1 / -1;
   }
 
-  .main-content {
-    grid-column: 2;
-  }
 
-  /* .plans-page,
-  .blog-page,
-  .recipes-page,
-  .about-page,
-  .contact-page,
-  .admin-page,
-  .post-details,
-  .edit-comment-list,
-  .plan-details { */
-  .main-content {
+
+  /* .edit-comment-list, */
+  .page {
     box-shadow: var(--box-shadow-page);
     border-radius: 4px;
     background-color: var(--pageClr);
+
+    grid-column: 2;
+    margin: 18px 0 26px;
   }
 
   .blur-load {

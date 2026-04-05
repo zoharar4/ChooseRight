@@ -1,15 +1,45 @@
 footer {
   display: grid;
-  grid-template-columns: var(--layout);
+  grid-template-columns: subgrid;
   background-color: var(--footerClr);
   border-top: 2px solid rgb(56, 56, 56);
   height: 185px;
 
-  >div {
+  .container {
     grid-column: 2;
     padding: 10px;
-    /* display: flex; */
-    /* justify-content: space-between; */
+    display: grid;
+    height: 100%;
+    grid-template-columns: repeat(auto-fit, minmax(350px, auto));
+    gap: 12px;
+  }
+
+  .section1 {
+    display: flex;
+    height: 100%;
+    flex-direction: column;
+
+    .logo-name-container {
+      display: grid;
+      align-items: stretch;
+      grid-template-columns: auto auto;
+      gap: 20px;
+
+      .logo-container {
+        display: flex;
+      }
+
+      img {
+        height: 50px;
+        width: auto;
+        object-fit: contain;
+      }
+    }
+  }
+
+  .section3 {
+    grid-column: 2;
+    text-align: center;
   }
 
 }

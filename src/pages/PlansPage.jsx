@@ -20,7 +20,7 @@ export function PlansPage() {
     }
 
     return (
-        <div className="plans-page">
+        <div className="plans-page page">
             <h1>תכניות הליווי</h1>
             <div className="sec1">
                 <p>

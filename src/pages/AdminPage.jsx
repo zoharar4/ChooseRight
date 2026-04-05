@@ -120,7 +120,7 @@ export function AdminPage() {
     })
 
     return (
-        <div className="admin-page">
+        <div className="admin-page page">
             {!objToEdit
                 ?
                 <>
