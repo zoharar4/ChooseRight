@@ -2,44 +2,124 @@ footer {
   display: grid;
   grid-template-columns: subgrid;
   background-color: var(--footerClr);
-  border-top: 2px solid rgb(56, 56, 56);
-  height: 185px;
 
   .container {
     grid-column: 2;
-    padding: 10px;
-    display: grid;
-    height: 100%;
-    grid-template-columns: repeat(auto-fit, minmax(350px, auto));
-    gap: 12px;
+    padding: 1.5rem 1rem 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
   }
 
+
+  /* Section 1 — logo + back to top */
   .section1 {
     display: flex;
-    height: 100%;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+
+  .logo-name-container {
+    display: flex;
+    /* align-items: center; */
+    gap: 1rem;
+  }
+
+  .website-name {
+    display: flex;
     flex-direction: column;
-
-    .logo-name-container {
-      display: grid;
-      align-items: stretch;
-      grid-template-columns: auto auto;
-      gap: 20px;
-
-      .logo-container {
-        display: flex;
-      }
-
-      img {
-        height: 50px;
-        width: auto;
-        object-fit: contain;
-      }
-    }
+    justify-content: space-between;
+    align-items: center;
   }
 
+  img {
+    height: 60px;
+    object-fit: contain;
+    border-radius: 50%;
+  }
+
+  .logo-name-container h2 {
+    font-family: suezOne;
+    margin: 0;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--footerTextClr, #fff);
+    letter-spacing: 0.04em;
+  }
+
+  .logo-name-container h3 {
+    margin: 0;
+    font-size: 0.9rem;
+    font-weight: 400;
+    opacity: 0.75;
+    color: var(--footerTextClr, #fff);
+  }
+
+  .up-btn button {
+    background: transparent;
+    border: 1.5px solid rgba(255, 255, 255, 0.45);
+    color: var(--footerTextClr, #fff);
+    padding: 0.45rem 1.1rem;
+    border-radius: 999px;
+    font-size: 0.85rem;
+    cursor: pointer;
+    font-family: inherit;
+    transition: background 0.2s, border-color 0.2s;
+  }
+
+  .up-btn button:hover {
+    background: rgba(255, 255, 255, 0.12);
+    border-color: rgba(255, 255, 255, 0.75);
+  }
+
+  /* Section 2 — social + email */
+  .section2 {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1.2rem;
+    flex-wrap: wrap;
+  }
+
+  .section2 p {
+    margin: 0;
+    font-size: 0.85rem;
+    opacity: 0.8;
+    color: var(--footerTextClr, #fff);
+  }
+
+  .section2>div {
+    display: flex;
+    gap: 0.6rem;
+  }
+
+  .section2 i {
+    font-size: 1.6rem;
+    color: var(--footerTextClr, #fff);
+    opacity: 0.85;
+    cursor: pointer;
+    transition: opacity 0.2s, transform 0.2s;
+  }
+
+  .section2 i:hover {
+    opacity: 1;
+    transform: scale(1.15);
+  }
+
+  /* Section 3 — copyright bar */
   .section3 {
-    grid-column: 2;
+    grid-column: 1 / -1;
     text-align: center;
+    padding: 0.8rem 1rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.12);
   }
 
+  .section3 p {
+    margin: 0;
+    font-size: 0.78rem;
+    opacity: 0.55;
+    color: var(--footerTextClr, #fff);
+  }
 }

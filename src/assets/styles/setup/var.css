@@ -1,14 +1,12 @@
 :root {
-  
+
   /* colors */
   --mainBgc: #03640010;
 
-  --headerClr: #116e1047;
+  --headerClr: #ddefce;
 
   /* --pageClr: #f9f9f9; */
   --pageClr: #fff;
-  --clr1: #99e265;
-  --clr2: #1e9694;
   --green1: #46cb4f;
   --footerClr: #335f329a;
 
