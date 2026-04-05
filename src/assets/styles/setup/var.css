@@ -1,15 +1,16 @@
 :root {
   
   /* colors */
-  --mainBgc: #18301734;
+  --mainBgc: #03640010;
 
-  --headerClr: #183017cd;
+  --headerClr: #335f329a;
 
-  --pageClr: #f9f9f9;
+  /* --pageClr: #f9f9f9; */
+  --pageClr: #fff;
   --clr1: #99e265;
   --clr2: #1e9694;
   --green1: #46cb4f;
-  --footerClr: #e9e9e9;
+  --footerClr: #335f329a;
 
 
   /* specific colors */

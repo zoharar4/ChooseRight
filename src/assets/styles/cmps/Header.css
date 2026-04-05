@@ -55,10 +55,11 @@
   }
 
   .logo {
-    background-color: #fff;
-    padding: 4px;
-    border-radius: 50%;
+    background-color: #fffffff2;
+    padding: 0 8px;
+    border-radius: 4px;
     height: calc(var(--headerHeight) - 8px);
+    max-height: 60px;
     cursor: pointer;
   }
 }

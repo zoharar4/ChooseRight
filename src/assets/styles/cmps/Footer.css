@@ -2,11 +2,14 @@ footer {
   display: grid;
   grid-template-columns: var(--layout);
   background-color: var(--footerClr);
-  border-top: 2px solid rgb(221, 221, 221);
+  border-top: 2px solid rgb(56, 56, 56);
   height: 185px;
 
-  >div{
+  >div {
     grid-column: 2;
+    padding: 10px;
+    /* display: flex; */
+    /* justify-content: space-between; */
   }
 
 }
