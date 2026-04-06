@@ -1,15 +1,24 @@
+:root {
+  --padding-home: 10px;
+}
+
 .home-page {
-  padding: 10px;
+  padding: var(--padding-home);
   display: flex;
   flex-direction: column;
   gap: 50px;
 }
 
 .home-top-image {
-  position: relative;
-  grid-column: 1/-1;
+  padding: var(--padding-home);
+  background-color: var(--pageClr);
+  box-shadow: var(--box-shadow-page);
   height: var(--home-top-image-height);
-  box-shadow: 0 3px 4px rgba(0, 0, 0, 0.1);
+  border-radius: var(--page-border-radius);
+  position: relative;
+  grid-column: 2;
+  margin-top: 18px;
+  overflow: hidden;
 
   &::before {
     position: absolute;
@@ -20,11 +29,12 @@
 
 
   >img {
+    border-radius: var(--page-border-radius);
     height: 100%;
     width: 100%;
     object-fit: cover;
     object-position: center;
-    opacity: 0.65;
+    opacity: 0.6;
   }
 
   >div {
@@ -131,19 +141,18 @@
   }
 
   .image-container {
-    box-shadow: 0 4px 6px rgb(167, 167, 167);
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.345);
     overflow: hidden;
     border-radius: 20px;
     height: 520px;
     width: 80%;
-
+    
     img {
+      transform: scaleX(-1);
       width: 100%;
       height: 100%;
       object-fit: cover;
       object-position: left;
-      border-radius: 12px;
-      transform: scaleX(-1)
     }
   }
 

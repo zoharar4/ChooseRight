@@ -26,7 +26,7 @@
   /* .edit-comment-list, */
   .page {
     box-shadow: var(--box-shadow-page);
-    border-radius: 4px;
+    border-radius: var(--page-border-radius);
     background-color: var(--pageClr);
 
     grid-column: 2;

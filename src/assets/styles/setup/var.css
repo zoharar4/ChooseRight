@@ -2,7 +2,6 @@
 
   /* colors */
   --mainBgc: #03640010;
-
   --headerClr: #ddefce;
 
   /* --pageClr: #f9f9f9; */
@@ -31,6 +30,7 @@
   /* others */
   --box-shadow-page: 0 0 5px rgba(0, 0, 0, 0.08);
   --headerHeight: 82px;
+  --page-border-radius:6px;
 }
 
 @media (max-width: 1024px) {
