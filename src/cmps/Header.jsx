@@ -1,5 +1,5 @@
 import { NavLink, useLocation, useNavigate } from "react-router"
-import logo from "../../public/logo.svg"
+import logo from "../assets/images/logo.png"
 import menuSvg from "../assets/images/menu.svg"
 import closeSvg from "../assets/images/close.svg"
 import { useEffect, useState } from "react"
