@@ -1,51 +1,121 @@
+/* ─────────────────────────────────────────
+   ADMIN TABLE
+───────────────────────────────────────── */
 .admin-table {
   width: 100%;
   border-collapse: collapse;
-  font-family: rubik, Arial, sans-serif;
+  font-family: var(--sans);
+  font-size: 14px;
+  background: var(--white);
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: 0 2px 12px rgba(45,106,79,.06);
 }
 
 .admin-table thead {
-  background-color: #f5f5f5;
+  background: var(--g1);
+  color: white;
 }
-
 .admin-table th {
   text-align: right;
-  padding: 12px;
-  font-weight: 600;
-  border-bottom: 2px solid #e5e5e5;
+  padding: 13px 16px;
+  font-weight: 500;
+  font-size: 13px;
+  letter-spacing: .02em;
+  white-space: nowrap;
 }
 
 .admin-table td {
-  padding: 12px;
-  border-bottom: 1px solid #eaeaea;
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--border);
+  color: var(--charcoal);
+  vertical-align: middle;
+}
+.admin-table tr:last-child td {
+  border-bottom: none;
+}
+.admin-table tbody tr:hover {
+  background: rgba(45, 106, 79, .04);
 }
 
-.admin-table tr:nth-child(even) {
-  background-color: #f5f5f5;
+/* ── Row number column ── */
+.admin-table .col-num {
+  width: 40px;
+  text-align: center;
+  color: var(--lgray);
+  font-size: 12px;
 }
 
-.admin-table tr:hover {
-  background-color: #f0f0f0;
+/* ── ID column ── */
+.admin-table .col-id {
+  font-size: 11px;
+  color: var(--lgray);
+  font-family: monospace;
 }
 
+/* ── Sortable headers ── */
+.admin-table .sortable-col {
+  cursor: pointer;
+  user-select: none;
+}
+.admin-table .sortable-col:hover {
+  background: rgba(255,255,255,.12);
+}
+.th-inner {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+.sort-indicator {
+  font-size: 12px;
+  line-height: 1;
+}
+.sort-indicator.inactive {
+  opacity: .35;
+}
+.sort-indicator.active {
+  opacity: 1;
+  color: var(--g5);
+}
+
+/* ── Action buttons ── */
+.admin-table td:last-child {
+  white-space: nowrap;
+}
 .admin-table button {
-  margin-left: 6px;
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  border: none;
+  font-size: 13px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 4px;
+  transition: opacity .15s, transform .15s;
+}
+.admin-table button:hover {
+  opacity: .85;
+  transform: scale(1.08);
 }
 
-.admin-table .edit-btn {
-  background-color: #3b82f6;
-  color: white;
-}
+.admin-table .view-btn     { background: var(--g7);     color: var(--g2); }
+.admin-table .edit-btn     { background: #DBEAFE;        color: #1D4ED8; }
+.admin-table .delete-btn   { background: #FEE2E2;        color: #B91C1C; }
+.admin-table .comments-btn { background: #F3F4F6;        color: #374151; }
 
-.admin-table .delete-btn {
-  background-color: #ef4444;
-  color: white;
-}
-.admin-table .comments-btn {
-  background-color: #555555;
-  color: white;
-}
-.admin-table .view-btn {
-  background-color: #d2dce6;
-  color: black;
+/* ── Responsive: horizontal scroll on small screens ── */
+@media (max-width: 700px) {
+  .admin-table {
+    display: block;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    border-radius: 10px;
+  }
+  .admin-table th,
+  .admin-table td {
+    padding: 10px 12px;
+    font-size: 13px;
+  }
 }

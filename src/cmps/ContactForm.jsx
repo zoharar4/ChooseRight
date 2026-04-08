@@ -2,7 +2,7 @@ import { useRef, useState } from "react"
 
 
 export function ContactForm() {
-    const formDefault = { fullname: '', phoneNum: '', email: '', message: '' }
+    const formDefault = { fullname: '', phoneNum: '', email: '', topic: '', message: '' }
 
     const [formData, setFormData] = useState(formDefault)
     const [isFormSent, setIsFormSent] = useState(false)
@@ -23,9 +23,6 @@ export function ContactForm() {
 
     function handleChange(ev, type) {
         setFormData(data => ({ ...data, [type]: ev.target.value }))
-        if (errors[type]) {
-
-        }
         setErrors(err => ({ ...err, [type]: '' }))
     }
 
@@ -87,13 +84,13 @@ export function ContactForm() {
         <div className="contact-form">
             <form action="" onSubmit={ev => onSubmit(ev)} noValidate>
                 <h2>יצירת קשר</h2>
+
                 <div className="form1">
                     <div>
                         <label htmlFor="fullname">שם מלא *</label>
                         <input onChange={(ev) => handleChange(ev, "fullname")} value={formData.fullname} type="text" id="fullname" />
                         {errors.fullname && <span className="error">{errors.fullname}</span>}
                     </div>
-
                     <div>
                         <label htmlFor="phone-num">טלפון *</label>
                         <input onChange={(ev) => handleChange(ev, "phoneNum")} value={formData.phoneNum} type="tel" id="phone-num" />
@@ -107,6 +104,17 @@ export function ContactForm() {
                     {errors.email && <span className="error">{errors.email}</span>}
                 </div>
 
+                <div className="form-topic">
+                    <label htmlFor="topic">נושא הפנייה</label>
+                    <select onChange={(ev) => handleChange(ev, "topic")} value={formData.topic} id="topic">
+                        <option value="">בחרו נושא...</option>
+                        <option value="info">קבלת מידע</option>
+                        <option value="meeting">פגישה</option>
+                        <option value="question">שאלה כללית</option>
+                        <option value="other">אחר</option>
+                    </select>
+                </div>
+
                 <div className="form3">
                     <label htmlFor="message">שליחת הודעה</label>
                     <textarea onChange={(ev) => handleChange(ev, 'message')} value={formData.message} name="message" id="message"></textarea>
@@ -115,8 +123,7 @@ export function ContactForm() {
 
                 <button className="sent-btn">שליחה</button>
                 {isFormSent &&
-                    <div className="success-message">תודה! קיבלנו את הפרטים שלך וניצור קשר בהקדם.
-                    </div>
+                    <div className="success-message">תודה! קיבלנו את הפרטים שלך וניצור קשר בהקדם.</div>
                 }
             </form>
         </div>

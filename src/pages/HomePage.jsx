@@ -1,100 +1,87 @@
 import { useNavigate } from "react-router"
-import { useEffect, useState } from "react"
 import image1 from "../assets/images/image1.jpeg"
-import image2 from "../assets/images/1.png"
-import { ContactForm } from "../cmps/ContactForm.jsx"
-import { mainService } from "../services/main.service.js"
-import { PostPreview } from "../cmps/PostPreview.jsx"
 import { BlockPreview } from "../cmps/BlockPreview.jsx"
 import { ImageBasic } from "../cmps/ImageBasic.jsx"
 
 export function HomePage() {
-
     const navigate = useNavigate()
-    const [previewBlock, setPreviewBlock] = useState({ blog: [], recipes: [] })
-    const [plansBlock, setPlansBlock] = useState([])
-
-    useEffect(() => {
-        loadPreviews()
-    }, [])
-
-    async function loadPreviews() {
-        try {
-            const [blog, recipes, plans] = await Promise.all([
-                mainService.query("blog", { limit: 3 }),
-                mainService.query("recipes", { limit: 3 }),
-                mainService.query("plans")
-            ])
-
-            setPreviewBlock({ blog: blog.data, recipes: recipes.data })
-            setPlansBlock(plans)
-        } catch (err) {
-            console.error("Failed loading previews", err)
-        }
-    }
 
     return (
-        <>
-            <div className="home-top-image">
-                <ImageBasic src={image2} />
-                <div>
-                    <div>
-                        <h1 className="no-select" >לבחור נכון</h1>
-                        <h2 className="no-select">הבחירה בידיים שלך</h2>
+        <div className="home-page">
+
+            {/* ── Hero ── */}
+            <section className="home-hero">
+                <div className="home-hero-inner container">
+                    <div className="home-hero-text">
+                        <span className="hero-label">קואצ'ינג אישי מקצועי</span>
+                        <h1 className="home-hero-title">
+                            לבחור נכון,<br />
+                            <span>לחיות טוב יותר</span>
+                        </h1>
+                        <p className="home-hero-desc">
+                            עם ליווי אישי מקצועי שמותאם בדיוק עבורך — כדי שתוכלו לחבר את עצמכם למשאבים שלכם ולהצליח בחייכם.
+                        </p>
+                        <div className="home-hero-actions">
+                            <button className="btn-primary" onClick={() => navigate("/plans")}>תכניות ליווי</button>
+                            <button className="btn-outline" onClick={() => navigate("/about")}>אודותי</button>
+                        </div>
                     </div>
+                    <div className="home-hero-visual">
+                        <div className="hero-blob-home">
+                            <ImageBasic src={image1} className="hero-img-main" />
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            {/* ── Features Strip ── */}
+            <div className="features-strip">
+                <div className="features-strip-inner container">
+                    <div className="strip-item"><span className="strip-icon">🎯</span> ליווי אישי מותאם</div>
+                    <div className="strip-item"><span className="strip-icon">🌱</span> גישה הוליסטית</div>
+                    <div className="strip-item"><span className="strip-icon">📚</span> ידע מקצועי עמוק</div>
+                    <div className="strip-item"><span className="strip-icon">💪</span> תוצאות ממשיות</div>
+                    <div className="strip-item"><span className="strip-icon">✨</span> שינוי אמיתי לחיים</div>
                 </div>
             </div>
 
-            <div className="home-page page">
-                <section className="hero-sec-home">
-                    <section className="owner-details-home">
-                        <div className="txt-container">
-                            <h1>החופש לבחור בחיים טובים יותר</h1>
-                            <p>
-                                שמי שמרית בן עמי, אמא ל- 9 ילדים מופלאים, בעלת תואר ראשון במנהל עסקים, בוגרת מכללת "אילמה" במגמת בריאות טבעית ועין הבדולח וכן בוגרת מכללת "תוצאות NLP Master-Practition.
-                            </p>
-
-                            <p>
-                                בנוסף, אני מנחת סדנאות יצירה בתחום המנדלות.
-                            </p>
-
-                            <p>
-                                ניסיון החיים העשיר שלי ותהליך אישי ומורכב שעברתי הביא איתו רצון וצורך ממשי להתפתחות אישית וכפועל יוצא מכך גם המון רצון לעזור לאחרים להתפתח ולהצליח בחייהם ולאפשר להם חיבור מיטבי למשאבים שלהם.
-                            </p>
-                        </div>
-
-                        <div className="btn-container">
-                            <button className="plans-btn" onClick={() => navigate("/plans")} >תכניות ליווי</button>
-                            <button className="more-btn" onClick={() => navigate("/about")}>אודותי</button>
-                        </div>
-                    </section>
-
-                    <div className="img-container">
-                        <ImageBasic src={image1} className={"home_image_1"} />
-                        {/* <img draggable="false" className="home_image_1" src={image1} alt="" /> */}
+            {/* ── About Strip ── */}
+            <section className="home-about-strip">
+                <div className="home-about-inner container">
+                    <div className="about-strip-photo">
+                        <ImageBasic src={image1} className="about-strip-img" />
                     </div>
-                </section>
-
-                <BlockPreview type={'blog'} />
-                <BlockPreview type={'recipes'} />
-
-                {/* <section className="home-plans-block">
-                </section> */}
-
-                <div className="contact-sec">
-                    <div className="container">
-                        <div className="image-container">
-                            <img src={image2} alt="" />
+                    <div className="about-strip-text">
+                        <span className="hero-label">קצת עלי</span>
+                        <h2>שמרית בן עמי —<br />מלווה אתכם לחיים טובים יותר</h2>
+                        <p>בוגרת תואר ראשון במנהל עסקים, מכללת "אילמה" במגמת בריאות טבעית ועין הבדולח וכן בוגרת מכללת "תוצאות NLP Master-Practitioner".</p>
+                        <p>ניסיון החיים העשיר שלי ותהליך אישי ומורכב שעברתי הביא רצון לעזור לאחרים להתפתח ולהצליח.</p>
+                        <div className="about-creds">
+                            <div className="cred-item"><div className="cred-dot"></div>קואצ'ינג אישי, NLP Master-Practitioner</div>
+                            <div className="cred-item"><div className="cred-dot"></div>בריאות טבעית ועין הבדולח</div>
+                            <div className="cred-item"><div className="cred-dot"></div>מנחת סדנאות מנדלות</div>
                         </div>
-
-                        <div className="contact-form-container">
-                            <ContactForm />
-                        </div>
+                        <button className="btn-primary" onClick={() => navigate("/about")}>קראו עוד עלי</button>
                     </div>
-
                 </div>
-            </div>
-        </>
+            </section>
 
+            {/* ── Blog + Recipes Preview ── */}
+            <BlockPreview type="blog" />
+            <BlockPreview type="recipes" />
+
+            {/* ── CTA Banner ── */}
+            <section className="cta-banner">
+                <div className="container">
+                    <h2>מוכנים להתחיל?</h2>
+                    <p>פגישת היכרות ראשונה ללא עלות — ללא התחייבויות</p>
+                    <div className="cta-banner-btns">
+                        <button className="btn-primary" onClick={() => navigate("/contact")}>קביעת פגישה עכשיו</button>
+                        <button className="btn-outline" onClick={() => navigate("/plans")}>ראו את התכניות</button>
+                    </div>
+                </div>
+            </section>
+
+        </div>
     )
 }

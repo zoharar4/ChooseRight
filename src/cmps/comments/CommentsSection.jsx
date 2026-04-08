@@ -5,41 +5,34 @@ import { mainService } from "../../services/main.service"
 
 
 export function CommentsSection({ post, setPost, type }) {
-
     const [isAddingComment, setIsAddingComment] = useState(false)
-
-    function toggleAddComment() {
-        setIsAddingComment(prev => !prev)
-    }
 
     async function onAddComment(commentToAdd) {
         try {
             const res = await mainService.addComment(type, post._id, commentToAdd)
             setPost(prev => ({ ...prev, comments: [res, ...prev.comments] }))
-            setTimeout(() => {
-                setIsAddingComment(false)
-            }, 500)
+            setTimeout(() => setIsAddingComment(false), 500)
         } catch (err) {
-            console.error('had issue with adding comment. comment:', commentToAdd, "err:", err)
+            console.error('had issue with adding comment:', commentToAdd, err)
             throw err
         }
     }
 
     return (
         <div className="comments-section">
+            <div className="top-container">
+                <h3>תגובות ({post.comments?.length || 0})</h3>
+                <button className="toggle-comment-btn" onClick={() => setIsAddingComment(prev => !prev)}>
+                    {isAddingComment ? "סגור" : "כתוב תגובה"}
+                </button>
+            </div>
 
-
-            {isAddingComment
-                ?
+            {isAddingComment && (
                 <AddComment
                     onSubmit={onAddComment}
                     onCancel={() => setIsAddingComment(false)}
                 />
-                :
-                <button className="toggle-comment-btn" onClick={toggleAddComment}>
-                    {isAddingComment ? "סגור" : "כתוב תגובה"}
-                </button>
-            }
+            )}
 
             <CommentsList
                 comments={post.comments}
@@ -47,7 +40,6 @@ export function CommentsSection({ post, setPost, type }) {
                 setPost={setPost}
                 type={type}
             />
-
         </div>
     )
 }

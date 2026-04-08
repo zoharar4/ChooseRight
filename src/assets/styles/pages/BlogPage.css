@@ -1,3 +1,49 @@
-.blog-page {
+.blog-page,
+.recipes-page {
+  width: 100%;
 }
 
+/* ── Page Hero (shared with PlansPage) ── */
+.list-page-hero {
+  padding: 60px 0 50px;
+}
+
+/* ── List Section ── */
+.list-page-section {
+  padding: 52px 0 72px;
+}
+
+/* ── Filter Bar ── */
+.filter-bar {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-bottom: 36px;
+  justify-content: center;
+}
+.filter-btn {
+  padding: 8px 20px;
+  border-radius: 30px;
+  border: 1.5px solid var(--border);
+  background: transparent;
+  color: var(--gray);
+  font-family: var(--sans);
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all .2s;
+}
+.filter-btn:hover,
+.filter-btn.active {
+  background: var(--g4);
+  border-color: var(--g4);
+  color: white;
+}
+
+/* ── Post grid on list pages ── */
+.list-page-section .post-list {
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 24px;
+}

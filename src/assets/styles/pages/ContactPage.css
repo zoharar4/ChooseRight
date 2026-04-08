@@ -1,0 +1,200 @@
+/* ─────────────────────────────────────────
+   CONTACT PAGE
+───────────────────────────────────────── */
+.contact-page-wrap { width: 100%; }
+
+/* ── Contact Section ── */
+.contact-section {
+  padding: 72px 0 80px;
+}
+.contact-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.5fr;
+  gap: 56px;
+  align-items: flex-start;
+}
+
+/* ── Info Column ── */
+.contact-info h2 {
+  font-family: var(--serif);
+  font-size: 30px;
+  font-weight: 700;
+  color: var(--g1);
+  margin-bottom: 10px;
+}
+.contact-info > p {
+  font-size: 15px;
+  color: var(--gray);
+  font-weight: 300;
+  line-height: 1.75;
+  margin-bottom: 28px;
+}
+.contact-items {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 32px;
+}
+.contact-item {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  text-decoration: none;
+  color: var(--charcoal);
+  padding: 14px 18px;
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  transition: border-color .2s, box-shadow .2s;
+}
+.contact-item:hover {
+  border-color: var(--g4);
+  box-shadow: 0 4px 16px rgba(45,106,79,.08);
+}
+.contact-icon-wrap {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  flex-shrink: 0;
+}
+.contact-icon-wrap.email { background: #EEF2FF; color: #4F46E5; }
+.contact-icon-wrap.green { background: var(--g7); color: var(--g3); }
+.contact-icon-wrap.wa   { background: #E8F8EC; color: #25D366; }
+.contact-item-label {
+  display: block;
+  font-size: 11px;
+  color: var(--lgray);
+  font-weight: 300;
+  margin-bottom: 2px;
+}
+.contact-item-value {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--charcoal);
+}
+.contact-hours {
+  padding: 18px 20px;
+  background: var(--g7);
+  border-radius: 16px;
+  border: 1px solid var(--border);
+}
+.contact-hours-title {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--g1);
+  margin-bottom: 8px;
+}
+.contact-hours-text {
+  font-size: 13px;
+  color: var(--gray);
+  font-weight: 300;
+  line-height: 1.9;
+}
+
+/* ── Social Links ── */
+.contact-social-title {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--charcoal);
+  margin-bottom: 12px;
+}
+.contact-social-row {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.social-link-card {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  text-decoration: none;
+  padding: 14px 18px;
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  transition: border-color .2s, box-shadow .2s, background .2s;
+  color: var(--charcoal);
+}
+.social-link-card:hover {
+  box-shadow: 0 4px 16px rgba(0,0,0,.1);
+  transform: translateY(-2px);
+}
+.social-link-logo {
+  width: 42px;
+  height: 42px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: background .2s;
+}
+
+/* Facebook — hover turns blue */
+.social-link-card--fb .social-link-logo {
+  background: #E8F0FE;
+  color: #1877F2;
+}
+.social-link-card--fb:hover {
+  border-color: #1877F2;
+}
+.social-link-card--fb:hover .social-link-logo {
+  background: #1877F2;
+  color: white;
+}
+
+/* Instagram — hover turns gradient */
+.social-link-card--ig .social-link-logo {
+  background: #FDE8F0;
+  color: #E1306C;
+}
+.social-link-card--ig:hover {
+  border-color: #E1306C;
+}
+.social-link-card--ig:hover .social-link-logo {
+  background: linear-gradient(135deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888);
+  color: white;
+}
+
+.social-link-info {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.social-link-name {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--charcoal);
+}
+.social-link-handle {
+  font-size: 12px;
+  color: var(--lgray);
+  font-weight: 300;
+}
+
+/* ── Form Column ── */
+.contact-form-wrap {
+  position: sticky;
+  top: 100px;
+}
+.contact-form-wrap .contact-form {
+  max-width: 100%;
+}
+
+/* ── Responsive ── */
+@media (max-width: 900px) {
+  .contact-grid {
+    grid-template-columns: 1fr;
+    gap: 36px;
+  }
+  .contact-form-wrap {
+    position: static;
+  }
+  .contact-section {
+    padding: 52px 0;
+  }
+}

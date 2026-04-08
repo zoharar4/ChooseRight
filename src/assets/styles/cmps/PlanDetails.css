@@ -3,7 +3,7 @@
 
   .top-container {
     display: flex;
-    justify-content: left;
+    justify-content: flex-end;
     margin-bottom: 18px;
   }
 

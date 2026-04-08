@@ -5,7 +5,6 @@ import { useNavigate } from "react-router"
 import { Loading } from "./Loading"
 
 export function BlockPreview({ type }) {
-
     const [items, setItems] = useState(null)
     const navigate = useNavigate()
 
@@ -14,7 +13,6 @@ export function BlockPreview({ type }) {
     }, [type])
 
     async function loadItems() {
-        console.log('loading type:', type)
         try {
             const res = await mainService.query(type, { limit: 3 })
             setItems(res.data)
@@ -23,23 +21,31 @@ export function BlockPreview({ type }) {
         }
     }
 
+    const isBlog = type === 'blog'
+
     return (
-        <section className="home-post-block">
-            <div className="top-container">
-                <h2>{type === 'blog' ? 'פוסטים אחרונים' : "מתכונים אחרונים"}</h2>
-                <span onClick={() => navigate('/' + type)}>הצג הכל</span>
-            </div>
-            <div className="post-list-home">
-                {!items
-                    ?
-                    <Loading isForPage={false} />
-                    :
-                    // {
-                    items.map((item, idx) => (
-                        <PostPreview post={item} key={item._id || idx} isHome type={type} />
-                    ))
-                    // }
-                }
+        <section className={`block-preview-section block-preview--${type}`}>
+            <div className="container">
+                <div className="preview-header">
+                    <div className="preview-header-text">
+                        <span className="section-label">{isBlog ? 'מהבלוג שלי' : 'מהמטבח שלי'}</span>
+                        <h2 className="section-title">{isBlog ? 'פוסטים אחרונים' : 'מתכונים אחרונים'}</h2>
+                    </div>
+                    <button className="btn-outline" onClick={() => navigate('/' + type)}>
+                        ראו הכל ← 
+
+
+                    </button>
+                </div>
+
+                <div className="post-list-home">
+                    {!items
+                        ? <Loading isForPage={false} />
+                        : items.map((item, idx) => (
+                            <PostPreview post={item} key={item._id || idx} isHome type={type} />
+                        ))
+                    }
+                </div>
             </div>
         </section>
     )

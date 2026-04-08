@@ -86,9 +86,13 @@ export function PostDetails({ type }) {
         <Loading isForPage={true} />
     )
     return (
-        <div className="post-details page" >
+        <div className="post-details">
             <div className="top-container">
-                <button onClick={() => navigate(-1)}>חזור</button>
+                <button className="back-btn" onClick={() => navigate(-1)} title="חזור">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                            <path d="M19 12H5M12 5l-7 7 7 7" />
+                        </svg>
+                    </button>
             </div>
             <div className="post-section">
 

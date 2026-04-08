@@ -31,7 +31,11 @@ export function PlanDetails() {
     return (
         <div className="plan-details page">
             <div className="top-container">
-                <button className="return-btn" onClick={() => navigate('/plans')}>חזור</button>
+                <button className="back-btn" onClick={() => navigate('/plans')} title="חזור">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                            <path d="M19 12H5M12 5l-7 7 7 7" />
+                        </svg>
+                    </button>
             </div>
             <div className="image-preview"> {/* גריד עם 2 columns שווים */}
                 <div className="content-container">

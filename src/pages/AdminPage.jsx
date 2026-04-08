@@ -131,7 +131,9 @@ export function AdminPage() {
                                 <option value="recipes">מתכונים</option>
                                 <option value="plans">תכניות</option>
                             </select>
-                            <button onClick={handleChangeFormat}>פורמט זמן</button>
+                            <button onClick={handleChangeFormat} title="פורמט זמן" className="icon-btn">
+                                <i className="fa-regular fa-clock"></i>
+                            </button>
                         </div>
 
                         <div className="left-options">
@@ -144,9 +146,13 @@ export function AdminPage() {
                 </>
                 :
                 <>
-                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '20px' }}>
-                        <h2 style={{ margin: 0 }}>{adminConfig.typeText[type]} :</h2>
-                        <button onClick={() => setObjToEdit(null)}>חזור</button>
+                    <div className="edit-header">
+                        <h2>{adminConfig.typeText[type]}</h2>
+                        <button className="back-btn" onClick={() => setObjToEdit(null)} title="חזור לרשימה">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                                <path d="M19 12H5M12 5l-7 7 7 7" />
+                            </svg>
+                        </button>
                     </div>
 
                     <EditForm type={type} objToEdit={objToEdit} setObjToEdit={setObjToEdit} ref={editFormRef} />
@@ -154,11 +160,10 @@ export function AdminPage() {
                         <EditContent existingContent={objToEdit?.previewContent} setObjToEdit={setObjToEdit} editorRef={editorRef} isPreview />
                     }
                     <EditContent existingContent={objToEdit?.content} setObjToEdit={setObjToEdit} editorRef={editorRef} />
-                    <button onClick={onSave} disabled={isSaving}>
-                        {isSaving ?
-                            <Loading isTxt={false} />
-                            :
-                            'Save'
+                    <button className="save-btn" onClick={onSave} disabled={isSaving} title="שמור">
+                        {isSaving
+                            ? <Loading isTxt={false} />
+                            : <i className="fa-solid fa-floppy-disk"></i>
                         }
                     </button>
                 </>

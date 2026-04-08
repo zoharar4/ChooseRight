@@ -18,26 +18,17 @@
 
   /* Fonts */
   --sans: 'Heebo', sans-serif;
-  --serif: "'Frank Ruhl Libre', serif";
-
-  /* --mainBgc: #03640010;
-  --headerClr: #ddefce;
-
-  --pageClr: #fff;
-  --green1: #46cb4f;
-  --footerClr: #335f329a; */
-
+  --serif: 'Frank Ruhl Libre', serif;
 
   /* specific colors */
-  --date-clr: #777;
-
+  --date-clr: var(--lgray);
 
   /* fonts */
-  --bodyF: Rubik;
-  --bodyFW: normal;
+  --bodyF: 'Heebo', sans-serif;
+  --bodyFW: 300;
 
-  --headerF: Rubik;
-  --headerFW: normal;
+  --headerF: 'Frank Ruhl Libre', serif;
+  --headerFW: 700;
 
 
   /* layouts */
