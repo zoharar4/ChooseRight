@@ -1,9 +1,115 @@
 footer {
-  display: grid;
+  background-color: var(--g1);
+  color: rgba(255, 255, 255, .7);
+  padding: 56px 0 0;
+}
+
+footer {
+
+  .footer-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 64px 44px;
+    display: grid;
+    grid-template-columns: 2fr ;
+    grid-auto-flow: column;
+    grid-auto-columns: 1fr;
+    gap: 48px;
+  }
+
+  .logo-container {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 15px;
+
+    img {
+      height: 30px;
+    }
+  }
+
+  .footer-brand .logo-name {
+    color: white;
+    font-size: 22px;
+  }
+
+  .footer-brand p {
+    margin: 0;
+    font-size: 13px;
+    font-weight: 300;
+    line-height: 1.8;
+    color: rgba(255, 255, 255, .5);
+    max-width: 260px;
+  }
+
+  .footer-social {
+    display: flex;
+    gap: 10px;
+    margin-top: 20px;
+  }
+
+  .social-btn {
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, .07);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background .2s;
+  }
+
+  .social-btn:hover {
+    background: var(--g4);
+  }
+
+  .footer-col h5 {
+    font-family: var(--serif);
+    font-size: 15px;
+    font-weight: 700;
+    color: white;
+    margin-bottom: 16px;
+  }
+
+  .footer-col ul {
+    list-style: none;
+  }
+
+  .footer-col ul li {
+    margin-bottom: 8px;
+  }
+
+  .footer-col ul li span {
+    font-size: 13px;
+    color: rgba(255, 255, 255, .45);
+    transition: color .2s;
+    font-weight: 300;
+    cursor: pointer;
+  }
+
+  .footer-col ul li span:hover {
+    color: var(--g5);
+  }
+
+  .footer-bottom {
+    border-top: 1px solid rgba(255, 255, 255, .08);
+    padding: 22px 64px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 12px;
+    color: rgba(255, 255, 255, .28);
+    font-weight: 300;
+    max-width: 100%;
+  }
+}
+
+/* display: grid;
   grid-template-columns: subgrid;
   background-color: var(--footerClr);
 
-  /* ─── Container ─── */
   .container {
     grid-column: 2;
     padding: 1.5rem 1rem;
@@ -12,7 +118,6 @@ footer {
     gap: 2rem;
   }
 
-  /* ─── Section 1 — Logo + Back to top ─── */
   .section1 {
     display: flex;
     align-items: center;
@@ -72,7 +177,6 @@ footer {
     border-color: rgba(255, 255, 255, 0.75);
   }
 
-  /* ─── Section 2 — Social + Contact ─── */
   .section2 {
     display: flex;
     justify-content: space-between;
@@ -83,7 +187,6 @@ footer {
     color: var(--footerTextClr, #fff);
   }
 
-  /* Social */
   .social-container {
     display: flex;
     flex-direction: column;
@@ -94,7 +197,6 @@ footer {
   .social-container>p {
     margin: 0;
     font-size: 0.9rem;
-    /* opacity: 0.8; */
     color: var(--footerTextClr, #fff);
   }
 
@@ -173,4 +275,4 @@ footer {
     opacity: 0.55;
     color: var(--footerTextClr, #fff);
   }
-}
+} */

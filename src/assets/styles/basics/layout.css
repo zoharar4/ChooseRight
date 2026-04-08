@@ -1,15 +1,9 @@
 .main-layout {
   display: grid;
-  grid-template-columns: var(--layout);
+  /* grid-template-columns: var(--layout); */
   grid-template-rows: max-content auto max-content;
   position: relative;
   min-height: 101vh;
-
-  .header {
-    grid-column: 1 / -1;
-    display: grid;
-    grid-template-columns: subgrid;
-  }
 
   .main-content {
     grid-column: 1 / -1;
@@ -17,9 +11,6 @@
     grid-template-columns: subgrid;
   }
 
-  footer {
-    grid-column: 1 / -1;
-  }
 
 
 

@@ -8,13 +8,21 @@ export function Header() {
     const navigate = useNavigate()
     const location = useLocation()
     const [isMenuOpen, setIsMenuOpen] = useState(false)
+    const navItems = [
+        { id: "/", label: "דף הבית" },
+        { id: "/plans", label: "תכניות ליווי" },
+        { id: "/blog", label: "בלוג" },
+        { id: "/recipes", label: "מתכונים" },
+        { id: "/about", label: "אודותי" },
+        { id: "/contact", label: "יצירת קשר" },
+    ]
 
     useEffect(() => {
         setIsMenuOpen(false)
     }, [location])
 
     useEffect(() => {
-        const mediaQuery = window.matchMedia("(min-width: 1000px)");
+        const mediaQuery = window.matchMedia("(min-width: 900px)");
         const handleChange = (e) => {
             if (e.matches) {
                 setIsMenuOpen(false);
@@ -28,79 +36,78 @@ export function Header() {
         };
     }, [])
 
-    function onMenu() {
-        setIsMenuOpen(value => !value)
-    }
 
     return (
         <>
-            <div className="header">
-                <nav className="nav-bar">
-                    <img className="logo" onClick={() => navigate('/admin')} src={logo} alt="logo" />
-                    <div>
-                        <NavLink to="/" className={({ isActive }) => isActive ? "nav-link active" : "nav-link"}>
-                            בית
-                        </NavLink>
+            <header className="header">
 
-                        <NavLink to="/plans" className={({ isActive }) => isActive ? "nav-link active" : "nav-link"}>
-                            תכניות ליווי
-                        </NavLink>
+                <div className="header-inner">
 
-                        <NavLink to="/blog" className={({ isActive }) => isActive ? "nav-link active" : "nav-link"}>
-                            בלוג
-                        </NavLink>
-
-                        <NavLink to="/recipes" className={({ isActive }) => isActive ? "nav-link active" : "nav-link"}>
-                            מתכונים
-                        </NavLink>
+                    <div className="logo-container" onClick={() => navigate('/admin')}>
+                        <img className="logo" src={logo} alt="logo" />
                     </div>
 
-                    <div>
-                        <NavLink to="/about" className={({ isActive }) => isActive ? "nav-link active" : "nav-link"}>
-                            אודותי
-                        </NavLink>
-                        <NavLink to="/contact" className={({ isActive }) => isActive ? "nav-link active" : "nav-link"}>
-                            יצירת קשר
-                        </NavLink>
+                    <nav className="header-nav">
+                        {navItems.map(n => (
+                            <NavLink key={n.id} to={n.id} className={({ isActive }) => `nav-link ${isActive ? "active" : ""}`}>{n.label}</NavLink>
+                        ))}
+                    </nav>
 
-                    </div>
-                </nav>
-                <div className="mobile-container">
-                    <button onClick={onMenu} className="burger-menu"><img draggable="false" src={isMenuOpen ? closeSvg : menuSvg} alt="" /></button>
-                    <img className="logo" onClick={() => navigate('/admin')} src={logo} alt="logo" />
+                    <button className="meeting-btn" onClick={() => navigate("contact")}>
+                        לקביעת פגישה
+                    </button>
+
+                    <button className="burger-menu" onClick={() => setIsMenuOpen(!isMenuOpen)}>
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </button>
+
                 </div>
-                <nav className={`mobile-nav ${isMenuOpen ? "active" : ''}`}>
-                    <NavLink to="/" className={({ isActive }) => isActive ? "nav-link active" : "nav-link"}>
-                        בית
-                    </NavLink>
+            </header >
 
-                    <NavLink to="/plans" className={({ isActive }) => isActive ? "nav-link active" : "nav-link"}>
-                        תכניות ליווי
-                    </NavLink>
-
-                    <NavLink to="/blog" className={({ isActive }) => isActive ? "nav-link active" : "nav-link"}>
-                        בלוג
-                    </NavLink>
-
-                    <NavLink to="/recipes" className={({ isActive }) => isActive ? "nav-link active" : "nav-link"}>
-                        מתכונים
-                    </NavLink>
-
-                    <NavLink to="/about" className={({ isActive }) => isActive ? "nav-link active" : "nav-link"}>
-                        אודותי
-                    </NavLink>
-
-                    <NavLink to="/contact" className={({ isActive }) => isActive ? "nav-link active" : "nav-link"}>
-                        יצירת קשר
-                    </NavLink>
-                </nav>
-            </div>
             {isMenuOpen && (
-                <div
-                    className="menu-overlay"
-                    onClick={() => setIsMenuOpen(false)}
-                />
+                <div className="mobile-nav">
+                    {navItems.map(n => (
+                        <span key={n.id} onClick={() => navigate(n.id)}>{n.label}</span>
+                    ))}
+                    <button className="meeting-btn" onClick={() => navigate("contact")}>
+                        לקביעת פגישה
+                    </button>
+                </div>
+
+
             )}
+
         </>
     )
 }
+{/* <div className="mobile-container">
+        <button onClick={onMenu} className="burger-menu"><img draggable="false" src={isMenuOpen ? closeSvg : menuSvg} alt="" /></button>
+        <img className="logo" onClick={() => navigate('/admin')} src={logo} alt="logo" />
+    </div>
+    <nav className={`mobile-nav ${isMenuOpen ? "active" : ''}`}>
+        <NavLink to="/" className={({ isActive }) => isActive ? "nav-link active" : "nav-link"}>
+            בית
+        </NavLink>
+
+        <NavLink to="/plans" className={({ isActive }) => isActive ? "nav-link active" : "nav-link"}>
+            תכניות ליווי
+        </NavLink>
+
+        <NavLink to="/blog" className={({ isActive }) => isActive ? "nav-link active" : "nav-link"}>
+            בלוג
+        </NavLink>
+
+        <NavLink to="/recipes" className={({ isActive }) => isActive ? "nav-link active" : "nav-link"}>
+            מתכונים
+        </NavLink>
+
+        <NavLink to="/about" className={({ isActive }) => isActive ? "nav-link active" : "nav-link"}>
+            אודותי
+        </NavLink>
+
+        <NavLink to="/contact" className={({ isActive }) => isActive ? "nav-link active" : "nav-link"}>
+            יצירת קשר
+        </NavLink>
+    </nav> */}

@@ -1,13 +1,31 @@
 :root {
+  --bg: #F3F8F3;
+  --white: #FAFDF9;
+  --g1: #1B4332;
+  --g2: #2D6A4F;
+  --g3: #40916C;
+  --g4: #52B788;
+  --g5: #74C69D;
+  --g6: #B7E4C7;
+  --g7: #D8F3DC;
+  --g8: #EDFCEF;
+  --gold: #C9A84C;
+  --charcoal: #1A2E1F;
+  --gray: #546960;
+  --lgray: #8A9E93;
+  --border: #C3DFC9;
+  --red: #E05C5C;
 
-  /* colors */
-  --mainBgc: #03640010;
+  /* Fonts */
+  --sans: 'Heebo', sans-serif;
+  --serif: "'Frank Ruhl Libre', serif";
+
+  /* --mainBgc: #03640010;
   --headerClr: #ddefce;
 
-  /* --pageClr: #f9f9f9; */
   --pageClr: #fff;
   --green1: #46cb4f;
-  --footerClr: #335f329a;
+  --footerClr: #335f329a; */
 
 
   /* specific colors */
@@ -29,8 +47,7 @@
 
   /* others */
   --box-shadow-page: 0 0 5px rgba(0, 0, 0, 0.08);
-  --headerHeight: 82px;
-  --page-border-radius:6px;
+  --page-border-radius: 6px;
 }
 
 @media (max-width: 1024px) {

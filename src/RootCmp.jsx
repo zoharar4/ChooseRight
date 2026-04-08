@@ -1,7 +1,7 @@
 import { Route, Routes } from "react-router";
 
-import { Header } from "./cmps/Header";
-import { Footer } from "./cmps/footer";
+import { Header } from "./cmps/Header.jsx";
+import { Footer } from "./cmps/Footer.jsx";
 
 
 import { HomePage } from "./pages/HomePage";
