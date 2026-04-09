@@ -75,7 +75,6 @@ export const EditForm = forwardRef(function EditForm({ type, objToEdit, setObjTo
             }
         },
 
-        // 🔥 זה החדש — מביא תמיד את הדאטה העדכני
         getLatestImage() {
             return latestImageRef.current
         }

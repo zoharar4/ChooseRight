@@ -190,3 +190,9 @@
 @media (max-width: 700px) {
   .cta-banner h2 { font-size: 28px; }
 }
+
+/* General */
+
+.no-select {
+    user-select: none;
+}

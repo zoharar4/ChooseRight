@@ -29,26 +29,4 @@
 
   --headerF: 'Frank Ruhl Libre', serif;
   --headerFW: 700;
-
-
-  /* layouts */
-  --layout: minmax(52px, 1fr) minmax(auto, 1200px) minmax(52px, 1fr);
-  --home-top-image-height: 305px;
-
-
-  /* others */
-  --box-shadow-page: 0 0 5px rgba(0, 0, 0, 0.08);
-  --page-border-radius: 6px;
-}
-
-@media (max-width: 1024px) {
-  :root {
-    --layout: 6px 1fr 6px
-  }
-}
-
-@media (max-width: 800px) {
-  :root {
-    --headerHeight: 58px;
-  }
 }

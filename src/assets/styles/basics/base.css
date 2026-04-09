@@ -59,36 +59,3 @@ button {
     cursor: pointer;
 }
 
-/* button,
-select {
-    background-color: #dedede;
-    border: 0;
-    border-radius: 4px;
-    cursor: pointer;
-
-    &:hover {
-        filter: brightness(0.9);
-    }
-
-    &:active {
-        filter: brightness(0.85);
-    }
-}
-
-select:active option {
-    background-color: inherit;
-
-    &:hover {
-        background-color: inherit;
-        filter: brightness(0.9);
-    }
-
-    &:active {
-        background-color: inherit;
-        filter: brightness(0.85);
-    }
-} */
-
-.no-select {
-    user-select: none;
-}

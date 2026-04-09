@@ -1,28 +1,9 @@
 .main-layout {
   display: grid;
-  /* grid-template-columns: var(--layout); */
   grid-template-rows: max-content auto max-content;
   position: relative;
   min-height: 101vh;
 
-  .main-content {
-    grid-column: 1 / -1;
-    display: grid;
-    grid-template-columns: subgrid;
-  }
-
-
-
-
-  /* .edit-comment-list, */
-  .page {
-    box-shadow: var(--box-shadow-page);
-    border-radius: var(--page-border-radius);
-    background-color: var(--pageClr);
-
-    grid-column: 2;
-    margin: 18px 0 26px;
-  }
 
   .blur-load {
     filter: blur(12px);

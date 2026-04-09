@@ -113,6 +113,7 @@
   transition: background .2s, transform .15s;
   position: sticky;
   bottom: 24px;
+  z-index: 4;
 }
 .admin-page .save-btn:hover:not(:disabled) {
   background: var(--g2);
