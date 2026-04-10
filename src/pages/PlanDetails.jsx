@@ -37,13 +37,13 @@ export function PlanDetails() {
                         </svg>
                     </button>
             </div>
-            <div className="image-preview"> {/* גריד עם 2 columns שווים */}
+            <div className="image-preview"> 
                 <div className="content-container">
                     <h1>{plan.title}</h1>
                     <div className="preview-content" dangerouslySetInnerHTML={{ __html: plan.previewContent }}></div>
                 </div>
                 <div className="image-container">
-                    <ImageBasic src={plan.imageUrl[1]} alt={plan.title} /> {/*  תמונה עם object-fit:cover, width / height: 100%*/}
+                    <ImageBasic src={plan.imageUrl[1]} alt={plan.title} /> 
                 </div>
             </div>
 

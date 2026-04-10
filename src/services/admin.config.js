@@ -8,9 +8,9 @@ const postColumns = [
     { key: "date",     label: "תאריך", render: (item, { getTimeStr }) => getTimeStr(item), sortable: true, sortField: item => item.createdAtTimestamp || 0 },
 ]
 
-const postActions = ({ onEdit, onRemove, navigate, type }) => ({
+const postActions = ({ onRemove, navigate, type }) => ({
     view:     item => navigate(`/${type}/${item._id}`),
-    edit:     item => onEdit(item._id),
+    edit:     item => navigate(`/admin/edit/${type}/${item._id}`),
     remove:   id   => onRemove(id),
     comments: item => navigate(`/admin/${type}/${item._id}`),
 })
@@ -36,9 +36,9 @@ export const adminConfig = {
             { key: "views", icon: "fa-solid fa-eye fa-lg", clr: "rgb(76, 109, 135)", field: "views", sortable: true, sortField: item => item.views || 0 },
             { key: "date",  label: "תאריך", render: (item, { getTimeStr }) => getTimeStr(item), sortable: true, sortField: item => item.createdAtTimestamp || 0 },
         ],
-        actions: ({ onEdit, onRemove, navigate, type }) => ({
+        actions: ({ onRemove, navigate, type }) => ({
             view:   item => navigate(`/${type}/${item._id}`),
-            edit:   item => onEdit(item._id),
+            edit:   item => navigate(`/admin/edit/${type}/${item._id}`),
             remove: id   => onRemove(id),
         }),
         id: true,
