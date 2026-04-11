@@ -10,7 +10,7 @@
 .contact-form form {
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 18px;
 }
 .contact-form h2 {
   font-family: var(--serif);
@@ -71,23 +71,43 @@
   background: var(--g4);
   color: white;
   border-radius: 50px;
-  padding: 13px;
+  /* padding: 2px; */
   font-size: 15px;
   font-weight: 600;
   transition: background .2s;
   width: 100%;
+  min-height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
-.contact-form .sent-btn:hover {
+.contact-form .sent-btn:hover:not(:disabled) {
   background: var(--g2);
+}
+.contact-form .sent-btn:disabled {
+  opacity: .75;
+  cursor: not-allowed;
+}
+.contact-form .form-feedback {
+  font-size: 14px;
+  text-align: center;
+  font-weight: 500;
+  border-radius: 10px;
+  padding: 12px 14px;
+  line-height: 1.6;
 }
 .contact-form .success-message {
   color: var(--g2);
-  font-size: 15px;
-  text-align: center;
-  font-weight: 500;
   background: var(--g7);
-  border-radius: 10px;
-  padding: 12px;
+}
+.contact-form .error-message {
+  color: #7f1d1d;
+  background: #FEE2E2;
+}
+.contact-form .error-message a {
+  color: #b91c1c;
+  font-weight: 600;
+  text-decoration: underline;
 }
 .contact-form .error {
   margin-top: 4px;

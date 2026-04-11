@@ -1,49 +1,41 @@
 import { useRef, useState } from "react"
+import { Link } from "react-router-dom"
+import { emailService } from "../services/email.service"
+import { Loading } from "./Loading"
 
+const FORM_DEFAULT = { fullname: '', phoneNum: '', email: '', topic: '', message: '' }
 
 export function ContactForm() {
-    const formDefault = { fullname: '', phoneNum: '', email: '', topic: '', message: '' }
-
-    const [formData, setFormData] = useState(formDefault)
-    const [isFormSent, setIsFormSent] = useState(false)
+    const [formData, setFormData] = useState(FORM_DEFAULT)
     const [errors, setErrors] = useState({})
+    const [isSending, setIsSending] = useState(false)
+    const [isFormSent, setIsFormSent] = useState(false)
+    const [sendError, setSendError] = useState(false)
     const timeOutRef = useRef(null)
 
-    function sendForm() {
-        emailjs.send(import.meta.env.VITE_EMAIL_SERVICE_ID,
-            import.meta.env.VITE_EMAIL_TEMPLATE_ID, formData).then(
-                (response) => {
-                    console.log('SUCCESS!', response.status, response.text);
-                },
-                (error) => {
-                    console.log('FAILED...', error);
-                },
-            );
+    function handleChange(ev, field) {
+        setFormData(data => ({ ...data, [field]: ev.target.value }))
+        setErrors(err => ({ ...err, [field]: '' }))
     }
 
-    function handleChange(ev, type) {
-        setFormData(data => ({ ...data, [type]: ev.target.value }))
-        setErrors(err => ({ ...err, [type]: '' }))
-    }
-
-    function onSubmit(ev) {
+    async function onSubmit(ev) {
         ev.preventDefault()
+        if (!validateForm() || isSending) return
 
-        const isValid = validateForm()
-        if (!isValid || isFormSent) return
-
-        sendForm({ ...formData })
-
-        setFormData(formDefault)
-        setIsFormSent(true)
-
-        if (timeOutRef.current) {
-            clearTimeout(timeOutRef.current)
+        setSendError(false)
+        setIsSending(true)
+        try {
+            await emailService.send("contact", { ...formData })
+            setFormData(FORM_DEFAULT)
+            setIsFormSent(true)
+            if (timeOutRef.current) clearTimeout(timeOutRef.current)
+            timeOutRef.current = setTimeout(() => setIsFormSent(false), 10000)
+        } catch (err) {
+            console.error("Failed to send email:", err)
+            setSendError(true)
+        } finally {
+            setIsSending(false)
         }
-
-        timeOutRef.current = setTimeout(() => {
-            setIsFormSent(false)
-        }, 4000)
     }
 
     function validateForm() {
@@ -76,55 +68,67 @@ export function ContactForm() {
         }
 
         setErrors(newErrors)
-
         return Object.keys(newErrors).length === 0
     }
 
     return (
         <div className="contact-form">
-            <form action="" onSubmit={ev => onSubmit(ev)} noValidate>
+            <form onSubmit={onSubmit} noValidate>
                 <h2>יצירת קשר</h2>
 
                 <div className="form1">
                     <div>
                         <label htmlFor="fullname">שם מלא *</label>
-                        <input onChange={(ev) => handleChange(ev, "fullname")} value={formData.fullname} type="text" id="fullname" />
+                        <input onChange={ev => handleChange(ev, "fullname")} value={formData.fullname} type="text" id="fullname" />
                         {errors.fullname && <span className="error">{errors.fullname}</span>}
                     </div>
                     <div>
                         <label htmlFor="phone-num">טלפון *</label>
-                        <input onChange={(ev) => handleChange(ev, "phoneNum")} value={formData.phoneNum} type="tel" id="phone-num" />
+                        <input onChange={ev => handleChange(ev, "phoneNum")} value={formData.phoneNum} type="tel" id="phone-num" />
                         {errors.phoneNum && <span className="error">{errors.phoneNum}</span>}
                     </div>
                 </div>
 
                 <div className="form2">
                     <label htmlFor="email">Email *</label>
-                    <input onChange={(ev) => handleChange(ev, "email")} value={formData.email} type="email" id="email" />
+                    <input onChange={ev => handleChange(ev, "email")} value={formData.email} type="email" id="email" />
                     {errors.email && <span className="error">{errors.email}</span>}
                 </div>
 
                 <div className="form-topic">
                     <label htmlFor="topic">נושא הפנייה</label>
-                    <select onChange={(ev) => handleChange(ev, "topic")} value={formData.topic} id="topic">
+                    <select onChange={ev => handleChange(ev, "topic")} value={formData.topic} id="topic">
                         <option value="">בחרו נושא...</option>
-                        <option value="info">קבלת מידע</option>
-                        <option value="meeting">פגישה</option>
-                        <option value="question">שאלה כללית</option>
-                        <option value="other">אחר</option>
+                        <option value="קבלת מידע">קבלת מידע</option>
+                        <option value="פגישה">פגישה</option>
+                        <option value="שאלה כללית">שאלה כללית</option>
+                        <option value="אחר">אחר</option>
                     </select>
                 </div>
 
                 <div className="form3">
-                    <label htmlFor="message">שליחת הודעה</label>
-                    <textarea onChange={(ev) => handleChange(ev, 'message')} value={formData.message} name="message" id="message"></textarea>
+                    <label htmlFor="message">שליחת הודעה *</label>
+                    <textarea onChange={ev => handleChange(ev, 'message')} value={formData.message} name="message" id="message" />
                     {errors.message && <span className="error">{errors.message}</span>}
                 </div>
 
-                <button className="sent-btn">שליחה</button>
-                {isFormSent &&
-                    <div className="success-message">תודה! קיבלנו את הפרטים שלך וניצור קשר בהקדם.</div>
-                }
+                <button className="sent-btn" type="submit" disabled={isSending}>
+                    {isSending ? <Loading isTxt={false} /> : 'שליחה'}
+                </button>
+
+                {isFormSent && (
+                    <div className="form-feedback success-message">
+                        תודה! קיבלנו את הפרטים שלך וניצור קשר בהקדם.
+                    </div>
+                )}
+
+                {sendError && (
+                    <div className="form-feedback error-message">
+                        קרתה תקלה בשליחת הטופס.{' '}
+                        <Link to="/contact">אפשרויות נוספות ליצירת קשר</Link>
+                        {' '}זמינות בעמוד יצירת הקשר, ונשמח לדיווח על התקלה.
+                    </div>
+                )}
             </form>
         </div>
     )

@@ -66,7 +66,7 @@ export function AdminPage() {
     const actions = config.actions({ onRemove, navigate, type })
 
     return (
-        <div className="admin-page page">
+        <div className="admin-page">
             <div className="list-options">
                 <div className="right-options">
                     <select value={type} onChange={handleTypeChange} name="edit-type" id="edit-type">

@@ -126,7 +126,7 @@ export function EditList({ data, columns, actions, timeFormat, isId }) {
                                 )}
                                 {actions.comments && (
                                     <button className="comments-btn" onClick={() => actions.comments(item)} title="תגובות">
-                                        <i className="fa-regular fa-comment"></i>
+                                        <i className="fa-solid fa-comment"></i>
                                     </button>
                                 )}
                             </td>

@@ -13,7 +13,6 @@
 .loading-wrapper.inline {
   align-items: center;
   height: 100%;
-  min-height: 150px;
 }
 
 .loader {

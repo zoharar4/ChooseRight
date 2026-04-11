@@ -67,7 +67,7 @@ export function AdminEditPage() {
     const isPlans = type === 'plans'
 
     return (
-        <div className="admin-edit-page page">
+        <div className="admin-edit-page">
             <div className="edit-header">
                 <h2>{adminConfig.typeText[type]}</h2>
                 <button className="back-btn" onClick={() => navigate('/admin')} title="חזור לרשימה">

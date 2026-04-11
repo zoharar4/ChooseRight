@@ -3,6 +3,8 @@
 ───────────────────────────────────────── */
 .admin-page {
   width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
   min-height: 100vh;
   background: var(--bg);
   padding: 28px 32px;
@@ -24,7 +26,8 @@
   gap: 10px;
 }
 .list-options select {
-  padding: 8px 14px;
+  padding: 0 14px;
+  height: 38px;
   border: 1.5px solid var(--border);
   border-radius: 10px;
   font-family: var(--sans);
