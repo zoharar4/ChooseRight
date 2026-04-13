@@ -1,0 +1,10 @@
+.edit-comment-list {
+  padding: 28px 32px;
+  max-width: 1200px;
+  .top-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 24px;
+  }
+}

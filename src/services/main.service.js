@@ -4,19 +4,22 @@ import { plansService } from "./plans.service"
 export const mainService = {
     query,
     getById,
+    getStats,
     remove,
     save,
     incrementViews,
     incrementLikes,
     addComment,
     removeComment,
+    likeComment,
     addReply,
     updateReply,
     removeReply,
+    likeReply,
+    getRecentComments,
 }
 
 async function query(type, options = {}) {
-    console.log('type:',type)
     if (type === 'plans') return await plansService.query()
     const { limit, page, full } = options
 
@@ -29,7 +32,6 @@ async function query(type, options = {}) {
     const queryString = params.toString()
 
     const url = `post/${type}${queryString ? `?${queryString}` : ""}`
-    console.log('1:',1)
     return httpService.get(url)
 }
 
@@ -73,14 +75,27 @@ async function removeReply(type, id, commentId, replyId) {
     return httpService.delete(`post/${type}/${id}/comments/${commentId}/replies/${replyId}`)
 }
 
+async function getStats(type, id) {
+    return httpService.get(`stats/${type}/${id}`)
+}
+
+async function getRecentComments(limit = 20) {
+    return httpService.get('comments/recent', { limit })
+}
+
+async function likeComment(type, postId, commentId) {
+    return httpService.put(`post/${type}/${postId}/comments/${commentId}/like`)
+}
+
+async function likeReply(type, postId, commentId, replyId) {
+    return httpService.put(`post/${type}/${postId}/comments/${commentId}/replies/${replyId}/like`)
+}
+
 async function incrementViews(type, id) {
     return httpService.put(`stats/views/${type}/${id}`)
 }
 async function incrementLikes(type, id) {
     return httpService.put(`stats/likes/${type}/${id}`)
-}
-async function incrementShares(type, id) {
-    return httpService.put(`stats/shares/${type}/${id}`)
 }
 
 

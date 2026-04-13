@@ -28,7 +28,7 @@ export function BlogPage() {
 
             <section className="list-page-section">
                 <div className="container">
-                    <div className="filter-bar">
+                    {/* <div className="filter-bar">
                         {BLOG_CATEGORIES.map(cat => (
                             <button
                                 key={cat}
@@ -38,7 +38,7 @@ export function BlogPage() {
                                 {cat}
                             </button>
                         ))}
-                    </div>
+                    </div> */}
                     <div className="post-list">
                         {posts.map(post => (
                             <PostPreview post={post} key={post._id} type="blog" />

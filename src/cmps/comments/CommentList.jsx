@@ -1,6 +1,6 @@
 import { CommentItem } from "./CommentItem.jsx"
 
-export function CommentsList({ comments, postId, setPost, type, setComments, isAdminPage, onDelete }) {
+export function CommentsList({ comments, postId, setPost, type, setComments, onDelete }) {
     if (!comments || !comments.length)
         return <p className="no-comments">אין תגובות עדיין</p>
 
@@ -14,7 +14,6 @@ export function CommentsList({ comments, postId, setPost, type, setComments, isA
                     setPost={setPost}
                     type={type}
                     setComments={setComments}
-                    isAdminPage={isAdminPage}
                     onDelete={onDelete}
                 />
             )}

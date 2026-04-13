@@ -68,6 +68,7 @@ export function Footer() {
 
             <div className="footer-bottom">
                 <span>© 2026 לבחור נכון. כל הזכויות שמורות.</span>
+                <span className="footer-privacy" onClick={() => navigate('/privacy')}>מדיניות פרטיות</span>
                 <span>עוצב באהבה על ידי.</span>
             </div>
 

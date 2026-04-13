@@ -1,12 +1,17 @@
-import { useRef, useState } from "react"
+import { useEffect, useRef, useState } from "react"
 import { Link } from "react-router-dom"
 import { emailService } from "../services/email.service"
 import { Loading } from "./Loading"
 
 const FORM_DEFAULT = { fullname: '', phoneNum: '', email: '', topic: '', message: '' }
 
-export function ContactForm() {
+export function ContactForm({ prefill }) {
     const [formData, setFormData] = useState(FORM_DEFAULT)
+
+    useEffect(() => {
+        if (!prefill) return
+        setFormData(prev => ({ ...prev, ...prefill }))
+    }, [prefill])
     const [errors, setErrors] = useState({})
     const [isSending, setIsSending] = useState(false)
     const [isFormSent, setIsFormSent] = useState(false)
@@ -100,6 +105,7 @@ export function ContactForm() {
                     <select onChange={ev => handleChange(ev, "topic")} value={formData.topic} id="topic">
                         <option value="">בחרו נושא...</option>
                         <option value="קבלת מידע">קבלת מידע</option>
+                        <option value="הרשמה לתוכנית">הרשמה לתוכנית</option>
                         <option value="פגישה">פגישה</option>
                         <option value="שאלה כללית">שאלה כללית</option>
                         <option value="אחר">אחר</option>

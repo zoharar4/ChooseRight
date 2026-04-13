@@ -154,6 +154,70 @@
   min-height: 0;
 }
 
+/* ── Draft restore banner ── */
+.draft-restore-banner {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 18px;
+  margin-bottom: 20px;
+  background: #FFFBEB;
+  border: 1.5px solid #FDE68A;
+  border-radius: 12px;
+  font-size: 13px;
+  color: #92400E;
+  flex-wrap: wrap;
+}
+
+.draft-restore-banner i {
+  font-size: 15px;
+  color: #D97706;
+  flex-shrink: 0;
+}
+
+.draft-restore-banner > span {
+  flex: 1;
+  min-width: 0;
+}
+
+.draft-banner-actions {
+  display: flex;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
+.draft-restore-btn,
+.draft-discard-btn {
+  height: 30px;
+  padding: 0 14px;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  font-family: var(--sans);
+  cursor: pointer;
+  transition: background .15s, color .15s;
+}
+
+.draft-restore-btn {
+  background: #D97706;
+  border: none;
+  color: white;
+}
+
+.draft-restore-btn:hover {
+  background: #B45309;
+}
+
+.draft-discard-btn {
+  background: none;
+  border: 1.5px solid #FDE68A;
+  color: #92400E;
+}
+
+.draft-discard-btn:hover {
+  background: #FEF3C7;
+}
+
 /* ─────────────────────────────────────────
    ADMIN LOGIN
 ───────────────────────────────────────── */

@@ -129,6 +129,11 @@ export function EditList({ data, columns, actions, timeFormat, isId }) {
                                         <i className="fa-solid fa-comment"></i>
                                     </button>
                                 )}
+                                {actions.stats && (
+                                    <button className="stats-btn" onClick={() => actions.stats(item)} title="סטטיסטיקות">
+                                        <i className="fa-solid fa-chart-line"></i>
+                                    </button>
+                                )}
                             </td>
                         )}
                         {isId && <td className="col-id">{item._id.slice(-6)}</td>}

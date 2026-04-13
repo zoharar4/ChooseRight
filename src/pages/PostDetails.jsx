@@ -109,28 +109,21 @@ export function PostDetails({ type }) {
                     <div className="right-actions">
                         <button onClick={updateLikes} className={`like-btn ${isLiked ? "active" : ""}`}>
                             <span>{post.likes}</span>
-                            {isLiked ?
-                                <i className={`fa-solid fa-heart ${currAnimation || ''}`} ></i>
-                                :
-                                <i className={`fa-regular fa-heart`}></i>
+                            {isLiked
+                                ? <i className={`fa-solid fa-heart ${currAnimation || ''}`}></i>
+                                : <i className="fa-regular fa-heart"></i>
                             }
                         </button>
                     </div>
                 </div>
-                <hr style={{ margin: '0' }} />
-                <br />
+
                 <div className="image-container">
                     <ImageBasic src={post.imageUrl?.[1]} alt={post.title} />
                 </div>
-                <br />
-                {/* </Top> */}
 
                 <div className="content" dangerouslySetInnerHTML={{ __html: post.content }}></div>
-                <hr />
             </div>
             <BlockPreview type={type} />
-            <hr />
-
             <CommentsSection type={type} post={post} setPost={setPost} />
 
         </div>

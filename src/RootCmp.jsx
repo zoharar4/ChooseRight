@@ -13,7 +13,9 @@ import { AboutPage } from "./pages/AboutPage"
 import { ContactPage } from "./pages/ContactPage"
 import { AdminPage } from "./pages/AdminPage"
 import { AdminEditPage } from "./pages/AdminEditPage"
+import { AdminStatsPage } from "./pages/AdminStatsPage"
 import { EditCommentList } from "./cmps/admin/EditCommentsList"
+import { PrivacyPage } from "./pages/PrivacyPage"
 
 export function RootCmp() {
     return (
@@ -33,7 +35,9 @@ export function RootCmp() {
                     <Route path="/contact" element={<ContactPage />} />
                     <Route path="/admin" element={<AdminPage />} />
                     <Route path="/admin/edit/:type/:id" element={<AdminEditPage />} />
+                    <Route path="/admin/stats/:type/:id" element={<AdminStatsPage />} />
                     <Route path="/admin/:type/:id" element={<EditCommentList />} />
+                    <Route path="/privacy" element={<PrivacyPage />} />
                 </Routes>
             </div>
             <Footer />

@@ -1,12 +1,12 @@
 import { NavLink, useLocation, useNavigate } from "react-router"
 import logo from "../assets/images/logo.png"
-import menuSvg from "../assets/images/menu.svg"
-import closeSvg from "../assets/images/close.svg"
 import { useEffect, useState } from "react"
+import { useUser } from "../context/UserContext"
 
 export function Header() {
     const navigate = useNavigate()
     const location = useLocation()
+    const { user } = useUser()
     const [isMenuOpen, setIsMenuOpen] = useState(false)
     const navItems = [
         { id: "/", label: "דף הבית" },
@@ -43,7 +43,7 @@ export function Header() {
 
                 <div className="header-inner">
 
-                    <div className="logo-container" onClick={() => navigate('/admin')}>
+                    <div className="logo-container" onClick={() => navigate(user ? '/admin' : '/')}>
                         <img className="logo" src={logo} alt="logo" />
                     </div>
 

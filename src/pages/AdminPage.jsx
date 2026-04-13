@@ -1,10 +1,13 @@
 import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router'
 import { AdminLogin } from '../cmps/admin/AdminLogin'
+import { DraftsList } from '../cmps/admin/DraftsList'
 import { EditList } from '../cmps/admin/EditList'
+import { RecentComments } from '../cmps/admin/RecentComments'
 import { Loading } from '../cmps/Loading'
 import { useUser } from '../context/UserContext'
 import { adminConfig } from '../services/admin.config'
+import { draftService } from '../services/draft.service'
 import { mainService } from '../services/main.service'
 import { utilService } from '../services/util.service'
 
@@ -13,12 +16,19 @@ export function AdminPage() {
     const [itemList, setItemList] = useState(null)
     const [type, setType] = useState(utilService.loadFromStorage('edit-type') || 'blog')
     const [timeFormat, setTimeFormat] = useState(utilService.loadFromStorage('time-format') || 'txt')
+    const [showRecentComments, setShowRecentComments] = useState(false)
+    const [showDrafts, setShowDrafts] = useState(false)
+    const [draftCount, setDraftCount] = useState(0)
     const navigate = useNavigate()
 
     useEffect(() => {
         if (!user) return
         loadData()
     }, [type, user])
+
+    useEffect(() => {
+        setDraftCount(draftService.getAll().length)
+    }, [])
 
     async function loadData() {
         setItemList(null)
@@ -58,7 +68,7 @@ export function AdminPage() {
             return next
         })
     }
-    
+
     if (isUserLoading) return <Loading isForPage />
     if (!user) return <AdminLogin />
 
@@ -77,6 +87,13 @@ export function AdminPage() {
                     <button onClick={handleFormatChange} title="פורמט זמן" className="icon-btn">
                         <i className="fa-regular fa-clock"></i>
                     </button>
+                    <button onClick={() => setShowRecentComments(true)} title="תגובות אחרונות" className="icon-btn">
+                        <i className="fa-regular fa-comment"></i>
+                    </button>
+                    <button onClick={() => setShowDrafts(true)} title="טיוטות" className="icon-btn draft-icon-btn">
+                        <i className="fa-solid fa-floppy-disk"></i>
+                        {draftCount > 0 && <span className="draft-badge">{draftCount}</span>}
+                    </button>
                 </div>
                 <div className="left-options">
                     <button className="icon-btn" onClick={logout} title="התנתק">
@@ -89,6 +106,17 @@ export function AdminPage() {
             </div>
 
             <EditList data={itemList} columns={config.columns} actions={actions} timeFormat={timeFormat} isId={config.id} />
+
+            {showRecentComments && (
+                <RecentComments onClose={() => setShowRecentComments(false)} />
+            )}
+
+            {showDrafts && (
+                <DraftsList
+                    onClose={() => setShowDrafts(false)}
+                    onDraftDeleted={count => setDraftCount(count)}
+                />
+            )}
         </div>
     )
 }

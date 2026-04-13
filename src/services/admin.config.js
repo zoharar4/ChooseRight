@@ -13,6 +13,7 @@ const postActions = ({ onRemove, navigate, type }) => ({
     edit:     item => navigate(`/admin/edit/${type}/${item._id}`),
     remove:   id   => onRemove(id),
     comments: item => navigate(`/admin/${type}/${item._id}`),
+    stats:    item => navigate(`/admin/stats/${type}/${item._id}`),
 })
 
 

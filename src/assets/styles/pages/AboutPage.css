@@ -160,6 +160,10 @@
 
 /* ── Responsive ── */
 @media (max-width: 900px) {
+  .about-hero {
+    padding: 52px 0 44px;
+  }
+
   .about-hero-inner {
     grid-template-columns: 1fr;
     gap: 36px;

@@ -59,7 +59,6 @@ export function EditCommentList() {
                 type={type}
                 setComments={setComments}
                 onDelete={onDelete}
-                isAdminPage
             />
         </div>
     )

@@ -104,6 +104,15 @@ footer {
     font-weight: 300;
     max-width: 100%;
   }
+
+  .footer-privacy {
+    cursor: pointer;
+    transition: color .15s;
+  }
+
+  .footer-privacy:hover {
+    color: rgba(255, 255, 255, .6);
+  }
 }
 
 /* display: grid;
