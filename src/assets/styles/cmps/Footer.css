@@ -11,7 +11,7 @@ footer {
     margin: 0 auto;
     padding: 0 64px 44px;
     display: grid;
-    grid-template-columns: 2fr ;
+    grid-template-columns: 2fr;
     grid-auto-flow: column;
     grid-auto-columns: 1fr;
     gap: 48px;

@@ -19,12 +19,14 @@
   gap: 12px;
   flex-wrap: wrap;
 }
+
 .list-options .right-options,
 .list-options .left-options {
   display: flex;
   align-items: center;
   gap: 10px;
 }
+
 .list-options select {
   padding: 0 14px;
   height: 38px;
@@ -38,6 +40,7 @@
   outline: none;
   transition: border-color .2s;
 }
+
 .list-options select:focus {
   border-color: var(--g4);
 }
@@ -57,6 +60,7 @@
   cursor: pointer;
   transition: border-color .2s, color .2s;
 }
+
 .admin-page .icon-btn:hover {
   border-color: var(--g4);
   color: var(--g3);
@@ -77,6 +81,7 @@
   cursor: pointer;
   transition: background .2s;
 }
+
 .list-options .add-btn:hover {
   background: var(--g2);
 }
@@ -142,6 +147,7 @@
   align-items: flex-start;
   justify-content: flex-end;
 }
+
 .recent-comments-panel {
   width: 400px;
   max-width: 100vw;
@@ -153,10 +159,19 @@
   box-shadow: -6px 0 32px rgba(0, 0, 0, .12);
   animation: slideInPanel .22s ease;
 }
+
 @keyframes slideInPanel {
-  from { transform: translateX(-24px); opacity: 0; }
-  to   { transform: translateX(0);     opacity: 1; }
+  from {
+    transform: translateX(-24px);
+    opacity: 0;
+  }
+
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
 }
+
 .recent-comments-header {
   display: flex;
   align-items: center;
@@ -165,6 +180,7 @@
   border-bottom: 1.5px solid var(--border);
   flex-shrink: 0;
 }
+
 .recent-comments-header h3 {
   font-family: var(--serif);
   font-size: 17px;
@@ -172,6 +188,7 @@
   color: var(--g1);
   margin: 0;
 }
+
 .rc-close-btn {
   width: 32px;
   height: 32px;
@@ -186,26 +203,38 @@
   cursor: pointer;
   transition: border-color .18s, color .18s;
 }
-.rc-close-btn:hover { border-color: var(--red); color: var(--red); }
+
+.rc-close-btn:hover {
+  border-color: var(--red);
+  color: var(--red);
+}
 
 .recent-comments-list {
   flex: 1;
   overflow-y: auto;
   padding: 12px 0;
 }
+
 .rc-empty {
   font-size: 14px;
   color: var(--lgray);
   text-align: center;
   padding: 40px 20px;
 }
+
 .rc-item {
   padding: 12px 20px;
   border-bottom: 1px solid var(--border);
   transition: background .15s;
 }
-.rc-item:last-child { border-bottom: none; }
-.rc-item:hover { background: var(--g8); }
+
+.rc-item:last-child {
+  border-bottom: none;
+}
+
+.rc-item:hover {
+  background: var(--g8);
+}
 
 .rc-item-top {
   display: flex;
@@ -214,6 +243,7 @@
   margin-bottom: 6px;
   flex-wrap: wrap;
 }
+
 .rc-type-badge {
   font-size: 10px;
   font-weight: 600;
@@ -221,19 +251,34 @@
   padding: 3px 8px;
   border-radius: 10px;
 }
-.rc-type-badge.rc-type-blog    { background: #DBEAFE; color: #1D4ED8; }
-.rc-type-badge.rc-type-recipes { background: var(--g7); color: var(--g2); }
-.rc-type-badge.rc-type-plans   { background: #F3E8FF; color: #6B21A8; }
+
+.rc-type-badge.rc-type-blog {
+  background: #DBEAFE;
+  color: #1D4ED8;
+}
+
+.rc-type-badge.rc-type-recipes {
+  background: var(--g7);
+  color: var(--g2);
+}
+
+.rc-type-badge.rc-type-plans {
+  background: #F3E8FF;
+  color: #6B21A8;
+}
+
 .rc-name {
   font-size: 13px;
   font-weight: 600;
   color: var(--charcoal);
 }
+
 .rc-time {
   font-size: 11px;
   color: var(--lgray);
   margin-right: auto;
 }
+
 .rc-content {
   font-size: 13px;
   color: var(--gray);
@@ -245,6 +290,7 @@
   line-clamp: 2;
   -webkit-box-orient: vertical;
 }
+
 .rc-post-link {
   display: inline-flex;
   align-items: center;
@@ -257,13 +303,17 @@
   padding: 0;
   transition: color .15s;
 }
-.rc-post-link:hover { color: var(--g1); }
+
+.rc-post-link:hover {
+  color: var(--g1);
+}
 
 /* ── Responsive ── */
 @media (max-width: 700px) {
   .admin-page {
     padding: 16px;
   }
+
   .list-options {
     gap: 8px;
   }

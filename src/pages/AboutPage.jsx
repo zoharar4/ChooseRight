@@ -9,7 +9,7 @@ export function AboutPage() {
         <div className="about-page">
 
             {/* ── Hero ── */}
-            <section className="about-hero">
+            <section className="about-hero hero-section">
                 <div className="about-hero-inner container">
                     <div className="about-photo-wrap">
                         <ImageBasic src={image1} className="about-hero-img" />

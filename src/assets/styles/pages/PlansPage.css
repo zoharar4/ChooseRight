@@ -10,17 +10,6 @@
   background: var(--white);
   padding: 72px 0 60px;
   border-bottom: 1px solid var(--border);
-  position: relative;
-  overflow: hidden;
-}
-.page-hero::before {
-  content: '';
-  position: absolute;
-  top: -80px; left: -80px;
-  width: 420px; height: 420px;
-  border-radius: 50%;
-  background: radial-gradient(circle, rgba(116,198,157,.1) 0%, transparent 70%);
-  pointer-events: none;
 }
 .page-hero-title {
   font-family: var(--serif);
@@ -58,6 +47,59 @@
   font-weight: 300;
   margin: 0 0 10px;
 }
+.plans-desc-title {
+  font-family: var(--serif);
+  font-size: 26px;
+  font-weight: 700;
+  color: var(--g1);
+  margin: 0 0 16px;
+}
+
+.plans-tracks-title {
+  font-family: var(--serif);
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--g1);
+  margin: 28px 0 10px;
+}
+
+.plans-tracks {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin: 16px 0 24px;
+}
+
+.plans-track {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  background: var(--white);
+  border: 1.5px solid var(--border);
+  border-radius: 14px;
+  padding: 16px 20px;
+}
+
+.track-icon {
+  font-size: 22px;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.plans-track strong {
+  display: block;
+  font-size: 15px;
+  color: var(--charcoal);
+  margin-bottom: 4px;
+}
+
+.plans-track p {
+  font-size: 14px !important;
+  color: var(--lgray) !important;
+  margin: 0 !important;
+  line-height: 1.6 !important;
+}
+
 .plans-desc-note {
   margin-top: 20px !important;
   font-size: 15px !important;

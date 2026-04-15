@@ -51,6 +51,33 @@
   border-radius: 2px;
 }
 
+/* ── HERO BLOBS (shared ::before / ::after for all hero sections) ── */
+.hero-section {
+  position: relative;
+  overflow: hidden;
+}
+.hero-section::before,
+.hero-section::after {
+  content: '';
+  position: absolute;
+  border-radius: 45% 60% 40% 65% /65% 40% 60% 45%;
+  pointer-events: none;
+}
+.hero-section::before {
+  top: -60px;
+  left: -60px;
+  width: 500px;
+  height: 500px;
+  background: radial-gradient(circle, rgba(121, 170, 145, 0.2) 0%, transparent 90%);
+}
+.hero-section::after {
+  bottom: -60px;
+  right: -60px;
+  width: 380px;
+  height: 380px;
+  background: radial-gradient(circle, rgba(73, 163, 116, 0.1) 10%, transparent 86%);
+}
+
 /* ── HERO LABEL PILL ── */
 .hero-label {
   display: inline-block;

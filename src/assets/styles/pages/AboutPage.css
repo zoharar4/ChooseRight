@@ -8,21 +8,22 @@
 /* ── Hero ── */
 .about-hero {
   background: var(--white);
-  padding: 80px 0 0;
+  padding: 72px 0 60px;
   border-bottom: 1px solid var(--border);
 }
 
+
 .about-hero-inner {
   display: grid;
-  grid-template-columns: 1fr 1.3fr;
+  grid-template-columns: 1fr 1.2fr;
   gap: 64px;
-  align-items: flex-end;
+  align-items: center;
 }
 
 .about-photo-wrap {
   width: 100%;
   aspect-ratio: 3/4;
-  border-radius: 24px 24px 0 0;
+  border-radius: 24px;
   overflow: hidden;
   box-shadow: 0 16px 48px rgba(45, 106, 79, .12);
 }

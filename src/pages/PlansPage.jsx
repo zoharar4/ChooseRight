@@ -1,9 +1,11 @@
 import { useEffect, useState } from "react"
+import { useNavigate } from "react-router"
 import { PlanPreview } from "../cmps/PlanPreview"
 import { mainService } from "../services/main.service"
 
 export function PlansPage() {
     const [plans, setPlans] = useState([])
+    const navigate = useNavigate()
 
     useEffect(() => {
         loadPlans()
@@ -22,28 +24,60 @@ export function PlansPage() {
         <div className="plans-page">
 
             {/* ── Page Hero ── */}
-            <section className="page-hero">
+            <section className="page-hero hero-section">
                 <div className="container">
                     <span className="hero-label">תכניות ליווי אישי</span>
                     <h1 className="page-hero-title">
-                        ליווי שמותאם<br />
-                        <span>בדיוק לך</span>
+                        הדרך שלכם לבחור נכון —<br />
+                        <span>תכניות הליווי</span>
                     </h1>
                     <p className="page-hero-desc">
-                        ליווי אישי מקצועי — ללא תבניות מוכנות מראש. כל תוכנית נבנית עם הצרכים שלך.
+                        זה הזמן להעניק לעצמכם את המתנה של בריאות, חיוניות ושמחה.
+                        דמיינו שאתם קמים בבוקר מלאי אנרגיה, הגוף שלכם מרגיש קליל,
+                        המחשבה צלולה, ואתם יודעים בדיוק מה נכון עבורכם.
                     </p>
                 </div>
             </section>
 
-            {/* ── Description ── */}
+            {/* ── "זה לא חלום" Section ── */}
             <section className="plans-desc">
                 <div className="container">
-                    <p>תכניות הליווי שאני מציעה חלקן אישיות וחלקן קבוצתיות.</p>
-                    <p>לכל תכנית יש את היתרונות שלה ואת ההתאמה לאנשים שונים ולצרכים שונים.</p>
-                    <p>ישנם אנשים שזקוקים יותר לליווי אישי 'אחד על אחד' וישנם אנשים שדווקא הכוח של הקבוצה הוא זה שמחזק אותם.</p>
-                    <p>בכל תכנית אני מביאה לידי ביטוי את הידע הרב שצברתי ואת הניסיון שלי ומחברת אותו עם הצורך והרצון של מי שפונה אליי.</p>
-                    <p className="plans-desc-note bold">
-                        אני מבינה את הצורך להכיר קודם ולהבין האם תהליך הליווי יכול להתאים לכם, לכן ישנה אפשרות לתאם מפגש/שיחת הכרות ללא עלות ורק לאחר מכן להחליט האם מעוניינים להרשם.
+                    <h2 className="plans-desc-title">זה לא חלום – זו בחירה</h2>
+                    <p>
+                        התוכניות שלי נועדו כדי לתת לכם את הכלים להחזיר את האיזון הביתה:
+                        להזין את הגוף במזון טעים ומבריא, לשחרר את מה שלא משרת אתכם
+                        ולבנות הרגלים שמחזיקים מעמד לאורך זמן.
+                    </p>
+
+                    <h3 className="plans-tracks-title">מה הדרך המדויקת עבורך?</h3>
+                    <p>לכל אחד מאיתנו צרכים שונים וקצב שונה. לכן, יצרתי שלושה מסלולים שונים שמתמקדים בשינוי מהשורש:</p>
+
+                    <div className="plans-tracks">
+                        <div className="plans-track">
+                            <div className="track-icon">🥗</div>
+                            <div>
+                                <strong>ירידה במשקל בדרך הטבע</strong>
+                                <p>ליווי לשינוי תזונתי והפחתת משקל מתוך הקשבה לגוף, ללא "דיאטות" קיצוניות.</p>
+                            </div>
+                        </div>
+                        <div className="plans-track">
+                            <div className="track-icon">⚖️</div>
+                            <div>
+                                <strong>איזון אורח חיים</strong>
+                                <p>בניית שגרה בריאה שמשלבת תזונה, תנועה ורוגע בתוך מירוץ החיים.</p>
+                            </div>
+                        </div>
+                        <div className="plans-track">
+                            <div className="track-icon">🧠</div>
+                            <div>
+                                <strong>התפתחות אישית והצבת מטרות</strong>
+                                <p>עבודה עמוקה (בכלי NLP) על תודעה, חסמים והשגת המטרות שחשובות לכם באמת.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <p className="plans-desc-note">
+                        אני מזמינה אתכם לשיחת היכרות ללא עלות וללא התחייבות. נשוחח, נכיר, ונבין יחד מה הצעד הקטן הראשון שיעשה עבורכם שינוי גדול.
                     </p>
                 </div>
             </section>
@@ -54,12 +88,27 @@ export function PlansPage() {
                     <div className="section-header">
                         <div className="section-label">בחרו את התכנית שלכם</div>
                         <h2 className="section-title">מה הכי מתאים לך?</h2>
-                        <p className="section-subtitle">כל תוכנית בנויה על שיחת היכרות עמוקה — ולא על תבנית קבועה מראש.</p>
+                        <p className="section-subtitle">כל תוכנית נבנית על שיחת היכרות עמוקה — ולא על תבנית קבועה מראש.</p>
                     </div>
                     <div className="plans-container">
                         {plans.map(plan => (
                             <PlanPreview plan={plan} key={plan._id} />
                         ))}
+                    </div>
+                </div>
+            </section>
+
+            {/* ── CTA ── */}
+            <section className="cta-banner">
+                <div className="container">
+                    <h2>צעד ראשון בדרך לבחירה נכונה</h2>
+                    <p>
+                        אני יודעת שקשה לפעמים לדעת מאיפה להתחיל. האם זה מתאים לי? איזה מסלול נכון עבורי?
+                        בדיוק בשביל זה, אני מזמינה אתכם לשיחת היכרות ללא עלות וללא התחייבות.
+                        נשוחח, נכיר, ונבין יחד מה הצעד הקטן הראשון שיעשה עבורכם שינוי גדול.
+                    </p>
+                    <div className="cta-banner-btns">
+                        <button className="btn-primary" onClick={() => navigate("/contact")}>לשיחת היכרות חינם</button>
                     </div>
                 </div>
             </section>

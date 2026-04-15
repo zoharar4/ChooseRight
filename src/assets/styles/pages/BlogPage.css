@@ -16,6 +16,7 @@
   margin-bottom: 36px;
   justify-content: center;
 }
+
 .filter-btn {
   padding: 8px 20px;
   border-radius: 30px;
@@ -28,6 +29,7 @@
   cursor: pointer;
   transition: all .2s;
 }
+
 .filter-btn:hover,
 .filter-btn.active {
   background: var(--g4);

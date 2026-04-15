@@ -12,6 +12,7 @@ export function ContactForm({ prefill }) {
         if (!prefill) return
         setFormData(prev => ({ ...prev, ...prefill }))
     }, [prefill])
+    
     const [errors, setErrors] = useState({})
     const [isSending, setIsSending] = useState(false)
     const [isFormSent, setIsFormSent] = useState(false)

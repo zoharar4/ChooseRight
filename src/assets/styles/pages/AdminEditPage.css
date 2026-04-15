@@ -64,7 +64,8 @@
   gap: 6px;
 }
 
-.admin-edit-page .edit-form label, p {
+.admin-edit-page .edit-form label,
+p {
   font-size: 13px;
   font-weight: 600;
   color: var(--gray);
@@ -175,7 +176,7 @@
   flex-shrink: 0;
 }
 
-.draft-restore-banner > span {
+.draft-restore-banner>span {
   flex: 1;
   min-width: 0;
 }

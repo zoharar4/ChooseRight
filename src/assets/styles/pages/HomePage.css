@@ -10,21 +10,8 @@
   background: var(--white);
   padding: 80px 0 40px;
   border-bottom: 1px solid var(--border);
-  overflow: hidden;
-  position: relative;
 }
 
-.home-hero::before {
-  content: '';
-  position: absolute;
-  top: -60px;
-  left: -60px;
-  width: 500px;
-  height: 500px;
-  border-radius: 50%;
-  background: radial-gradient(circle, rgba(121, 170, 145, 0.2) 0%, transparent 90%);
-  pointer-events: none;
-}
 
 .home-hero-inner {
   display: grid;
@@ -178,6 +165,100 @@
   border-radius: 50%;
   background: var(--g4);
   flex-shrink: 0;
+}
+
+/* ── Philosophy Section ── */
+.home-philosophy {
+  background: var(--white);
+  padding: 72px 0 64px;
+  border-bottom: 1px solid var(--border);
+}
+
+.home-philosophy-inner {
+  max-width: 760px;
+}
+
+.philosophy-quote {
+  font-family: var(--serif);
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--g2);
+  border-right: 4px solid var(--g4);
+  padding-right: 20px;
+  margin: 0 0 28px;
+  line-height: 1.6;
+}
+
+.home-philosophy p {
+  font-size: 16px;
+  color: var(--gray);
+  line-height: 1.9;
+  margin-bottom: 16px;
+}
+
+.philosophy-highlight {
+  font-size: 17px !important;
+  font-weight: 600;
+  color: var(--g2) !important;
+  margin-top: 8px;
+}
+
+/* ── "המחזר?" Section ── */
+.home-cycle {
+  background: var(--g8);
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  padding: 72px 0;
+  text-align: center;
+}
+
+.home-cycle .section-header {
+  margin-bottom: 32px;
+}
+
+.home-cycle .section-title span {
+  color: var(--g4);
+}
+
+.home-cycle .section-subtitle {
+  font-size: 16px;
+  color: var(--gray);
+  margin-top: 8px;
+}
+
+.cycle-promises {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  max-width: 480px;
+  margin: 0 auto 28px;
+}
+
+.cycle-promise {
+  background: var(--white);
+  border: 1.5px solid var(--border);
+  border-radius: 12px;
+  padding: 14px 20px;
+  font-size: 15px;
+  font-weight: 600;
+  font-style: italic;
+  color: var(--charcoal);
+}
+
+.cycle-text {
+  font-size: 16px;
+  color: var(--gray);
+  line-height: 1.8;
+  max-width: 560px;
+  margin: 0 auto 16px;
+}
+
+.cycle-question {
+  font-family: var(--serif);
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--g1);
+  margin-bottom: 32px;
 }
 
 /* ── Responsive ── */
