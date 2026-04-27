@@ -1,4 +1,6 @@
 
+const isDev = process.env.NODE_ENV !== 'production'
+
 export const utilService = {
     makeId,
     makeLorem,
@@ -10,6 +12,16 @@ export const utilService = {
     getRandomIntInclusive,
     debounce,
     animateCSS,
+    devLog,
+}
+
+function devLog(label, data) {
+    if (!isDev) return
+    if (data !== undefined) {
+        console.log(`[${label}]`, data)
+    } else {
+        console.log(`[${label}]`)
+    }
 }
 
 //Make text

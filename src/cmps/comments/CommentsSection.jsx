@@ -2,6 +2,7 @@ import { useState } from "react"
 import { CommentsList } from "./CommentList"
 import { AddComment } from "./AddComment"
 import { mainService } from "../../services/main.service"
+import { utilService } from "../../services/util.service"
 
 
 export function CommentsSection({ post, setPost, type }) {
@@ -9,7 +10,9 @@ export function CommentsSection({ post, setPost, type }) {
 
     async function onAddComment(commentToAdd) {
         try {
+            utilService.devLog(`Add comment to ${type}/${post._id} — before`, commentToAdd)
             const res = await mainService.addComment(type, post._id, commentToAdd)
+            utilService.devLog(`Add comment to ${type}/${post._id} — after`, res)
             setPost(prev => ({ ...prev, comments: [res, ...prev.comments] }))
             setTimeout(() => setIsAddingComment(false), 500)
         } catch (err) {

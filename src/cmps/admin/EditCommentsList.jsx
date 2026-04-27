@@ -1,20 +1,32 @@
 import { useEffect, useState } from "react"
-import { useNavigate, useParams } from "react-router"
+import { useNavigate, useParams, useLocation } from "react-router"
 import { mainService } from "../../services/main.service"
+import { utilService } from "../../services/util.service"
 import { CommentsList } from "../comments/CommentList"
+import { useUser } from "../../context/UserContext"
+import { Loading } from "../Loading"
 
 export function EditCommentList() {
     const { id, type } = useParams()
     const navigate = useNavigate()
+    const location = useLocation()
+    const { user, isLoading: isUserLoading } = useUser()
     const [comments, setComments] = useState(null)
     const [deletingIds, setDeletingIds] = useState(new Set())
 
     useEffect(() => {
+        if (isUserLoading) return
+        if (!user) navigate('/admin', { state: { from: location.pathname }, replace: true })
+    }, [user, isUserLoading])
+
+    useEffect(() => {
+        if (!user) return
         loadComments()
-    }, [id, type])
+    }, [id, type, user])
 
     async function loadComments() {
         const post = await mainService.getById(type, id)
+        utilService.devLog(`Comments loaded for ${type}/${id} — ${post.comments?.length || 0} comments`, post.comments)
         setComments(post.comments)
     }
 
@@ -23,12 +35,14 @@ export function EditCommentList() {
         const currId = replyId || commentId
         if (deletingIds.has(currId)) return
 
+        utilService.devLog(`Delete ${replyId ? 'reply' : 'comment'} — ${currId} from ${type}/${postId}`)
         setDeletingIds(p => new Set(p).add(currId))
         try {
             await (replyId
                 ? mainService.removeReply(type, postId, commentId, replyId)
                 : mainService.removeComment(type, postId, commentId)
             )
+            utilService.devLog(`Delete ${replyId ? 'reply' : 'comment'} — done`)
             setComments(p =>
                 replyId
                     ? p.map(c => c._id === commentId
@@ -41,6 +55,8 @@ export function EditCommentList() {
             setDeletingIds(p => { const s = new Set(p); s.delete(currId); return s })
         }
     }
+
+    if (isUserLoading || !user) return <Loading isForPage />
 
     return (
         <div className="edit-comment-list">

@@ -15,7 +15,9 @@ export function CommentItem({ comment, postId, setPost, type, setComments, onDel
 
     async function onReply(replyData) {
         try {
+            utilService.devLog(`Reply to comment ${comment._id} — before`, replyData)
             const res = await mainService.addReply(type, postId, comment._id, replyData)
+            utilService.devLog(`Reply to comment ${comment._id} — after`, res)
             if (setPost) {
                 setPost(prev => ({
                     ...prev,

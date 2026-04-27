@@ -35,6 +35,7 @@ export function PostDetails({ type }) {
     async function loadPost() {
         try {
             const postToSave = await mainService.getById(type, id)
+            utilService.devLog(`Post loaded — ${type}/${id}`, postToSave)
             setPost(postToSave)
             updateViews()
         } catch (err) {
@@ -59,6 +60,7 @@ export function PostDetails({ type }) {
         const likedPosts = utilService.loadFromStorage('likedPosts') || []
         if (likedPosts.includes(id) || isLiked) return
 
+        utilService.devLog(`Like post — ${type}/${id}`)
         likedPosts.push(id)
         utilService.saveToStorage("likedPosts", likedPosts)
         setIsLiked(true)

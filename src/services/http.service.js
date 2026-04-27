@@ -37,10 +37,14 @@ async function ajax(endpoint, method = 'GET', data = null) {
 
         return res.data
     } catch (err) {
-        console.log(`Had Issues ${method}ing to the backend, endpoint: ${endpoint}, with data: `, data)
-        console.dir(err)
+        if (process.env.NODE_ENV !== 'production') {
+            console.log(`[HTTP Error] ${method} ${endpoint}`, { status: err.response?.status, data })
+        }
         if (err.response && err.response.status === 401) {
-            sessionStorage.clear()
+            if (process.env.NODE_ENV !== 'production') {
+                console.log('[Auth] Cookie expired — dispatching auth:expired')
+            }
+            window.dispatchEvent(new Event('auth:expired'))
         }
         throw err
     }

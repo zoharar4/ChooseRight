@@ -1,23 +1,27 @@
 import { useEffect, useState } from 'react'
-import { useNavigate } from 'react-router'
+import { useNavigate, useLocation } from 'react-router'
 import { AdminLogin } from '../cmps/admin/AdminLogin'
+import { DeletedItemsPanel } from '../cmps/admin/DeletedItemsPanel'
 import { DraftsList } from '../cmps/admin/DraftsList'
 import { EditList } from '../cmps/admin/EditList'
 import { RecentComments } from '../cmps/admin/RecentComments'
 import { Loading } from '../cmps/Loading'
 import { useUser } from '../context/UserContext'
 import { adminConfig } from '../services/admin.config'
+import { backupService } from '../services/backup.service'
 import { draftService } from '../services/draft.service'
 import { mainService } from '../services/main.service'
 import { utilService } from '../services/util.service'
 
 export function AdminPage() {
     const { user, logout, isLoading: isUserLoading } = useUser()
+    const location = useLocation()
     const [itemList, setItemList] = useState(null)
     const [type, setType] = useState(utilService.loadFromStorage('edit-type') || 'blog')
     const [timeFormat, setTimeFormat] = useState(utilService.loadFromStorage('time-format') || 'txt')
     const [showRecentComments, setShowRecentComments] = useState(false)
     const [showDrafts, setShowDrafts] = useState(false)
+    const [showDeleted, setShowDeleted] = useState(false)
     const [draftCount, setDraftCount] = useState(0)
     const navigate = useNavigate()
 
@@ -33,8 +37,16 @@ export function AdminPage() {
     async function loadData() {
         setItemList(null)
         try {
-            const list = await mainService.query(type, { full: true })
-            setItemList(list)
+            const [list, versionCounts] = await Promise.all([
+                mainService.query(type, { full: true }),
+                backupService.getVersionCounts(type).catch(() => ({})),
+            ])
+            const merged = list.map(item => ({
+                ...item,
+                versionCount: versionCounts[item._id] || 0,
+            }))
+            utilService.devLog(`Admin list loaded — ${type}`, { items: merged.length, versionCounts })
+            setItemList(merged)
         } catch (err) {
             setItemList([])
             console.error('loadData error:', err)
@@ -70,7 +82,7 @@ export function AdminPage() {
     }
 
     if (isUserLoading) return <Loading isForPage />
-    if (!user) return <AdminLogin />
+    if (!user) return <AdminLogin from={location.state?.from} />
 
     const config = adminConfig[type]
     const actions = config.actions({ onRemove, navigate, type })
@@ -94,6 +106,9 @@ export function AdminPage() {
                         <i className="fa-solid fa-floppy-disk"></i>
                         {draftCount > 0 && <span className="draft-badge">{draftCount}</span>}
                     </button>
+                    <button onClick={() => setShowDeleted(true)} title="פריטים שנמחקו" className="icon-btn">
+                        <i className="fa-solid fa-trash-can-arrow-up"></i>
+                    </button>
                 </div>
                 <div className="left-options">
                     <button className="icon-btn" onClick={logout} title="התנתק">
@@ -115,6 +130,14 @@ export function AdminPage() {
                 <DraftsList
                     onClose={() => setShowDrafts(false)}
                     onDraftDeleted={count => setDraftCount(count)}
+                />
+            )}
+
+            {showDeleted && (
+                <DeletedItemsPanel
+                    type={type}
+                    onClose={() => setShowDeleted(false)}
+                    onRestored={loadData}
                 />
             )}
         </div>

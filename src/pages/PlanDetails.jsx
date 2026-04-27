@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react"
 import { useNavigate, useParams } from "react-router"
 import { mainService } from "../services/main.service"
+import { utilService } from "../services/util.service"
 import { Loading } from "../cmps/Loading"
 import { ImageBasic } from "../cmps/ImageBasic"
 import { ContactForm } from "../cmps/ContactForm"
@@ -20,6 +21,7 @@ export function PlanDetails() {
     async function loadPlan() {
         try {
             const res = await mainService.getById('plans', id)
+            utilService.devLog(`Plan loaded — ${id}`, res)
             setPlan(res)
         } catch (err) {
             console.error('cannot get plan by id,', err)

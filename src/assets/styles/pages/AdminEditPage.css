@@ -29,6 +29,33 @@
   margin: 0;
 }
 
+/* ── Header actions row ── */
+.admin-edit-page .edit-header-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.admin-edit-page .edit-header-btn {
+  width: 38px;
+  height: 38px;
+  border-radius: 10px;
+  border: 1.5px solid var(--border);
+  background: var(--white);
+  color: var(--gray);
+  font-size: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: border-color .2s, color .2s;
+}
+
+.admin-edit-page .edit-header-btn:hover {
+  border-color: var(--g4);
+  color: var(--g3);
+}
+
 /* ── Back button ── */
 .admin-edit-page .back-btn {
   width: 38px;
@@ -264,6 +291,12 @@ p {
   color: var(--gray);
 }
 
+.admin-login .password-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
 .admin-login input {
   padding: 10px 14px;
   border: 1.5px solid var(--border);
@@ -274,11 +307,38 @@ p {
   color: var(--charcoal);
   outline: none;
   transition: border-color .2s, box-shadow .2s;
+  width: 100%;
+}
+
+.admin-login .password-wrapper input {
+  padding-left: 40px;
 }
 
 .admin-login input:focus {
   border-color: var(--g4);
   box-shadow: 0 0 0 3px rgba(82, 183, 136, .12);
+}
+
+.admin-login .toggle-password {
+  position: absolute;
+  left: 10px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  color: var(--gray);
+  transition: color .2s;
+}
+
+.admin-login .toggle-password:hover {
+  color: var(--g2);
+}
+
+.admin-login .toggle-password svg {
+  width: 18px;
+  height: 18px;
 }
 
 .admin-login .login-error {

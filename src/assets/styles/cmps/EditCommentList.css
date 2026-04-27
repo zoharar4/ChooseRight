@@ -1,6 +1,7 @@
 .edit-comment-list {
   padding: 28px 32px;
   max-width: 1200px;
+  margin: 0 auto;
   .top-container {
     display: flex;
     align-items: center;

@@ -308,6 +308,46 @@
   color: var(--g1);
 }
 
+/* ── Backup panel items ── */
+.backup-item {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.backup-restore-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 5px 12px;
+  border-radius: 8px;
+  border: none;
+  background: var(--g7);
+  color: var(--g1);
+  font-family: var(--sans);
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background .15s;
+  align-self: flex-start;
+}
+
+.backup-restore-btn:hover:not(:disabled) {
+  background: var(--g4);
+  color: white;
+}
+
+.backup-restore-btn:disabled {
+  opacity: .6;
+  cursor: not-allowed;
+}
+
+.backup-replies-badge {
+  font-size: 11px;
+  color: var(--lgray);
+  font-style: italic;
+}
+
 /* ── Responsive ── */
 @media (max-width: 700px) {
   .admin-page {

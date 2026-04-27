@@ -1,5 +1,6 @@
 import { createContext, useContext, useEffect, useState } from 'react'
 import { userService } from '../services/user.service'
+import { utilService } from '../services/util.service'
 
 const UserContext = createContext(null)
 
@@ -12,6 +13,15 @@ export function UserProvider({ children }) {
             .then(u => setUser(u))
             .catch(() => setUser(null))
             .finally(() => setIsLoading(false))
+    }, [])
+
+    useEffect(() => {
+        function handleAuthExpired() {
+            utilService.devLog('Auth expired — clearing user')
+            setUser(null)
+        }
+        window.addEventListener('auth:expired', handleAuthExpired)
+        return () => window.removeEventListener('auth:expired', handleAuthExpired)
     }, [])
 
     async function login(credentials) {
