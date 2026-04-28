@@ -28,7 +28,7 @@ const COLUMN_ICONS = {
     ),
 }
 
-export function EditList({ data, columns, actions, timeFormat, isId }) {
+export function EditList({ data, columns, timeFormat, isId, onRowClick }) {
 
     const [sortKey, setSortKey] = useState('date')
     const [sortDir, setSortDir] = useState('desc')
@@ -98,14 +98,17 @@ export function EditList({ data, columns, actions, timeFormat, isId }) {
                             </span>
                         </th>
                     ))}
-                    {actions && <th>פעולות</th>}
                     {isId && <th>ID</th>}
                 </tr>
             </thead>
 
             <tbody>
                 {sortedData.map((item, idx) => (
-                    <tr key={item._id}>
+                    <tr
+                        key={item._id}
+                        className={onRowClick ? 'clickable-row' : ''}
+                        onClick={onRowClick ? () => onRowClick(item) : undefined}
+                    >
                         <td className="col-num">{idx + 1}</td>
                         {columns.map(col => (
                             <td key={col.key}>
@@ -114,35 +117,6 @@ export function EditList({ data, columns, actions, timeFormat, isId }) {
                                     : item[col.field]}
                             </td>
                         ))}
-                        {actions && (
-                            <td>
-                                {actions.view && (
-                                    <button className="view-btn" onClick={() => actions.view(item)} title="צפייה">
-                                        <i className="fa-solid fa-arrow-up-right-from-square"></i>
-                                    </button>
-                                )}
-                                {actions.edit && (
-                                    <button className="edit-btn" onClick={() => actions.edit(item)} title="עריכה">
-                                        <i className="fa-solid fa-pen"></i>
-                                    </button>
-                                )}
-                                {actions.remove && (
-                                    <button className="delete-btn" onClick={() => actions.remove(item._id)} title="מחיקה">
-                                        <i className="fa-solid fa-trash"></i>
-                                    </button>
-                                )}
-                                {actions.comments && (
-                                    <button className="comments-btn" onClick={() => actions.comments(item)} title="תגובות">
-                                        <i className="fa-solid fa-comment"></i>
-                                    </button>
-                                )}
-                                {actions.stats && (
-                                    <button className="stats-btn" onClick={() => actions.stats(item)} title="סטטיסטיקות">
-                                        <i className="fa-solid fa-chart-line"></i>
-                                    </button>
-                                )}
-                            </td>
-                        )}
                         {isId && <td className="col-id">{item._id.slice(-6)}</td>}
                     </tr>
                 ))}

@@ -1,41 +1,32 @@
 import { useEffect, useRef, useState } from 'react'
-import { useNavigate, useParams, useLocation } from 'react-router'
-import { DeletedCommentsPanel } from '../cmps/admin/DeletedCommentsPanel'
-import { EditContent } from '../cmps/admin/EditContent'
-import { EditForm } from '../cmps/admin/EditForm'
-import { VersionsPanel } from '../cmps/admin/VersionsPanel'
-import { Loading } from '../cmps/Loading'
-import { adminConfig } from '../services/admin.config'
-import { draftService } from '../services/draft.service'
-import { mainService } from '../services/main.service'
-import { utilService } from '../services/util.service'
-import { useUser } from '../context/UserContext'
+import { useNavigate } from 'react-router'
+import { adminConfig } from '../../services/admin.config'
+import { draftService } from '../../services/draft.service'
+import { mainService } from '../../services/main.service'
+import { utilService } from '../../services/util.service'
+import { Loading } from '../Loading'
+import { EditContent } from './EditContent'
+import { EditForm } from './EditForm'
+import { VersionsPanel } from './VersionsPanel'
 
-export function AdminEditPage() {
-    const { type, id } = useParams()
+export function EditPanel({ type, id }) {
     const navigate = useNavigate()
-    const location = useLocation()
-    const { user, isLoading: isUserLoading } = useUser()
-
-    useEffect(() => {
-        if (isUserLoading) return
-        if (!user) navigate('/admin', { state: { from: location.pathname }, replace: true })
-    }, [user, isUserLoading])
-
     const [objToEdit, setObjToEdit] = useState(null)
     const [isSaving, setIsSaving] = useState(false)
     const [draftBanner, setDraftBanner] = useState(null)
     const [showVersions, setShowVersions] = useState(false)
-    const [showDeletedComments, setShowDeletedComments] = useState(false)
+    const [reloadKey, setReloadKey] = useState(0)
 
     const editFormRef = useRef()
     const mainEditorRef = useRef()
     const previewEditorRef = useRef()
     const isDirtyRef = useRef(false)
 
+    const isNew = id === 'new'
+
     useEffect(() => {
         isDirtyRef.current = false
-        if (id === 'new') {
+        if (isNew) {
             const empty = adminConfig.emptyObj[type]
             const draft = draftService.get(type, id)
             if (draft) {
@@ -56,14 +47,13 @@ export function AdminEditPage() {
                     setObjToEdit(item)
                 })
                 .catch(err => {
-                    alert(`ERROR: cannot load item`)
+                    alert('ERROR: cannot load item')
                     console.error(err)
                     navigate('/admin')
                 })
         }
-    }, [type, id])
+    }, [type, id, reloadKey])
 
-    // Auto-save draft when form data changes (debounced)
     useEffect(() => {
         if (!objToEdit || !isDirtyRef.current) return
         const timer = setTimeout(() => {
@@ -72,7 +62,6 @@ export function AdminEditPage() {
         return () => clearTimeout(timer)
     }, [objToEdit, type, id])
 
-    // Wrap setObjToEdit to mark dirty on user changes
     function handleChange(updater) {
         isDirtyRef.current = true
         setObjToEdit(updater)
@@ -90,18 +79,14 @@ export function AdminEditPage() {
         setDraftBanner(null)
     }
 
-    function reloadItem() {
-        utilService.devLog(`Reload item — ${type}/${id}`)
+    function reloadAfterRestore() {
+        utilService.devLog(`Reload edit panel after version restore — ${type}/${id}`)
         setObjToEdit(null)
-        mainService.getById(type, id)
-            .then(item => {
-                utilService.devLog(`Reload item done — ${type}/${id}`, item)
-                setObjToEdit(item)
-            })
-            .catch(err => {
-                console.error(err)
-                navigate('/admin')
-            })
+        setReloadKey(k => k + 1)
+    }
+
+    function onImproveWithAi() {
+        utilService.devLog(`AI improve clicked — ${type}/${id} (not implemented yet)`)
     }
 
     async function onSave() {
@@ -135,35 +120,24 @@ export function AdminEditPage() {
         }
     }
 
-    if (isUserLoading || !user) return <Loading isForPage />
     if (!objToEdit) return <Loading isForPage />
 
     const isPlans = type === 'plans'
 
     return (
-        <div className="admin-edit-page">
-            <div className="edit-header">
-                <h2>{adminConfig.typeText[type]}</h2>
-                <div className="edit-header-actions">
-                    {id !== 'new' && (
-                        <>
-                            <button className="edit-header-btn" onClick={() => setShowVersions(true)} title="גרסאות קודמות">
-                                <i className="fa-solid fa-clock-rotate-left"></i>
-                            </button>
-                            {type !== 'plans' && (
-                                <button className="edit-header-btn" onClick={() => setShowDeletedComments(true)} title="תגובות שנמחקו">
-                                    <i className="fa-solid fa-comment-slash"></i>
-                                </button>
-                            )}
-                        </>
-                    )}
-                    <button className="back-btn" onClick={() => navigate('/admin')} title="חזור לרשימה">
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
-                            <path d="M19 12H5M12 5l-7 7 7 7" />
-                        </svg>
+        <div className="edit-panel">
+            {!isNew && (
+                <div className="panel-options">
+                    <button className="panel-option-btn" onClick={() => setShowVersions(true)} title="גרסאות קודמות">
+                        <i className="fa-solid fa-clock-rotate-left"></i>
+                        <span>גרסאות קודמות</span>
+                    </button>
+                    <button className="panel-option-btn" onClick={onImproveWithAi} title="שפר עם AI">
+                        <i className="fa-solid fa-wand-magic-sparkles"></i>
+                        <span>שפר עם AI</span>
                     </button>
                 </div>
-            </div>
+            )}
 
             {draftBanner && (
                 <div className="draft-restore-banner">
@@ -176,10 +150,17 @@ export function AdminEditPage() {
                 </div>
             )}
 
-            <EditForm type={type} objToEdit={objToEdit} setObjToEdit={handleChange} ref={editFormRef} />
+            <EditForm
+                key={`form-${reloadKey}`}
+                type={type}
+                objToEdit={objToEdit}
+                setObjToEdit={handleChange}
+                ref={editFormRef}
+            />
 
             {isPlans && (
                 <EditContent
+                    key={`preview-${reloadKey}`}
                     ref={previewEditorRef}
                     existingContent={objToEdit.previewContent}
                     setObjToEdit={handleChange}
@@ -188,6 +169,7 @@ export function AdminEditPage() {
             )}
 
             <EditContent
+                key={`main-${reloadKey}`}
                 ref={mainEditorRef}
                 existingContent={objToEdit.content}
                 setObjToEdit={handleChange}
@@ -202,16 +184,7 @@ export function AdminEditPage() {
                     type={type}
                     itemId={id}
                     onClose={() => setShowVersions(false)}
-                    onRestored={reloadItem}
-                />
-            )}
-
-            {showDeletedComments && (
-                <DeletedCommentsPanel
-                    type={type}
-                    postId={id}
-                    onClose={() => setShowDeletedComments(false)}
-                    onRestored={reloadItem}
+                    onRestored={reloadAfterRestore}
                 />
             )}
         </div>

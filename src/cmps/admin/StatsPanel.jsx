@@ -1,24 +1,23 @@
-import { useEffect, useMemo, useState } from "react"
-import { useNavigate, useParams } from "react-router"
+import { useEffect, useMemo, useState } from 'react'
 import {
     BarChart, Bar, XAxis, YAxis, CartesianGrid,
     Tooltip, ResponsiveContainer
-} from "recharts"
-import { Loading } from "../cmps/Loading"
-import { adminConfig } from "../services/admin.config"
-import { mainService } from "../services/main.service"
+} from 'recharts'
+import { Loading } from '../Loading'
+import { mainService } from '../../services/main.service'
+import { utilService } from '../../services/util.service'
 
 const PERIODS = [
-    { key: "day",   label: "יום" },
-    { key: "week",  label: "שבוע" },
-    { key: "month", label: "חודש" },
-    { key: "year",  label: "שנה" },
+    { key: 'day',   label: 'יום' },
+    { key: 'week',  label: 'שבוע' },
+    { key: 'month', label: 'חודש' },
+    { key: 'year',  label: 'שנה' },
 ]
 
 const METRICS = [
-    { key: "views",    label: "צפיות",  color: "#4c6d87" },
-    { key: "likes",    label: "לייקים", color: "#9b2335" },
-    { key: "comments", label: "תגובות", color: "#52796f" },
+    { key: 'views',    label: 'צפיות',  color: '#4c6d87' },
+    { key: 'likes',    label: 'לייקים', color: '#9b2335' },
+    { key: 'comments', label: 'תגובות', color: '#52796f' },
 ]
 
 const DAYS_HE   = ['ראשון', 'שני', 'שלישי', 'רביעי', 'חמישי', 'שישי', 'שבת']
@@ -92,17 +91,18 @@ function StatsTooltip({ active, payload, label, metricLabel }) {
     )
 }
 
-export function AdminStatsPage() {
-    const { type, id } = useParams()
-    const navigate = useNavigate()
+export function StatsPanel({ type, id }) {
     const [stats, setStats]   = useState(null)
-    const [period, setPeriod] = useState("week")
+    const [period, setPeriod] = useState('week')
 
     useEffect(() => {
         mainService.getStats(type, id)
-            .then(setStats)
+            .then(res => {
+                utilService.devLog(`Stats loaded — ${type}/${id}`, res)
+                setStats(res)
+            })
             .catch(err => {
-                console.error("Failed to load stats:", err)
+                console.error('Failed to load stats:', err)
                 setStats({})
             })
     }, [type, id])
@@ -118,26 +118,13 @@ export function AdminStatsPage() {
     }
 
     return (
-        <div className="admin-stats-page">
-
-            <div className="stats-header">
-                <div className="stats-title-row">
-                    <button className="back-btn" onClick={() => navigate("/admin")} title="חזרה">
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
-                            <path d="M19 12H5M12 5l-7 7 7 7" />
-                        </svg>
-                    </button>
-                    <div>
-                        <h2>סטטיסטיקות | {adminConfig.typeText[type]}</h2>
-                        {stats.title && <p className="stats-item-title">{stats.title}</p>}
-                    </div>
-                </div>
-
+        <div className="stats-panel">
+            <div className="stats-panel-header">
                 <div className="period-btns">
                     {PERIODS.map(p => (
                         <button
                             key={p.key}
-                            className={`period-btn${period === p.key ? " active" : ""}`}
+                            className={`period-btn${period === p.key ? ' active' : ''}`}
                             onClick={() => setPeriod(p.key)}
                         >
                             {p.label}
@@ -198,7 +185,6 @@ export function AdminStatsPage() {
                     )
                 })}
             </div>
-
         </div>
     )
 }

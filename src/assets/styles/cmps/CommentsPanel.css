@@ -1,0 +1,100 @@
+/* ─────────────────────────────────────────
+   COMMENTS PANEL (inside AdminItemPage)
+───────────────────────────────────────── */
+.comments-panel {
+  width: 100%;
+}
+
+.comments-panel-title {
+  font-family: var(--serif);
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--g1);
+  margin: 0 0 16px;
+}
+
+/* ── Bulk-select list ── */
+.bulk-comments-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.bulk-comment-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 12px 14px;
+  background: var(--white);
+  border: 1.5px solid var(--border);
+  border-radius: 10px;
+  cursor: pointer;
+  transition: border-color .15s, background .15s;
+}
+
+.bulk-comment-item:hover {
+  border-color: var(--g4);
+  background: var(--g8);
+}
+
+.bulk-comment-item.selected {
+  border-color: var(--g4);
+  background: var(--g8);
+  box-shadow: 0 0 0 3px rgba(82, 183, 136, .12);
+}
+
+.bulk-comment-item input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  margin-top: 2px;
+  accent-color: var(--g4);
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.bulk-comment-body {
+  flex: 1;
+  min-width: 0;
+}
+
+.bulk-comment-top {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 4px;
+  flex-wrap: wrap;
+}
+
+.bulk-comment-name {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--charcoal);
+}
+
+.bulk-comment-time {
+  font-size: 11px;
+  color: var(--lgray);
+}
+
+.bulk-comment-content {
+  font-size: 13px;
+  color: var(--gray);
+  line-height: 1.5;
+  margin: 0;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  line-clamp: 3;
+  -webkit-box-orient: vertical;
+}
+
+.bulk-comment-replies {
+  display: inline-block;
+  margin-top: 6px;
+  font-size: 11px;
+  color: var(--lgray);
+  font-style: italic;
+}

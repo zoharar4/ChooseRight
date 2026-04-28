@@ -11,7 +11,7 @@ export function DraftsList({ onClose, onDraftDeleted }) {
 
     function goToEdit(draft) {
         onClose()
-        navigate(`/admin/edit/${draft.type}/${draft.id}`)
+        navigate(`/admin/${draft.type}/${draft.id}`)
     }
 
     function deleteDraft(e, draft) {

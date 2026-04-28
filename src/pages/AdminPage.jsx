@@ -53,19 +53,6 @@ export function AdminPage() {
         }
     }
 
-    async function onRemove(id) {
-        if (!confirm('האם את/ה בטוח?')) return
-        try {
-            await mainService.remove(type, id)
-            alert('Deleted')
-        } catch (err) {
-            alert('ERROR: cannot delete data')
-            console.error(err)
-        } finally {
-            loadData()
-        }
-    }
-
     function handleTypeChange({ target }) {
         if (target.value === type) return
         setType(target.value)
@@ -81,11 +68,14 @@ export function AdminPage() {
         })
     }
 
+    function onRowClick(item) {
+        navigate(`/admin/${type}/${item._id}`)
+    }
+
     if (isUserLoading) return <Loading isForPage />
     if (!user) return <AdminLogin from={location.state?.from} />
 
     const config = adminConfig[type]
-    const actions = config.actions({ onRemove, navigate, type })
 
     return (
         <div className="admin-page">
@@ -114,13 +104,19 @@ export function AdminPage() {
                     <button className="icon-btn" onClick={logout} title="התנתק">
                         <i className="fa-solid fa-right-from-bracket"></i>
                     </button>
-                    <button className="add-btn" onClick={() => navigate(`/admin/edit/${type}/new`)} title="הוסף">
+                    <button className="add-btn" onClick={() => navigate(`/admin/${type}/new`)} title="הוסף">
                         <i className="fa-solid fa-plus fa-2xl" style={{ color: 'white' }}></i>
                     </button>
                 </div>
             </div>
 
-            <EditList data={itemList} columns={config.columns} actions={actions} timeFormat={timeFormat} isId={config.id} />
+            <EditList
+                data={itemList}
+                columns={config.columns}
+                timeFormat={timeFormat}
+                isId={config.id}
+                onRowClick={onRowClick}
+            />
 
             {showRecentComments && (
                 <RecentComments onClose={() => setShowRecentComments(false)} />

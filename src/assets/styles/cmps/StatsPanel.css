@@ -1,60 +1,23 @@
 /* ─────────────────────────────────────────
-   ADMIN STATS PAGE
+   STATS PANEL (inside AdminItemPage)
 ───────────────────────────────────────── */
-.admin-stats-page {
+.stats-panel {
   width: 100%;
-  max-width: 1200px;
-  margin: 0 auto;
-  min-height: 100vh;
-  background: var(--bg);
-  padding: 28px 32px;
 }
 
-/* ── Header ── */
-.stats-header {
-  position: sticky;
-  top: 72px;
-  z-index: 10;
-  background: var(--bg);
+.stats-panel-header {
   display: flex;
-  flex-direction: row-reverse;
   align-items: center;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  gap: 14px;
-  margin-bottom: 28px;
-  padding: 16px 0 18px;
-  border-bottom: 1.5px solid var(--border);
-}
-
-.stats-title-row {
-  display: flex;
-  flex-direction: row-reverse;
-  align-items: center;
-  gap: 14px;
-}
-
-.stats-title-row h2 {
-  font-family: var(--serif);
-  font-size: 22px;
-  font-weight: 700;
-  color: var(--g1);
-  margin: 0;
-}
-
-.stats-item-title {
-  font-size: 13px;
-  color: var(--lgray);
-  margin: 3px 0 0;
+  margin-bottom: 20px;
 }
 
 /* ── Period toggle ── */
-.period-btns {
+.stats-panel .period-btns {
   display: flex;
   gap: 6px;
 }
 
-.period-btn {
+.stats-panel .period-btn {
   padding: 7px 16px;
   border-radius: 20px;
   border: 1.5px solid var(--border);
@@ -67,12 +30,12 @@
   transition: background .18s, border-color .18s, color .18s;
 }
 
-.period-btn:hover {
+.stats-panel .period-btn:hover {
   border-color: var(--g4);
   color: var(--g2);
 }
 
-.period-btn.active {
+.stats-panel .period-btn.active {
   background: var(--g4);
   border-color: var(--g4);
   color: white;
@@ -80,14 +43,14 @@
 }
 
 /* ── Summary cards ── */
-.stats-summary {
+.stats-panel .stats-summary {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 16px;
   margin-bottom: 28px;
 }
 
-.stat-card {
+.stats-panel .stat-card {
   background: var(--white);
   border: 1.5px solid var(--border);
   border-radius: 16px;
@@ -100,7 +63,7 @@
   border-top: 3px solid var(--metric-color, var(--g4));
 }
 
-.stat-num {
+.stats-panel .stat-num {
   font-family: var(--serif);
   font-size: 36px;
   font-weight: 700;
@@ -108,20 +71,20 @@
   line-height: 1;
 }
 
-.stat-label {
+.stats-panel .stat-label {
   font-size: 13px;
   color: var(--lgray);
   font-weight: 500;
 }
 
 /* ── Charts grid ── */
-.stats-charts {
+.stats-panel .stats-charts {
   display: flex;
   flex-direction: column;
   gap: 20px;
 }
 
-.chart-card {
+.stats-panel .chart-card {
   background: var(--white);
   border: 1.5px solid var(--border);
   border-radius: 16px;
@@ -129,7 +92,7 @@
   box-shadow: 0 2px 10px rgba(45, 106, 79, .05);
 }
 
-.chart-title {
+.stats-panel .chart-title {
   font-family: var(--sans);
   font-size: 14px;
   font-weight: 700;
@@ -137,7 +100,7 @@
   letter-spacing: .01em;
 }
 
-.no-chart-data {
+.stats-panel .no-chart-data {
   font-size: 13px;
   color: var(--lgray);
   text-align: center;
@@ -153,49 +116,40 @@
   direction: rtl;
 }
 
-.tooltip-label {
+.stats-tooltip .tooltip-label {
   font-size: 12px;
   color: var(--g5);
   margin: 0 0 3px;
 }
 
-.tooltip-value {
+.stats-tooltip .tooltip-value {
   font-size: 14px;
   color: white;
   margin: 0;
 }
 
-.tooltip-value strong {
+.stats-tooltip .tooltip-value strong {
   font-weight: 700;
 }
 
 /* ── Responsive ── */
 @media (max-width: 700px) {
-  .admin-stats-page {
-    padding: 16px;
-  }
-
-  .stats-header {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-
-  .stats-summary {
+  .stats-panel .stats-summary {
     grid-template-columns: repeat(3, 1fr);
     gap: 10px;
   }
 
-  .stat-card {
+  .stats-panel .stat-card {
     padding: 14px 10px;
   }
 
-  .stat-num {
+  .stats-panel .stat-num {
     font-size: 26px;
   }
 }
 
 @media (max-width: 480px) {
-  .stats-summary {
+  .stats-panel .stats-summary {
     grid-template-columns: 1fr;
   }
 }

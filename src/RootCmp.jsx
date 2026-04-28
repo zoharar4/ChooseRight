@@ -12,9 +12,7 @@ import { PlanDetails } from "./pages/PlanDetails.jsx"
 import { AboutPage } from "./pages/AboutPage"
 import { ContactPage } from "./pages/ContactPage"
 import { AdminPage } from "./pages/AdminPage"
-import { AdminEditPage } from "./pages/AdminEditPage"
-import { AdminStatsPage } from "./pages/AdminStatsPage"
-import { EditCommentList } from "./cmps/admin/EditCommentsList"
+import { AdminItemPage } from "./pages/AdminItemPage"
 import { PrivacyPage } from "./pages/PrivacyPage"
 
 export function RootCmp() {
@@ -34,9 +32,8 @@ export function RootCmp() {
                     <Route path="/about" element={<AboutPage />} />
                     <Route path="/contact" element={<ContactPage />} />
                     <Route path="/admin" element={<AdminPage />} />
-                    <Route path="/admin/edit/:type/:id" element={<AdminEditPage />} />
-                    <Route path="/admin/stats/:type/:id" element={<AdminStatsPage />} />
-                    <Route path="/admin/:type/:id" element={<EditCommentList />} />
+                    <Route path="/admin/:type/:id" element={<AdminItemPage />} />
+                    <Route path="/admin/:type/:id/:tab" element={<AdminItemPage />} />
                     <Route path="/privacy" element={<PrivacyPage />} />
                 </Routes>
             </div>

@@ -3,7 +3,7 @@
   padding: 72px 0;
 }
 
-.block-preview--recipes {
+.block-preview--recipes, .post-details .block-preview--blog {
   background: var(--white);
   border-top: 1px solid var(--border);
 }

@@ -18,7 +18,7 @@ export const EditContent = forwardRef(function EditContent({ existingContent, se
     }))
 
     return (
-        <div style={{ maxWidth: "1200px", margin: "40px auto" }}>
+        <div>
             <p style={{ fontSize: '18px' }}>{isPreview ? 'מידע מקדים:' : 'תוכן:'}</p>
             <Editor
                 onInit={(evt, editor) => { editorInstanceRef.current = editor }}

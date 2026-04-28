@@ -18,7 +18,6 @@
 /* list */
 @import "./cmps/EditList.css";
 @import "./cmps/CommentsList.css";
-@import "./cmps/EditCommentList.css";
 
 /* preview */
 @import "./cmps/PostPreview.css";
@@ -26,8 +25,15 @@
 
 /* details */
 @import "./cmps/PostDetails.css";
+@import "./cmps/PostSection.css";
 @import "./cmps/PlanDetails.css";
 
+/* admin panels */
+@import "./cmps/AdminLogin.css";
+@import "./cmps/GeneralPanel.css";
+@import "./cmps/EditPanel.css";
+@import "./cmps/CommentsPanel.css";
+@import "./cmps/StatsPanel.css";
 
 
 /* PAGES */
@@ -38,6 +44,5 @@
 @import "./pages/AboutPage.css";
 @import "./pages/ContactPage.css";
 @import "./pages/AdminPage.css";
-@import "./pages/AdminEditPage.css";
-@import "./pages/AdminStatsPage.css";
+@import "./pages/AdminItemPage.css";
 @import "./pages/PrivacyPage.css";

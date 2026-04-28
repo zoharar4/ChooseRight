@@ -5,50 +5,37 @@ import { useUser } from "../../context/UserContext"
 import { CommentContent } from "./CommentContent"
 import { AddComment } from "./AddComment"
 
-export function CommentItem({ comment, postId, setPost, type, setComments, onDelete }) {
+export function CommentItem({ comment, postId, setPost, type, setComments }) {
     const { user } = useUser()
     const [isReplying, setIsReplying] = useState(false)
+    const [deletingId, setDeletingId] = useState(null)
 
     const likedComments = utilService.loadFromStorage('likedComments') || []
     const likedReplies = utilService.loadFromStorage('likedReplies') || []
     const isCommentLiked = likedComments.includes(comment._id)
+
+    function patchComments(updater) {
+        if (setPost) {
+            setPost(prev => ({ ...prev, comments: updater(prev.comments || []) }))
+        } else if (setComments) {
+            setComments(prev => updater(prev || []))
+        }
+    }
+
+    function patchThisComment(updater) {
+        patchComments(comments => comments.map(c => c._id === comment._id ? updater(c) : c))
+    }
 
     async function onReply(replyData) {
         try {
             utilService.devLog(`Reply to comment ${comment._id} — before`, replyData)
             const res = await mainService.addReply(type, postId, comment._id, replyData)
             utilService.devLog(`Reply to comment ${comment._id} — after`, res)
-            if (setPost) {
-                setPost(prev => ({
-                    ...prev,
-                    comments: prev.comments.map(c =>
-                        c._id === comment._id
-                            ? { ...c, replies: [...(c.replies || []), res] }
-                            : c
-                    )
-                }))
-            } else {
-                setComments(prev => prev.map(c =>
-                    c._id === comment._id
-                        ? { ...c, replies: [...(c.replies || []), res] }
-                        : c
-                ))
-            }
+            patchThisComment(c => ({ ...c, replies: [...(c.replies || []), res] }))
         } catch (err) {
             console.error(err)
         }
         setTimeout(() => setIsReplying(false), 500)
-    }
-
-    function updateCommentState(updater) {
-        if (setPost) {
-            setPost(prev => ({
-                ...prev,
-                comments: prev.comments.map(c => c._id === comment._id ? updater(c) : c)
-            }))
-        } else {
-            setComments(prev => prev.map(c => c._id === comment._id ? updater(c) : c))
-        }
     }
 
     async function onLikeComment() {
@@ -56,15 +43,14 @@ export function CommentItem({ comment, postId, setPost, type, setComments, onDel
         const liked = utilService.loadFromStorage('likedComments') || []
         liked.push(comment._id)
         utilService.saveToStorage('likedComments', liked)
-        updateCommentState(c => ({ ...c, likes: (c.likes || 0) + 1 }))
+        patchThisComment(c => ({ ...c, likes: (c.likes || 0) + 1 }))
         try {
             await mainService.likeComment(type, postId, comment._id)
         } catch (err) {
-            // rollback
             const idx = liked.indexOf(comment._id)
             if (idx > -1) liked.splice(idx, 1)
             utilService.saveToStorage('likedComments', liked)
-            updateCommentState(c => ({ ...c, likes: Math.max(0, (c.likes || 1) - 1) }))
+            patchThisComment(c => ({ ...c, likes: Math.max(0, (c.likes || 1) - 1) }))
             console.error(err)
         }
     }
@@ -74,7 +60,7 @@ export function CommentItem({ comment, postId, setPost, type, setComments, onDel
         const liked = utilService.loadFromStorage('likedReplies') || []
         liked.push(reply._id)
         utilService.saveToStorage('likedReplies', liked)
-        updateCommentState(c => ({
+        patchThisComment(c => ({
             ...c,
             replies: (c.replies || []).map(r =>
                 r._id === reply._id ? { ...r, likes: (r.likes || 0) + 1 } : r
@@ -83,17 +69,53 @@ export function CommentItem({ comment, postId, setPost, type, setComments, onDel
         try {
             await mainService.likeReply(type, postId, comment._id, reply._id)
         } catch (err) {
-            // rollback
             const idx = liked.indexOf(reply._id)
             if (idx > -1) liked.splice(idx, 1)
             utilService.saveToStorage('likedReplies', liked)
-            updateCommentState(c => ({
+            patchThisComment(c => ({
                 ...c,
                 replies: (c.replies || []).map(r =>
                     r._id === reply._id ? { ...r, likes: Math.max(0, (r.likes || 1) - 1) } : r
                 )
             }))
             console.error(err)
+        }
+    }
+
+    async function onDeleteComment() {
+        if (deletingId) return
+        if (!confirm('האם את/ה בטוח שברצונך למחוק?')) return
+        setDeletingId(comment._id)
+        try {
+            utilService.devLog(`Delete comment — ${comment._id} from ${type}/${postId}`)
+            await mainService.removeComment(type, postId, comment._id)
+            utilService.devLog(`Delete comment — done`)
+            patchComments(comments => comments.filter(c => c._id !== comment._id))
+        } catch (err) {
+            console.error(err)
+            alert('שגיאה במחיקה')
+        } finally {
+            setDeletingId(null)
+        }
+    }
+
+    async function onDeleteReply(reply) {
+        if (deletingId) return
+        if (!confirm('האם את/ה בטוח שברצונך למחוק?')) return
+        setDeletingId(reply._id)
+        try {
+            utilService.devLog(`Delete reply — ${reply._id} from ${type}/${postId}`)
+            await mainService.removeReply(type, postId, comment._id, reply._id)
+            utilService.devLog(`Delete reply — done`)
+            patchThisComment(c => ({
+                ...c,
+                replies: (c.replies || []).filter(r => r._id !== reply._id)
+            }))
+        } catch (err) {
+            console.error(err)
+            alert('שגיאה במחיקה')
+        } finally {
+            setDeletingId(null)
         }
     }
 
@@ -120,8 +142,8 @@ export function CommentItem({ comment, postId, setPost, type, setComments, onDel
                     </button>
                 )}
 
-                {user && onDelete && (
-                    <button onClick={() => onDelete(type, postId, comment._id)} className="delete-btn">
+                {user && (
+                    <button onClick={onDeleteComment} className="delete-btn" disabled={deletingId === comment._id}>
                         <i className="fa-solid fa-trash-can"></i>
                     </button>
                 )}
@@ -158,8 +180,8 @@ export function CommentItem({ comment, postId, setPost, type, setComments, onDel
                                         <span>{reply.likes || 0}</span>
                                     </button>
 
-                                    {user && onDelete && (
-                                        <button onClick={() => onDelete(type, postId, comment._id, reply._id)} className="delete-btn">
+                                    {user && (
+                                        <button onClick={() => onDeleteReply(reply)} className="delete-btn" disabled={deletingId === reply._id}>
                                             <i className="fa-solid fa-trash-can"></i>
                                         </button>
                                     )}

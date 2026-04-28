@@ -38,6 +38,15 @@
   background: rgba(45, 106, 79, .04);
 }
 
+/* ── Clickable rows ── */
+.admin-table tr.clickable-row {
+  cursor: pointer;
+  transition: background .15s;
+}
+.admin-table tr.clickable-row:hover {
+  background: var(--g8);
+}
+
 /* ── Row number column ── */
 .admin-table .col-num {
   width: 40px;
@@ -77,33 +86,6 @@
   opacity: 1;
   color: var(--g5);
 }
-
-/* ── Action buttons ── */
-.admin-table td:last-child {
-  white-space: nowrap;
-}
-.admin-table button {
-  width: 32px;
-  height: 32px;
-  border-radius: 8px;
-  border: none;
-  font-size: 13px;
-  cursor: pointer;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  margin-left: 4px;
-  transition: opacity .15s, transform .15s;
-}
-.admin-table button:hover {
-  opacity: .85;
-  transform: scale(1.08);
-}
-
-.admin-table .view-btn     { background: var(--g7);     color: var(--g2); }
-.admin-table .edit-btn     { background: #DBEAFE;        color: #1D4ED8; }
-.admin-table .delete-btn   { background: #FEE2E2;        color: #B91C1C; }
-.admin-table .comments-btn { background: #F3F4F6;        color: #374151; }
 
 /* ── Responsive: horizontal scroll on small screens ── */
 @media (max-width: 700px) {

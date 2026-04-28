@@ -92,9 +92,6 @@ export function HomePage() {
             {/* ── About Strip ── */}
             <section className="home-about-strip">
                 <div className="home-about-inner container">
-                    <div className="about-strip-photo">
-                        <ImageBasic src={image1} className="about-strip-img" />
-                    </div>
                     <div className="about-strip-text">
                         <span className="hero-label">הדרך שלכם לאיזון</span>
                         <h2>אני לא מציעה פתרונות קסם.<br />אני מציעה דרך.</h2>

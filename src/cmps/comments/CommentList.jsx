@@ -1,8 +1,8 @@
 import { CommentItem } from "./CommentItem.jsx"
 
-export function CommentsList({ comments, postId, setPost, type, setComments, onDelete }) {
+export function CommentsList({ comments, postId, setPost, type, setComments }) {
     if (!comments || !comments.length)
-        return <p className="no-comments">אין תגובות עדיין</p>
+        return <p className="no-comments">אין תגובות עדיין. <br /> אשמח לשמוע מה דעתכם 🙂</p>
 
     return (
         <ul className="comments-list">
@@ -14,7 +14,6 @@ export function CommentsList({ comments, postId, setPost, type, setComments, onD
                     setPost={setPost}
                     type={type}
                     setComments={setComments}
-                    onDelete={onDelete}
                 />
             )}
         </ul>
