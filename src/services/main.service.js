@@ -20,7 +20,7 @@ export const mainService = {
     getRecentComments,
 }
 
-async function query(type, options = {}) {
+async function query(type, options = {}) { // if !options retuns array, else returns obj with data:[Array] and pagination data. 
     if (type === 'plans') return await plansService.query()
     const { limit, page, full } = options
 

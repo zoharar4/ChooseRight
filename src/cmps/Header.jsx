@@ -2,20 +2,15 @@ import { NavLink, useLocation, useNavigate } from "react-router"
 import logo from "../assets/images/logo.png"
 import { useEffect, useState } from "react"
 import { useUser } from "../context/UserContext"
+import { siteConfig } from "../services/site.config"
 
 export function Header() {
     const navigate = useNavigate()
     const location = useLocation()
     const { user } = useUser()
     const [isMenuOpen, setIsMenuOpen] = useState(false)
-    const navItems = [
-        { id: "/", label: "דף הבית" },
-        { id: "/plans", label: "תכניות ליווי" },
-        { id: "/blog", label: "בלוג" },
-        { id: "/recipes", label: "מתכונים" },
-        { id: "/about", label: "אודותי" },
-        { id: "/contact", label: "יצירת קשר" },
-    ]
+    const navItems = siteConfig.navItems
+
 
     useEffect(() => {
         setIsMenuOpen(false)

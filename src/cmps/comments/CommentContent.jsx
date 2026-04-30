@@ -1,6 +1,6 @@
 import { useState } from "react"
 
-export function CommentContent({ content = "fgdsssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss fgdsssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss fgdsssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss fgdsssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss" }) {
+export function CommentContent({ content = "אין תוכן לתגובה." }) {
 
     const [isExpanded, setIsExpanded] = useState(false)
 

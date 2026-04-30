@@ -15,6 +15,7 @@ export function BlockPreview({ type }) {
     async function loadItems() {
         try {
             const res = await mainService.query(type, { limit: 3 })
+            console.log('block preview res:',res)
             setItems(res.data)
         } catch (err) {
             console.error("Failed loading previews", err)

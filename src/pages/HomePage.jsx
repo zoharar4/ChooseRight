@@ -2,10 +2,11 @@ import { useNavigate } from "react-router"
 import image1 from "../assets/images/image1.jpeg"
 import { BlockPreview } from "../cmps/BlockPreview.jsx"
 import { ImageBasic } from "../cmps/ImageBasic.jsx"
+import { siteConfig } from "../services/site.config.js"
 
 export function HomePage() {
     const navigate = useNavigate()
-
+    const { paragraphs, heroLables, featuresStrip } = siteConfig
     return (
         <div className="home-page">
 
@@ -13,18 +14,15 @@ export function HomePage() {
             <section className="home-hero hero-section">
                 <div className="home-hero-inner container">
                     <div className="home-hero-text">
-                        <span className="hero-label">קואצ'ינג אישי מקצועי</span>
+                        <span className="hero-label">{heroLables.home}</span>
                         <h1 className="home-hero-title">
                             החופש לבחור<br />
                             <span>בחיים בריאים יותר</span>
                         </h1>
-                        <p className="home-hero-desc">
-                            הבריאות שלנו היא המצב הטבעי שבו אנו מחוברים לעצמנו, לגופנו ולתחושות שלנו.
-                            אני כאן כדי לעזור לך למצוא את הדרך החזרה אליהם.
-                        </p>
+                        <p className="home-hero-desc">{paragraphs.homeHeroDesc}</p>
                         <div className="home-hero-actions">
-                            <button className="btn-primary" onClick={() => navigate("/plans")}>תכניות ליווי</button>
-                            <button className="btn-outline" onClick={() => navigate("/about")}>אודותי</button>
+                            <button className="btn-primary" onClick={() => navigate("/plans")}>תכניות ליווי תזונתי</button>
+                            <button className="btn-outline" onClick={() => navigate("/about")}>אודות</button>
                         </div>
                     </div>
                     <div className="home-hero-visual">
@@ -38,33 +36,17 @@ export function HomePage() {
             {/* ── Features Strip ── */}
             <div className="features-strip">
                 <div className="features-strip-inner container">
-                    <div className="strip-item"><span className="strip-icon">🎯</span> ליווי אישי מותאם</div>
-                    <div className="strip-item"><span className="strip-icon">🌱</span> גישה הוליסטית</div>
-                    <div className="strip-item"><span className="strip-icon">📚</span> ידע מקצועי עמוק</div>
-                    <div className="strip-item"><span className="strip-icon">💪</span> תוצאות ממשיות</div>
-                    <div className="strip-item"><span className="strip-icon">✨</span> שינוי אמיתי לחיים</div>
+                    {featuresStrip.map((s, idx) => <div key={idx} className="strip-item"><span className="strip-icon">{s.icon}</span>{s.txt}</div>)}
                 </div>
             </div>
 
             {/* ── Philosophy Section ── */}
             <section className="home-philosophy">
                 <div className="container home-philosophy-inner">
-                    <blockquote className="philosophy-quote">
-                        "בְּרֵאשִׁית בָּרָא אֱלֹהִים אֵת הַשָּׁמַיִם וְאֵת הָאָרֶץ..."
-                    </blockquote>
-                    <p>
-                        המילה <strong>בריאות</strong> טומנת בחובה את המילה <strong>בריאה</strong>.
-                        העולם נברא כשהוא שלם, מאוזן ובריא – וכך גם אנחנו.
-                        הבריאות שלנו היא המצב הטבעי שבו אנו מחוברים לעצמנו, לגופנו ולתחושות שלנו.
-                    </p>
-                    <p>
-                        אבל במירוץ החיים, קל לאבד את הקשב. כשאנחנו מפסיקים להקשיב לגוף, האיזון מופר.
-                        זה יכול להופיע כעייפות כרונית, אכילה רגשית, מחלות שונות או פשוט תחושה שמשהו תקוע.
-                        כשאנחנו לא באיזון, אנחנו לא פנויים לחיות חיים בעלי משמעות.
-                    </p>
-                    <p className="philosophy-highlight">
-                        להיות בריא זה להיות חופשי – חופשי להגשים את הייעוד שלנו בעולם.
-                    </p>
+                    <blockquote className="philosophy-quote">{paragraphs.homePhilosophyQuote}</blockquote>
+                    <p dangerouslySetInnerHTML={{ __html: paragraphs.homePhilosophy1 }}></p>
+                    <p>{paragraphs.homePhilosophy2}</p>
+                    <p className="philosophy-highlight">{paragraphs.homePhilosophy3}</p>
                 </div>
             </section>
 
@@ -93,8 +75,8 @@ export function HomePage() {
             <section className="home-about-strip">
                 <div className="home-about-inner container">
                     <div className="about-strip-text">
-                        <span className="hero-label">הדרך שלכם לאיזון</span>
-                        <h2>אני לא מציעה פתרונות קסם.<br />אני מציעה דרך.</h2>
+                        <span className="hero-label">{heroLables.home2}</span>
+                        <h2>אני לא מציעה פתרונות קסם.<br /><span>אני מציעה דרך.</span></h2>
                         <p>
                             גם אני הייתי שם. גם אני התמודדתי עם אלרגיות חוזרות, עייפות שלא נגמרת
                             וחוסר איזון גופני ונפשי שחיפש מענה. מתוך הקושי האישי שלי, יצאתי למסע

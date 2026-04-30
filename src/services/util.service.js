@@ -55,7 +55,6 @@ function makeLorem(size = 100) {
         }
     }
     txt += '.'
-    console.log('txt:', txt)
     return txt
 }
 

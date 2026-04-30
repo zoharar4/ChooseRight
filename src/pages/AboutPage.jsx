@@ -1,9 +1,11 @@
 import { useNavigate } from "react-router"
 import image1 from "../assets/images/image1.jpeg"
 import { ImageBasic } from "../cmps/ImageBasic"
+import { siteConfig } from "../services/site.config"
 
 export function AboutPage() {
     const navigate = useNavigate()
+    const { heroLables, paragraphs } = siteConfig
 
     return (
         <div className="about-page">
@@ -15,23 +17,13 @@ export function AboutPage() {
                         <ImageBasic src={image1} className="about-hero-img" />
                     </div>
                     <div className="about-intro">
-                        <span className="hero-label">אודות</span>
+                        <span className="hero-label">{heroLables.about}</span>
                         <h1>שלום, אני שמרית —<br />כאן כדי לעזור לכם לבחור את הדרך</h1>
-                        <p>
-                            בוגרת תואר ראשון במנהל עסקים, בוגרת מכללת "אילמה" במגמת בריאות טבעית ועין הבדולח
-                            וכן בוגרת מכללת "תוצאות NLP Master-Practitioner". 5 שנות ניסיון קליני.
-                        </p>
-                        <p>
-                            ניסיון החיים העשיר שלי ותהליך אישי ומורכב שעברתי הביא איתו רצון וצורך ממשי
-                            להתפתחות אישית וכפועל יוצא מכך גם המון רצון לעזור לאחרים.
-                        </p>
-                        <p>בנוסף, אני מנחת סדנאות יצירה בתחום המנדלות.</p>
-                        <div className="about-cred-list">
-                            <div className="about-cred-item"><span className="cred-check">✓</span> B.Sc. מנהל עסקים</div>
-                            <div className="about-cred-item"><span className="cred-check">✓</span> NLP Master-Practitioner</div>
-                            <div className="about-cred-item"><span className="cred-check">✓</span> בריאות טבעית ועין הבדולח</div>
-                            <div className="about-cred-item"><span className="cred-check">✓</span> מנחת סדנאות מנדלות</div>
-                        </div>
+                        <p>{paragraphs.aboutIntro1}</p>
+                        <p>{paragraphs.aboutIntro2}</p>
+                        <p>{paragraphs.aboutIntro3}</p>
+                        <p>{paragraphs.aboutIntro4}</p>
+
                         <button className="btn-primary" onClick={() => navigate("/contact")}>בואו נדבר</button>
                     </div>
                 </div>
@@ -41,61 +33,27 @@ export function AboutPage() {
             <section className="about-philosophy">
                 <div className="container">
                     <div className="section-header">
-                        <div className="section-label">הפילוסופיה שלי</div>
-                        <h2 className="section-title">על מה אני מסתכלת בתהליך</h2>
+                        <div className="section-label">{heroLables.about2}</div>
+                        <h2 className="section-title">{paragraphs.aboutPhilosophy.h2}</h2>
                     </div>
                     <div className="philosophy-grid">
-                        <div className="philosophy-card">
-                            <div className="philosophy-icon">🎯</div>
-                            <h3>אין "תוכנית אחת לכולם"</h3>
-                            <p>הסיפור שלך שלך. ההיסטוריה שלך שלך. הצרכים שלך שלך. אני בונה תהליך שמדייק לאדם הספציפי שעומד מולי.</p>
-                        </div>
-                        <div className="philosophy-card">
-                            <div className="philosophy-icon">🌱</div>
-                            <h3>שינוי מתחיל — לא מלמעלה</h3>
-                            <p>תהליכים אמיתיים באים מבפנים. לא נכפים מבחוץ. אני עוזרת לך לגלות את הכוח שכבר קיים בך.</p>
-                        </div>
-                        <div className="philosophy-card">
-                            <div className="philosophy-icon">💚</div>
-                            <h3>הגוף והנפש — קשורים</h3>
-                            <p>תזונה, שינה, רגשות, עייפות — כולם משפיעים על החיים שלך. אני עובדת על כל המשתנים יחד.</p>
-                        </div>
-                        <div className="philosophy-card">
-                            <div className="philosophy-icon">🧠</div>
-                            <h3>חיבור בין ראש ולב</h3>
-                            <p>ידע מקצועי, סרטים, שינוי הרגלים — כולם חשובים. אני עובדת על החיבור האמיתי בין כולם.</p>
-                        </div>
+                        {paragraphs.aboutPhilosophy.cards.map((card, idx) => (
+                            <div key={idx} className="philosophy-card">
+                                <div className="philosophy-icon">{card.icon}</div>
+                                <h3>{card.h3}</h3>
+                                <p>{card.txt}</p>
+                            </div>
+                        ))}
                     </div>
                 </div>
             </section>
 
-            {/* ── Journey ── */}
-            <section className="about-journey">
+            {/* ── Credentials ── */}
+            <section className="about-credentials">
                 <div className="container">
-                    <div className="journey-grid">
-                        <div className="journey-text">
-                            <span className="hero-label" style={{ display: 'block', marginBottom: '12px' }}>הסיפור שלי</span>
-                            <h2>הגעתי לקואצ'ינג דרך חיים, לא דרך ספרים</h2>
-                            <p>
-                                גדלתי בתוך חיים מלאים — ילדים, שגשוג, עצמאות, בחירות. יחד עם זאת חשתי שה"להיות נכון" מולנו תמיד נשאר כמשאלה.
-                            </p>
-                            <p>
-                                כשהגעתי לגיל 40 הבנתי שאני רוצה משהו שונה — לא רק להסתפק במסגרות הקיימות. הכשרתי את עצמי, מצאתי את דרכי.
-                            </p>
-                            <p>
-                                היום אני עובדת עם נשים שרוצות להוביל שינוי אמיתי בחייהן — ועזרתי להן למצוא את הדרך שלהן.
-                            </p>
-                            <button
-                                className="btn-outline"
-                                style={{ marginTop: '20px' }}
-                                onClick={() => navigate("/contact")}
-                            >
-                                השאירו פרטים
-                            </button>
-                        </div>
-                        <div className="journey-img-wrap">
-                            <ImageBasic src={image1} className="journey-img" />
-                        </div>
+                    <p>{paragraphs.aboutIntro5}</p>
+                    <div className="about-cred-list">
+                        {paragraphs.aboutCredList.map((txt, idx) => <div key={idx} className="about-cred-item"><span className="cred-check">✓</span> {txt}</div>)}
                     </div>
                 </div>
             </section>
