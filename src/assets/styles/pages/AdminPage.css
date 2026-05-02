@@ -87,11 +87,13 @@
 }
 
 /* ── Draft badge on icon button ── */
-.draft-icon-btn {
+.draft-icon-btn,
+.comment-icon-btn {
   position: relative;
 }
 
-.draft-badge {
+.draft-badge,
+.comment-badge {
   position: absolute;
   top: -6px;
   left: -6px;
@@ -99,7 +101,6 @@
   height: 18px;
   padding: 0 4px;
   border-radius: 9px;
-  background: #D97706;
   color: white;
   font-size: 10px;
   font-weight: 700;
@@ -107,6 +108,14 @@
   align-items: center;
   justify-content: center;
   pointer-events: none;
+}
+
+.draft-badge {
+  background: #D97706;
+}
+
+.comment-badge {
+  background: #DC2626;
 }
 
 /* ── Draft item delete button ── */
@@ -234,6 +243,25 @@
 
 .rc-item:hover {
   background: var(--g8);
+}
+
+.rc-item-new {
+  background: #FEF2F2;
+  border-right: 3px solid #DC2626;
+}
+
+.rc-item-new:hover {
+  background: #FEE2E2;
+}
+
+.rc-new-badge {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: .04em;
+  padding: 2px 7px;
+  border-radius: 10px;
+  background: #DC2626;
+  color: white;
 }
 
 .rc-item-top {

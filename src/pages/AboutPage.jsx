@@ -2,6 +2,7 @@ import { useNavigate } from "react-router"
 import image1 from "../assets/images/image1.jpeg"
 import { ImageBasic } from "../cmps/ImageBasic"
 import { siteConfig } from "../services/site.config"
+import { CTABanner } from "../cmps/CTABanner"
 
 export function AboutPage() {
     const navigate = useNavigate()
@@ -51,7 +52,7 @@ export function AboutPage() {
             {/* ── Credentials ── */}
             <section className="about-credentials">
                 <div className="container">
-                    <p>{paragraphs.aboutIntro5}</p>
+                    <p style={{maxWidth: "600px"}}>{paragraphs.aboutIntro5}</p>
                     <div className="about-cred-list">
                         {paragraphs.aboutCredList.map((txt, idx) => <div key={idx} className="about-cred-item"><span className="cred-check">✓</span> {txt}</div>)}
                     </div>
@@ -59,16 +60,7 @@ export function AboutPage() {
             </section>
 
             {/* ── CTA ── */}
-            <section className="cta-banner">
-                <div className="container">
-                    <h2>רוצים להכיר?</h2>
-                    <p>פגישת היכרות ראשונה ללא עלות — בואו נראה יחד מה אפשר לעשות</p>
-                    <div className="cta-banner-btns">
-                        <button className="btn-primary" onClick={() => navigate("/contact")}>קביעת פגישה עכשיו</button>
-                    </div>
-                </div>
-            </section>
-
+            <CTABanner content={siteConfig.ctaTxt.about} />
         </div>
     )
 }

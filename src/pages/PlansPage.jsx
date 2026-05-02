@@ -2,6 +2,8 @@ import { useEffect, useState } from "react"
 import { useNavigate } from "react-router"
 import { PlanPreview } from "../cmps/PlanPreview"
 import { mainService } from "../services/main.service"
+import { CTABanner } from "../cmps/CTABanner"
+import { siteConfig } from "../services/site.config"
 
 export function PlansPage() {
     const [plans, setPlans] = useState([])
@@ -99,19 +101,7 @@ export function PlansPage() {
             </section>
 
             {/* ── CTA ── */}
-            <section className="cta-banner">
-                <div className="container">
-                    <h2>צעד ראשון בדרך לבחירה נכונה</h2>
-                    <p>
-                        אני יודעת שקשה לפעמים לדעת מאיפה להתחיל. האם זה מתאים לי? איזה מסלול נכון עבורי?
-                        בדיוק בשביל זה, אני מזמינה אתכם לשיחת היכרות ללא עלות וללא התחייבות.
-                        נשוחח, נכיר, ונבין יחד מה הצעד הקטן הראשון שיעשה עבורכם שינוי גדול.
-                    </p>
-                    <div className="cta-banner-btns">
-                        <button className="btn-primary" onClick={() => navigate("/contact")}>לשיחת היכרות חינם</button>
-                    </div>
-                </div>
-            </section>
+            <CTABanner content={siteConfig.ctaTxt.plans} />
 
         </div>
     )

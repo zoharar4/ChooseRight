@@ -3,10 +3,11 @@ import image1 from "../assets/images/image1.jpeg"
 import { BlockPreview } from "../cmps/BlockPreview.jsx"
 import { ImageBasic } from "../cmps/ImageBasic.jsx"
 import { siteConfig } from "../services/site.config.js"
+import { CTABanner } from "../cmps/CTABanner.jsx"
 
 export function HomePage() {
     const navigate = useNavigate()
-    const { paragraphs, heroLables, featuresStrip } = siteConfig
+    const { paragraphs, heroLables, featuresStrip, ctaTxt } = siteConfig
     return (
         <div className="home-page">
 
@@ -114,20 +115,7 @@ export function HomePage() {
             <BlockPreview type="recipes" />
 
             {/* ── CTA Banner ── */}
-            <section className="cta-banner">
-                <div className="container">
-                    <h2>זה הזמן לבחור נכון</h2>
-                    <p>
-                        עכשיו זה הזמן הכי טוב להתחיל. אני מזמינה אותך ליצור איתי קשר,
-                        ויחד נבין איך להחזיר את האיזון לחייך ולמצוא את הדרך המיוחדת שלך לחיות בטוב.
-                    </p>
-                    <div className="cta-banner-btns">
-                        <button className="btn-primary" onClick={() => navigate("/contact")}>קביעת פגישה עכשיו</button>
-                        <button className="btn-outline" onClick={() => navigate("/plans")}>ראו את התכניות</button>
-                    </div>
-                </div>
-            </section>
-
+            <CTABanner content={ctaTxt.home} />
         </div>
     )
 }

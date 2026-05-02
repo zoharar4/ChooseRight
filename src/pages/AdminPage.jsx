@@ -23,6 +23,10 @@ export function AdminPage() {
     const [showDrafts, setShowDrafts] = useState(false)
     const [showDeleted, setShowDeleted] = useState(false)
     const [draftCount, setDraftCount] = useState(0)
+    const [recentComments, setRecentComments] = useState([])
+    const [lastSeenCommentTime, setLastSeenCommentTime] = useState(
+        utilService.loadFromStorage('last-seen-comment-time') || null
+    )
     const navigate = useNavigate()
 
     useEffect(() => {
@@ -33,6 +37,41 @@ export function AdminPage() {
     useEffect(() => {
         setDraftCount(draftService.getAll().length)
     }, [])
+
+    useEffect(() => {
+        if (!user) return
+        mainService.getRecentComments(30)
+            .then(list => {
+                setRecentComments(list)
+                if (!lastSeenCommentTime && list.length) {
+                    const newest = newestCommentTime(list)
+                    utilService.saveToStorage('last-seen-comment-time', newest)
+                    setLastSeenCommentTime(newest)
+                }
+            })
+            .catch(() => {})
+    }, [user])
+
+    function newestCommentTime(list) {
+        return list.reduce((max, c) => {
+            const t = new Date(c.createdAt).getTime()
+            return t > max ? t : max
+        }, 0)
+    }
+
+    function handleRecentCommentsLoaded(list) {
+        setRecentComments(list)
+        if (!list.length) return
+        const newest = newestCommentTime(list)
+        utilService.saveToStorage('last-seen-comment-time', newest)
+        setLastSeenCommentTime(newest)
+    }
+
+    const newCommentCount = lastSeenCommentTime
+        ? recentComments.filter(
+            c => new Date(c.createdAt).getTime() > new Date(lastSeenCommentTime).getTime()
+        ).length
+        : 0
 
     async function loadData() {
         setItemList(null)
@@ -89,8 +128,9 @@ export function AdminPage() {
                     <button onClick={handleFormatChange} title="פורמט זמן" className="icon-btn">
                         <i className="fa-regular fa-clock"></i>
                     </button>
-                    <button onClick={() => setShowRecentComments(true)} title="תגובות אחרונות" className="icon-btn">
+                    <button onClick={() => setShowRecentComments(true)} title="תגובות אחרונות" className="icon-btn comment-icon-btn">
                         <i className="fa-regular fa-comment"></i>
+                        {newCommentCount > 0 && <span className="comment-badge">{newCommentCount}</span>}
                     </button>
                     <button onClick={() => setShowDrafts(true)} title="טיוטות" className="icon-btn draft-icon-btn">
                         <i className="fa-solid fa-floppy-disk"></i>
@@ -119,7 +159,11 @@ export function AdminPage() {
             />
 
             {showRecentComments && (
-                <RecentComments onClose={() => setShowRecentComments(false)} />
+                <RecentComments
+                    onClose={() => setShowRecentComments(false)}
+                    lastSeen={lastSeenCommentTime}
+                    onCommentsLoaded={handleRecentCommentsLoaded}
+                />
             )}
 
             {showDrafts && (

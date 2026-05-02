@@ -1,4 +1,7 @@
+import { siteConfig } from "../services/site.config";
+
 export function PrivacyPage() {
+    const ownerInfo = siteConfig.ownerInfo
     return (
         <div className="privacy-page">
             <div className="privacy-inner">
@@ -96,7 +99,7 @@ export function PrivacyPage() {
                     <p>
                         לכל שאלה או בקשה בנושא פרטיות ניתן לפנות אל:
                         <br />
-                        <a href="mailto:shimritben1@gmail.com">shimritben1@gmail.com</a>
+                        <a href={`mailto:${ownerInfo.email}`}>{ownerInfo.email}</a>
                     </p>
                 </section>
 
