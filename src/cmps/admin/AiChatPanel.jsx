@@ -29,12 +29,9 @@ export function AiChatPanel({ type, getLiveObj, onApply, onClose }) {
             setSelected({ oldObj: liveObj, newObj: improvedObj })
         } catch (err) {
             console.error(err)
-            const fakeImproved = { ...liveObj, title: '123' }
             setMessages(prev => [...prev, {
                 role: 'assistant',
                 content: 'שגיאה',
-                improvedObj: fakeImproved,
-                baseObj: liveObj,
                 error: true,
             }])
             setSelected({ oldObj: liveObj, newObj: fakeImproved })

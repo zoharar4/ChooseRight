@@ -123,27 +123,10 @@
 }
 
 /* Variant-based visibility: "old" pane hides additions; "new" pane hides removals */
-.variant-old .ins,
-.variant-old ins {
-  display: none;
-}
-
-.variant-old .del,
-.variant-old del {
-  background: #f8d4d4;
-  text-decoration: line-through;
-}
-
-.variant-new .del,
-.variant-new del {
-  display: none;
-}
-
-.variant-new .ins,
-.variant-new ins {
-  background: #d4f4d4;
-  text-decoration: none;
-}
+.variant-old .ins { display: none; }
+.variant-old .del { background: #f8d4d4; text-decoration: line-through; }
+.variant-new .del { display: none; }
+.variant-new .ins { background: #d4f4d4; }
 
 /* ── Responsive ── */
 @media (max-width: 700px) {
