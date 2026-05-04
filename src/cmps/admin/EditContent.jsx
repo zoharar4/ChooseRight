@@ -14,7 +14,13 @@ export const EditContent = forwardRef(function EditContent({ existingContent, se
         },
         getContent() {
             return editorInstanceRef.current?.getContent() ?? existingContent
-        }
+        },
+        setContent(html) {
+            if (!editorInstanceRef.current) return
+            editorInstanceRef.current.setContent(html ?? '')
+            const field = isPreview ? 'previewContent' : 'content'
+            setObjToEdit(obj => ({ ...obj, [field]: html ?? '' }))
+        },
     }))
 
     return (

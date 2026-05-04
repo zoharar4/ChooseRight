@@ -1,0 +1,161 @@
+/* Bare structure only — visual polish later */
+
+.ai-chat-panel {
+  position: fixed;
+  top: 0;
+  inset-inline-end: 0;
+  width: min(900px, 100vw);
+  height: 100vh;
+  background: #fff;
+  border-inline-start: 1px solid #ccc;
+  display: flex;
+  flex-direction: row;
+  z-index: 50;
+}
+
+/* ── Left: chat ── */
+.ai-chat-side {
+  width: 360px;
+  display: flex;
+  flex-direction: column;
+  border-inline-end: 1px solid #eee;
+}
+
+.ai-chat-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 14px;
+  border-bottom: 1px solid #eee;
+}
+
+.ai-chat-thread {
+  flex: 1;
+  overflow-y: auto;
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.ai-chat-msg {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.ai-chat-msg.user .ai-chat-bubble {
+  align-self: flex-end;
+  background: #e6f4ea;
+}
+
+.ai-chat-msg.assistant .ai-chat-bubble {
+  align-self: flex-start;
+  background: #f1f1f1;
+}
+
+.ai-chat-bubble {
+  padding: 6px 10px;
+  border-radius: 8px;
+  max-width: 85%;
+}
+
+.ai-chat-msg-actions {
+  display: flex;
+  gap: 6px;
+}
+
+.ai-chat-input-row {
+  display: flex;
+  gap: 6px;
+  padding: 10px;
+  border-top: 1px solid #eee;
+}
+
+.ai-chat-input-row textarea {
+  flex: 1;
+  resize: none;
+  color: black;
+}
+
+/* ── Right: diff ── */
+.ai-diff-side {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.ai-diff-pane {
+  flex: 1;
+  overflow-y: auto;
+  padding: 12px;
+}
+
+.ai-diff-pane-old {
+  border-bottom: 1px solid #eee;
+}
+
+.ai-diff-pane-title {
+  font-size: 12px;
+  color: #666;
+  margin-bottom: 8px;
+}
+
+.ai-diff-empty {
+  color: #999;
+  font-size: 13px;
+}
+
+.ai-diff-field {
+  margin-bottom: 10px;
+}
+
+.ai-diff-label {
+  font-size: 12px;
+  color: #666;
+  margin-bottom: 2px;
+}
+
+.ai-diff-body {
+  background: #fafafa;
+  padding: 6px;
+  border-radius: 4px;
+}
+
+/* Variant-based visibility: "old" pane hides additions; "new" pane hides removals */
+.variant-old .ins,
+.variant-old ins {
+  display: none;
+}
+
+.variant-old .del,
+.variant-old del {
+  background: #f8d4d4;
+  text-decoration: line-through;
+}
+
+.variant-new .del,
+.variant-new del {
+  display: none;
+}
+
+.variant-new .ins,
+.variant-new ins {
+  background: #d4f4d4;
+  text-decoration: none;
+}
+
+/* ── Responsive ── */
+@media (max-width: 700px) {
+  .ai-chat-panel {
+    flex-direction: column;
+    width: 100vw;
+  }
+
+  .ai-chat-side {
+    width: 100%;
+    height: 50%;
+    border-inline-end: none;
+    border-bottom: 1px solid #eee;
+  }
+}

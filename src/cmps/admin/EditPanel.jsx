@@ -8,6 +8,7 @@ import { Loading } from '../Loading'
 import { EditContent } from './EditContent'
 import { EditForm } from './EditForm'
 import { VersionsPanel } from './VersionsPanel'
+import { AiChatPanel } from './AiChatPanel'
 
 export function EditPanel({ type, id }) {
     const navigate = useNavigate()
@@ -16,6 +17,7 @@ export function EditPanel({ type, id }) {
     const [draftBanner, setDraftBanner] = useState(null)
     const [showVersions, setShowVersions] = useState(false)
     const [reloadKey, setReloadKey] = useState(0)
+    const [showAiChat, setShowAiChat] = useState(false)
 
     const editFormRef = useRef()
     const mainEditorRef = useRef()
@@ -86,7 +88,13 @@ export function EditPanel({ type, id }) {
     }
 
     function onImproveWithAi() {
-        utilService.devLog(`AI improve clicked — ${type}/${id} (not implemented yet)`)
+        setShowAiChat(true)
+    }
+
+    function applyAiResult(improved) {
+        mainEditorRef.current?.setContent(improved.content ?? '')
+        previewEditorRef.current?.setContent(improved.previewContent ?? '')
+        handleChange(prev => ({ ...prev, ...improved }))
     }
 
     async function onSave() {
@@ -97,10 +105,7 @@ export function EditPanel({ type, id }) {
             if (previewEditorRef.current) await previewEditorRef.current.uploadImages()
             if (mainEditorRef.current) await mainEditorRef.current.uploadImages()
 
-            const previewContent = previewEditorRef.current?.getContent() ?? objToEdit.previewContent
-            const content = mainEditorRef.current?.getContent() ?? objToEdit.content
-
-            let objToSave = { ...objToEdit, previewContent, content }
+            let objToSave = getLiveObj()
 
             const latestImage = editFormRef.current?.getLatestImage()
             if (latestImage) objToSave.imageUrl = latestImage
@@ -120,24 +125,32 @@ export function EditPanel({ type, id }) {
         }
     }
 
+    function getLiveObj() {
+        return {
+            ...objToEdit,
+            content: mainEditorRef.current?.getContent() ?? objToEdit.content,
+            previewContent: previewEditorRef.current?.getContent() ?? objToEdit.previewContent,
+        }
+    }
+
     if (!objToEdit) return <Loading isForPage />
 
     const isPlans = type === 'plans'
 
     return (
         <div className="edit-panel">
-            {!isNew && (
-                <div className="panel-options">
+            <div className="panel-options">
+                {!isNew && (
                     <button className="panel-option-btn" onClick={() => setShowVersions(true)} title="גרסאות קודמות">
                         <i className="fa-solid fa-clock-rotate-left"></i>
                         <span>גרסאות קודמות</span>
                     </button>
-                    <button className="panel-option-btn" onClick={onImproveWithAi} title="שפר עם AI">
-                        <i className="fa-solid fa-wand-magic-sparkles"></i>
-                        <span>שפר עם AI</span>
-                    </button>
-                </div>
-            )}
+                )}
+                <button className="panel-option-btn" onClick={onImproveWithAi} title="שפר עם AI">
+                    <i className="fa-solid fa-wand-magic-sparkles"></i>
+                    <span>שפר עם AI</span>
+                </button>
+            </div>
 
             {draftBanner && (
                 <div className="draft-restore-banner">
@@ -185,6 +198,15 @@ export function EditPanel({ type, id }) {
                     itemId={id}
                     onClose={() => setShowVersions(false)}
                     onRestored={reloadAfterRestore}
+                />
+            )}
+
+            {showAiChat && (
+                <AiChatPanel
+                    type={type}
+                    getLiveObj={getLiveObj}
+                    onApply={applyAiResult}
+                    onClose={() => setShowAiChat(false)}
                 />
             )}
         </div>
