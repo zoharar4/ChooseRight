@@ -3,10 +3,15 @@ import image1 from "../assets/images/image1.jpeg"
 import { ImageBasic } from "../cmps/ImageBasic"
 import { siteConfig } from "../services/site.config"
 import { CTABanner } from "../cmps/CTABanner"
+import { usePageMeta } from "../hooks/usePageMeta"
 
 export function AboutPage() {
     const navigate = useNavigate()
     const { heroLables, paragraphs } = siteConfig
+    usePageMeta({
+        title: 'אודות שמרית בן עמי',
+        description: paragraphs.aboutIntro1 + ' ' + paragraphs.aboutIntro3,
+    })
 
     return (
         <div className="about-page">

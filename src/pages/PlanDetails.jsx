@@ -5,6 +5,7 @@ import { utilService } from "../services/util.service"
 import { Loading } from "../cmps/Loading"
 import { ImageBasic } from "../cmps/ImageBasic"
 import { ContactForm } from "../cmps/ContactForm"
+import { usePageMeta } from "../hooks/usePageMeta"
 
 export function PlanDetails() {
     const { id } = useParams()
@@ -13,6 +14,12 @@ export function PlanDetails() {
     const [prefill, setPrefill] = useState(null)
     const formRef = useRef(null)
     const navigate = useNavigate()
+
+    usePageMeta({
+        title: plan?.title,
+        description: plan?.previewContent,
+        image: plan?.imageUrl?.[1] || plan?.imageUrl?.[0],
+    })
 
     useEffect(() => {
         loadPlan()

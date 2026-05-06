@@ -7,6 +7,7 @@ import { Loading } from "../cmps/Loading"
 import { PostSection } from "../cmps/PostSection"
 import { CommentsSection } from "../cmps/comments/CommentsSection"
 import { BlockPreview } from "../cmps/BlockPreview"
+import { usePageMeta } from "../hooks/usePageMeta"
 
 
 export function PostDetails({ type }) {
@@ -14,6 +15,13 @@ export function PostDetails({ type }) {
     const [post, setPost] = useState(null)
     const viewTimeoutRef = useRef(null)
     const navigate = useNavigate()
+
+    usePageMeta({
+        title: post?.title,
+        description: post?.previewContent,
+        image: post?.imageUrl?.[1] || post?.imageUrl?.[0],
+        type: 'article',
+    })
 
     useEffect(() => {
         setPost(null)

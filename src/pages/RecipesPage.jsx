@@ -1,12 +1,18 @@
 import { useEffect, useState } from "react"
 import { PostPreview } from "../cmps/PostPreview"
 import { mainService } from "../services/main.service"
+import { usePageMeta } from "../hooks/usePageMeta"
 
 const RECIPES_CATEGORIES = ['הכל', 'ארוחת בוקר', 'צהריים', 'ארוחת ערב', 'קינוחים', 'חטיפים בריאים']
 
 export function RecipesPage() {
     const [posts, setPosts] = useState([])
     const [activeCategory, setActiveCategory] = useState('הכל')
+
+    usePageMeta({
+        title: 'מתכונים',
+        description: 'מתכונים בריאים וטעימים — מטבח טבעי, מאוזן ומזין שיכניס את הבריאות לשגרה היומית שלכם.',
+    })
 
     useEffect(() => {
         loadPosts()

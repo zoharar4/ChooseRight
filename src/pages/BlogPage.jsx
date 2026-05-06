@@ -1,12 +1,18 @@
 import { useEffect, useState } from "react"
 import { PostPreview } from "../cmps/PostPreview"
 import { mainService } from "../services/main.service"
+import { usePageMeta } from "../hooks/usePageMeta"
 
 const BLOG_CATEGORIES = ['הכל', 'קואצ\'ינג', 'התפתחות אישית', 'כלים פרקטיים', 'מחשבות']
 
 export function BlogPage() {
     const [posts, setPosts] = useState([])
     const [activeCategory, setActiveCategory] = useState('הכל')
+
+    usePageMeta({
+        title: 'בלוג',
+        description: 'מאמרים, מחשבות וידע מקצועי על בריאות טבעית, תזונה, איזון אורח חיים והתפתחות אישית.',
+    })
 
     useEffect(() => {
         loadPosts()

@@ -1,8 +1,13 @@
 import { ContactForm } from "../cmps/ContactForm"
 import { siteConfig } from "../services/site.config"
+import { usePageMeta } from "../hooks/usePageMeta"
 
 export function ContactPage() {
     const ownerInfo = siteConfig.ownerInfo
+    usePageMeta({
+        title: 'יצירת קשר',
+        description: 'בואו נדבר — צרו קשר עם שמרית בן עמי לתיאום פגישת היכרות חינמית, מענה לשאלות וקבלת מידע על תכניות הליווי.',
+    })
     return (
         <div className="contact-page-wrap">
 

@@ -1,7 +1,12 @@
 import { siteConfig } from "../services/site.config";
+import { usePageMeta } from "../hooks/usePageMeta";
 
 export function PrivacyPage() {
     const ownerInfo = siteConfig.ownerInfo
+    usePageMeta({
+        title: 'מדיניות פרטיות',
+        description: 'מדיניות הפרטיות של אתר לבחור נכון — אילו נתונים נאספים, כיצד הם משמשים ואילו זכויות עומדות למשתמש.',
+    })
     return (
         <div className="privacy-page">
             <div className="privacy-inner">

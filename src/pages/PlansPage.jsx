@@ -4,10 +4,16 @@ import { PlanPreview } from "../cmps/PlanPreview"
 import { mainService } from "../services/main.service"
 import { CTABanner } from "../cmps/CTABanner"
 import { siteConfig } from "../services/site.config"
+import { usePageMeta } from "../hooks/usePageMeta"
 
 export function PlansPage() {
     const [plans, setPlans] = useState([])
     const navigate = useNavigate()
+
+    usePageMeta({
+        title: 'תכניות ליווי',
+        description: 'תכניות ליווי אישי לבריאות טבעית — ירידה במשקל בדרך הטבע, איזון אורח חיים, והתפתחות אישית בכלים מקצועיים.',
+    })
 
     useEffect(() => {
         loadPlans()

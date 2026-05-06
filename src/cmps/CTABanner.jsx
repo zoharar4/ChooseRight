@@ -11,7 +11,7 @@ export function CTABanner({ content }) {
                 <p>{p}</p>
                 <div className="cta-banner-btns">
                     {btns.map(({ txt, nav }, idx) => (
-                        <button className={`${!idx ? 'btn-primary' : 'btn-outline'}`} onClick={() => navigate(nav)}>{txt}</button>
+                        <button key={idx} className={`${!idx ? 'btn-primary' : 'btn-outline'}`} onClick={() => navigate(nav)}>{txt}</button>
                     ))}
                 </div>
             </div>

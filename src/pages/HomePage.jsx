@@ -4,10 +4,15 @@ import { BlockPreview } from "../cmps/BlockPreview.jsx"
 import { ImageBasic } from "../cmps/ImageBasic.jsx"
 import { siteConfig } from "../services/site.config.js"
 import { CTABanner } from "../cmps/CTABanner.jsx"
+import { usePageMeta } from "../hooks/usePageMeta.js"
 
 export function HomePage() {
     const navigate = useNavigate()
     const { paragraphs, heroLables, featuresStrip, ctaTxt } = siteConfig
+    usePageMeta({
+        title: 'ליווי אישי לבריאות טבעית',
+        description: 'שמרית בן עמי — ליווי אישי ומקצועי לבריאות טבעית, איזון אורח חיים, תזונה ושינוי הרגלים. הדרך שלכם לחיים בריאים יותר.',
+    })
     return (
         <div className="home-page">
 
