@@ -14,17 +14,28 @@ const PERIODS = [
     { key: 'year',  label: 'שנה' },
 ]
 
-const METRICS = [
-    { key: 'views',    label: 'צפיות',  color: '#4c6d87' },
-    { key: 'likes',    label: 'לייקים', color: '#9b2335' },
-    { key: 'comments', label: 'תגובות', color: '#52796f' },
-]
+const METRICS_BY_TYPE = {
+    blog: [
+        { key: 'views',    label: 'צפיות',  color: '#4c6d87' },
+        { key: 'likes',    label: 'לייקים', color: '#9b2335' },
+        { key: 'comments', label: 'תגובות', color: '#52796f' },
+    ],
+    recipes: [
+        { key: 'views',    label: 'צפיות',  color: '#4c6d87' },
+        { key: 'likes',    label: 'לייקים', color: '#9b2335' },
+        { key: 'comments', label: 'תגובות', color: '#52796f' },
+    ],
+    plans: [
+        { key: 'views',         label: 'צפיות',          color: '#4c6d87' },
+        { key: 'registrations', label: 'לחיצות הרשמה',  color: '#2D6A4F' },
+    ],
+}
 
 const DAYS_HE   = ['ראשון', 'שני', 'שלישי', 'רביעי', 'חמישי', 'שישי', 'שבת']
 const MONTHS_HE = ['ינואר', 'פברואר', 'מרץ', 'אפריל', 'מאי', 'יוני',
                    'יולי', 'אוגוסט', 'ספטמבר', 'אוקטובר', 'נובמבר', 'דצמבר']
 
-function buildChartData(stats, period) {
+function buildChartData(stats, period, metrics) {
     if (!stats) return []
     const now = new Date()
     let skeleton, getIdx, filterStart
@@ -63,7 +74,8 @@ function buildChartData(stats, period) {
             break
     }
 
-    const data = skeleton.map(s => ({ ...s, views: 0, likes: 0, comments: 0 }))
+    const zeroed = Object.fromEntries(metrics.map(m => [m.key, 0]))
+    const data = skeleton.map(s => ({ ...s, ...zeroed }))
 
     function fill(timestamps, field) {
         for (const ts of timestamps || []) {
@@ -74,9 +86,7 @@ function buildChartData(stats, period) {
         }
     }
 
-    fill(stats.views,    'views')
-    fill(stats.likes,    'likes')
-    fill(stats.comments, 'comments')
+    for (const m of metrics) fill(stats[m.key], m.key)
 
     return data
 }
@@ -95,6 +105,8 @@ export function StatsPanel({ type, id }) {
     const [stats, setStats]   = useState(null)
     const [period, setPeriod] = useState('week')
 
+    const metrics = METRICS_BY_TYPE[type] || METRICS_BY_TYPE.blog
+
     useEffect(() => {
         mainService.getStats(type, id)
             .then(res => {
@@ -107,15 +119,13 @@ export function StatsPanel({ type, id }) {
             })
     }, [type, id])
 
-    const chartData = useMemo(() => buildChartData(stats, period), [stats, period])
+    const chartData = useMemo(() => buildChartData(stats, period, metrics), [stats, period, metrics])
 
     if (!stats) return <Loading isForPage />
 
-    const total = {
-        views:    stats.views?.length    || 0,
-        likes:    stats.likes?.length    || 0,
-        comments: stats.comments?.length || 0,
-    }
+    const total = Object.fromEntries(
+        metrics.map(m => [m.key, stats[m.key]?.length || 0])
+    )
 
     return (
         <div className="stats-panel">
@@ -134,7 +144,7 @@ export function StatsPanel({ type, id }) {
             </div>
 
             <div className="stats-summary">
-                {METRICS.map(m => (
+                {metrics.map(m => (
                     <div className="stat-card" key={m.key} style={{ '--metric-color': m.color }}>
                         <span className="stat-num">{total[m.key]}</span>
                         <span className="stat-label">{m.label} סה"כ</span>
@@ -143,7 +153,7 @@ export function StatsPanel({ type, id }) {
             </div>
 
             <div className="stats-charts">
-                {METRICS.map(metric => {
+                {metrics.map(metric => {
                     const hasData = chartData.some(d => d[metric.key] > 0)
                     return (
                         <div className="chart-card" key={metric.key}>

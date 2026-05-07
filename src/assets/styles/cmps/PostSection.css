@@ -13,7 +13,6 @@
 }
 
 .post-section .title-container h1 {
-  font-family: var(--serif);
   font-size: clamp(26px, 5vw, 40px);
   font-weight: 700;
   color: var(--g1);
@@ -87,8 +86,12 @@
 }
 
 /* ── Body ── */
+.post-section .content,
+.post-section .content * {
+  font-family: var(--sans) !important;
+}
+
 .post-section .content {
-  font-family: var(--sans);
   font-size: 16px;
   font-weight: 300;
   line-height: 1.9;
@@ -99,7 +102,7 @@
 .post-section .content h1,
 .post-section .content h2,
 .post-section .content h3 {
-  font-family: var(--serif);
+  font-family: var(--serif) !important;
   color: var(--g1);
   margin: 1.8em 0 .5em;
   line-height: 1.3;

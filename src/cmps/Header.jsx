@@ -35,7 +35,6 @@ export function Header() {
     return (
         <>
             <header className="header">
-
                 <div className="header-inner">
 
                     <div className="logo-container" onClick={() => navigate(user ? '/admin' : '/')}>
@@ -70,39 +69,8 @@ export function Header() {
                         לקביעת פגישה
                     </button>
                 </div>
-
-
             )}
 
         </>
     )
 }
-{/* <div className="mobile-container">
-        <button onClick={onMenu} className="burger-menu"><img draggable="false" src={isMenuOpen ? closeSvg : menuSvg} alt="" /></button>
-        <img className="logo" onClick={() => navigate('/admin')} src={logo} alt="logo" />
-    </div>
-    <nav className={`mobile-nav ${isMenuOpen ? "active" : ''}`}>
-        <NavLink to="/" className={({ isActive }) => isActive ? "nav-link active" : "nav-link"}>
-            בית
-        </NavLink>
-
-        <NavLink to="/plans" className={({ isActive }) => isActive ? "nav-link active" : "nav-link"}>
-            תכניות ליווי
-        </NavLink>
-
-        <NavLink to="/blog" className={({ isActive }) => isActive ? "nav-link active" : "nav-link"}>
-            בלוג
-        </NavLink>
-
-        <NavLink to="/recipes" className={({ isActive }) => isActive ? "nav-link active" : "nav-link"}>
-            מתכונים
-        </NavLink>
-
-        <NavLink to="/about" className={({ isActive }) => isActive ? "nav-link active" : "nav-link"}>
-            אודותי
-        </NavLink>
-
-        <NavLink to="/contact" className={({ isActive }) => isActive ? "nav-link active" : "nav-link"}>
-            יצירת קשר
-        </NavLink>
-    </nav> */}

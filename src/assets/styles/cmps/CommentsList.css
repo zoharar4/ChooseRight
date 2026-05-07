@@ -15,7 +15,6 @@
 }
 
 .comments-section>.top-container h3 {
-  font-family: var(--serif);
   font-size: 20px;
   font-weight: 700;
   color: var(--g1);
@@ -54,7 +53,6 @@
 }
 
 .add-comment h3 {
-  font-family: var(--serif);
   font-size: 16px;
   font-weight: 700;
   color: var(--g1);

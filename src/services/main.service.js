@@ -10,6 +10,7 @@ export const mainService = {
     save,
     incrementViews,
     incrementLikes,
+    incrementRegistrations,
     addComment,
     removeComment,
     likeComment,
@@ -123,17 +124,6 @@ async function incrementViews(type, id) {
 async function incrementLikes(type, id) {
     return httpService.put(`stats/likes/${type}/${id}`)
 }
-
-
-export const plans = [
-    {
-        image: '123',
-        title: 'ניקוי רעלים',
-        subtitle: 'תכנית ליווי אישית לניקוי רעלים',
-        details: `"סור מרע ועשה טוב" לגוף ולנפש.
-לסלק את הפסולת שמקיפה אותנו מבפנים ומבחוץ ולמלא את הגוף באנרגיה מחודשת.`,
-        meetings: `3 מפגשים פרונטליים/בזום, מידע ותוכן, זמינות טלפונית לאורך רוב שעות היום, התאמה אישית לתזונה, פעילות גופנית.`,
-        duration: '3 שבועות.',
-        cost: 500,
-    }
-]
+async function incrementRegistrations(id) {
+    return httpService.put(`stats/registrations/plans/${id}`)
+}

@@ -85,17 +85,25 @@ export function GeneralPanel({ type, id }) {
                         <span className="info-stat-num">{item.views || 0}</span>
                         <span className="info-stat-label">צפיות</span>
                     </div>
-                    <div className="info-stat">
-                        <i className="fa-solid fa-heart" style={{ color: 'rgb(155, 35, 53)' }}></i>
-                        <span className="info-stat-num">{item.likes || 0}</span>
-                        <span className="info-stat-label">לייקים</span>
-                    </div>
-                    {type !== 'plans' && (
+                    {type === 'plans' ? (
                         <div className="info-stat">
-                            <i className="fa-solid fa-comment" style={{ color: 'rgb(82, 121, 111)' }}></i>
-                            <span className="info-stat-num">{item.comments?.length || 0}</span>
-                            <span className="info-stat-label">תגובות</span>
+                            <i className="fa-solid fa-user-plus" style={{ color: 'rgb(45, 106, 79)' }}></i>
+                            <span className="info-stat-num">{item.registrations || 0}</span>
+                            <span className="info-stat-label">לחיצות הרשמה</span>
                         </div>
+                    ) : (
+                        <>
+                            <div className="info-stat">
+                                <i className="fa-solid fa-heart" style={{ color: 'rgb(155, 35, 53)' }}></i>
+                                <span className="info-stat-num">{item.likes || 0}</span>
+                                <span className="info-stat-label">לייקים</span>
+                            </div>
+                            <div className="info-stat">
+                                <i className="fa-solid fa-comment" style={{ color: 'rgb(82, 121, 111)' }}></i>
+                                <span className="info-stat-num">{item.comments?.length || 0}</span>
+                                <span className="info-stat-label">תגובות</span>
+                            </div>
+                        </>
                     )}
                 </div>
             </div>

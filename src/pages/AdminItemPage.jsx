@@ -80,7 +80,7 @@ export function AdminItemPage() {
                 )}
                 {activeTab === 'stats' && !isNew && <StatsPanel type={type} id={id} />}
                 {activeTab === 'view'  && !isNew && (
-                    type === 'plans' ? <PlanDetails /> : <ViewPanel type={type} id={id} />
+                    type === 'plans' ? <PlanDetails isAdminPreview /> : <ViewPanel type={type} id={id} />
                 )}
             </div>
         </div>

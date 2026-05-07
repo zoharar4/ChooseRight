@@ -7,12 +7,13 @@ import { ImageBasic } from "../cmps/ImageBasic"
 import { ContactForm } from "../cmps/ContactForm"
 import { usePageMeta } from "../hooks/usePageMeta"
 
-export function PlanDetails() {
+export function PlanDetails({ isAdminPreview = false }) {
     const { id } = useParams()
     const [plan, setPlan] = useState(null)
     const [showForm, setShowForm] = useState(false)
     const [prefill, setPrefill] = useState(null)
     const formRef = useRef(null)
+    const viewTimeoutRef = useRef(null)
     const navigate = useNavigate()
 
     usePageMeta({
@@ -22,7 +23,12 @@ export function PlanDetails() {
     })
 
     useEffect(() => {
+        setPlan(null)
         loadPlan()
+
+        return () => {
+            clearTimeout(viewTimeoutRef.current)
+        }
     }, [id])
 
     async function loadPlan() {
@@ -30,14 +36,32 @@ export function PlanDetails() {
             const res = await mainService.getById('plans', id)
             utilService.devLog(`Plan loaded — ${id}`, res)
             setPlan(res)
+            updateViews()
         } catch (err) {
             console.error('cannot get plan by id,', err)
         }
     }
 
-    function handleOpenForm() {
+    function updateViews() {
+        if (isAdminPreview) return
+        viewTimeoutRef.current = setTimeout(async () => {
+            try {
+                await mainService.incrementViews('plans', id)
+            } catch (err) {
+                console.log('err:', err)
+            }
+        }, 5000)
+    }
+
+    async function handleOpenForm() {
         setShowForm(true)
         setTimeout(() => formRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' }), 80)
+        if (isAdminPreview) return
+        try {
+            await mainService.incrementRegistrations(id)
+        } catch (err) {
+            console.log('err:', err)
+        }
     }
 
     function handlePrefill(type) {
