@@ -94,7 +94,10 @@ const featuresStrip = [
     { icon: '✨', txt: 'שינוי אמיתי לחיים' },
 ]
 
+const siteUrl = 'https://choosing-right.com'
+
 export const siteConfig = {
+    siteUrl,
     navItems,
     ownerInfo,
     paragraphs,
