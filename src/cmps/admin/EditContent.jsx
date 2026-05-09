@@ -66,18 +66,8 @@ export const EditContent = forwardRef(function EditContent({ existingContent, se
                     },
                     images_upload_credentials: true,
                     content_style: `
-                        @font-face {
-                            font-family: 'Rubik';
-                            src: url('src/assets/fonts/Rubik-Regular.ttf') format('truetype');
-                            font-weight: normal;
-                        }
-                        @font-face {
-                            font-family: 'Rubik';
-                            src: url('src/assets/fonts/Rubik-Bold.ttf') format('truetype');
-                            font-weight: bold;
-                        }
                         body {
-                            font-family: Rubik, Arial, sans-serif;
+                            font-family: 'Heebo', Arial, sans-serif;
                             font-size: 14pt;
                         }
                     `
